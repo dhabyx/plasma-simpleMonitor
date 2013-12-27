@@ -24,7 +24,7 @@ Rectangle {
 
     Image {
         id: distroLogo
-        source: "monitorWidgets/images/distro-slackware.png"
+        source: "monitorWidgets/images/distro-tux.png"
         y: 73
         x: 0
     }
@@ -199,6 +199,12 @@ Rectangle {
                 disconnectSource(connectedSources[0])
             }
         }
+    }
+    Component.onCompleted: {
+        if (MonitorActions.getLogoInfo() != "tux") {
+            distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
+        }
+        plasmoid.addEventListener('ConfigChanged', MonitorActions.configListener)
     }
 
 }

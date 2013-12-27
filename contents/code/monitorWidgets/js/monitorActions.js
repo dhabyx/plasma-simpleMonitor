@@ -35,3 +35,18 @@ function formatNumberLength(num, length) {
     }
     return r;
 }
+
+function getLogoInfo() {
+    if (plasmoid.readConfig("logoTux") == true) {
+        return "tux"
+    }
+    if (plasmoid.readConfig("logoSlackware" == true)) {
+        return "slackware"
+    }
+}
+
+function configListener() {
+    distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
+    swapArea.visible=plasmoid.readConfig("showSwap")
+    uptimePicker.visible=plasmoid.readConfig("showUptime")
+}
