@@ -49,4 +49,6 @@ function configListener() {
     distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
     swapArea.visible=plasmoid.readConfig("showSwap")
     uptimePicker.visible=plasmoid.readConfig("showUptime")
+    coreTempList.highTemp =plasmoid.readConfig("cpuHighTemp")
+    coreTempList.criticalTemp =plasmoid.readConfig("cpuCritTemp")
 }

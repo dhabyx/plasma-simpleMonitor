@@ -9,6 +9,14 @@
             <label>Show Swap Secction</label>
             <default>true</default>
         </entry>
+        <entry name="cpuHighTemp" type="Int">
+            <label>CPU High Temp</label>
+            <default>87</default>
+        </entry>
+        <entry name="cpuCritTemp" type="Int">
+            <label>CPU Critical Temp</label>
+            <default>105</default>
+        </entry>
         <entry name="showUptime" type="Bool">
             <label>Show Swap Secction</label>
             <default>true</default>
