@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>354</height>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,24 +19,75 @@
      <property name="title">
       <string>Visuals</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="title">
+         <string>Background</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="kcfg_translucent">
+           <property name="text">
+            <string>Translucent</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QRadioButton" name="kcfg_crystal">
+           <property name="text">
+            <string>Crystal</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QRadioButton" name="kcfg_standard">
+           <property name="text">
+            <string>Standard</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
       <item>
        <widget class="QGroupBox" name="groupBox">
         <property name="title">
          <string>Distro Logo</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="3" column="0">
+          <widget class="QRadioButton" name="kcfg_logoSlackware">
+           <property name="text">
+            <string>Slackware</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="kcfg_logoTuz">
+           <property name="text">
+            <string>Tuz</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
           <widget class="QRadioButton" name="kcfg_logoTux">
            <property name="text">
             <string>Tux</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QRadioButton" name="kcfg_logoSlackware">
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="kcfg_logoUbuntu">
            <property name="text">
-            <string>Slackware</string>
+            <string>Ubuntu</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QRadioButton" name="kcfg_logoKubuntu">
+           <property name="text">
+            <string>Kubuntu</string>
            </property>
           </widget>
          </item>

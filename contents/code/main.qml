@@ -12,16 +12,6 @@ Rectangle {
     property int minimumHeight: 340
     //color: "black"
 
-    FontLoader {
-        id: mondaRegular
-        source: "fonts/Monda/Monda-Regular.ttf"
-    }
-
-    FontLoader {
-        id: doppioOneRegular
-        source: "fonts/Doppio_One/DoppioOne-Regular.ttf"
-    }
-
     Image {
         id: distroLogo
         source: "monitorWidgets/images/distro-tux.png"
@@ -205,6 +195,7 @@ Rectangle {
             }
         }
     }
+
     Component.onCompleted: {
         if (MonitorActions.getLogoInfo() != "tux") {
             distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"

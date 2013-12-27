@@ -5,10 +5,52 @@
      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
     <group name="simpleConfig">
+        <!-- Background Section -->
+        <entry name="standard" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>true</default>
+        </entry>
+        <entry name="crystal" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>false</default>
+        </entry>
+        <entry name="translucent" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>false</default>
+        </entry>
+        <!-- Logos Section -->
+        <entry name="logoTux" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>true</default>
+        </entry>
+        <entry name="logoTuz" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>false</default>
+        </entry>
+        <entry name="logoSlackware" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>false</default>
+        </entry>
+        <entry name="logoUbuntu" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>false</default>
+        </entry>
+        <entry name="logoKubuntu" type="Bool">
+            <label>Distribution logo choice</label>
+            <default>false</default>
+        </entry>
+        
+        <!-- Displays Section -->
         <entry name="showSwap" type="Bool">
             <label>Show Swap Secction</label>
             <default>true</default>
         </entry>
+        <entry name="showUptime" type="Bool">
+            <label>Show Swap Secction</label>
+            <default>true</default>
+        </entry>
+
+        <!-- System Section -->
         <entry name="cpuHighTemp" type="Int">
             <label>CPU High Temp</label>
             <default>87</default>
@@ -17,17 +59,6 @@
             <label>CPU Critical Temp</label>
             <default>105</default>
         </entry>
-        <entry name="showUptime" type="Bool">
-            <label>Show Swap Secction</label>
-            <default>true</default>
-        </entry>
-        <entry name="logoTux" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>true</default>
-        </entry>
-        <entry name="logoSlackware" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
+        
     </group>
 </kcfg>

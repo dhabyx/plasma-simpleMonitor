@@ -7,6 +7,11 @@ ListView {
 
     property int highTemp: 87
     property int criticalTemp : 105
+
+    FontLoader {
+        id: doppioOneRegular
+        source: "../fonts/Doppio_One/DoppioOne-Regular.ttf"
+    }
     delegate: Item {
         id: coreListTemp
         implicitHeight: 25

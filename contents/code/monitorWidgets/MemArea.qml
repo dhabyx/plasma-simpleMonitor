@@ -7,6 +7,10 @@ Item {
     property double memUsed: 0.0
     property double memBuffers: 0.0
     property alias memTypeLabel : memType.text
+    FontLoader {
+        id: doppioOneRegular
+        source: "../fonts/Doppio_One/DoppioOne-Regular.ttf"
+    }
     Column {
         anchors.fill: parent
         Rectangle {

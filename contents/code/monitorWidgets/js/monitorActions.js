@@ -7,16 +7,30 @@ function modelAddData(model,index,value) {
     }
 }
 
+function removeQuotes(value) {
+    return String(value).replace(/["']/g,'')
+}
+
 function parseOsRelease(text){
     var arrayResult = []
     var textLineSplit =text.split('\n')
-    arrayResult["name"]=textLineSplit[0].split('=')[1]
-    arrayResult["id"]=textLineSplit[2].split('=')[1]
-    arrayResult["version"]=textLineSplit[3].split('=')[1]
-    /*
+    for (i in textLineSplit)
+    {
+        switch (textLineSplit[i].split('=')[0]) {
+        case "NAME" :
+            arrayResult["name"]=removeQuotes(textLineSplit[i].split('=')[1])
+            break
+        case "ID" :
+            arrayResult["id"]=removeQuotes(textLineSplit[i].split('=')[1])
+            break
+        case "VERSION" :
+            arrayResult["version"]=removeQuotes(textLineSplit[i].split('=')[1])
+            break
+        }
+    }
+
     for (i in arrayResult)
         console.log(arrayResult[i])
-        */
     return arrayResult
 }
 
@@ -37,16 +51,24 @@ function formatNumberLength(num, length) {
 }
 
 function getLogoInfo() {
-    if (plasmoid.readConfig("logoTux") == true) {
-        return "tux"
-    }
-    if (plasmoid.readConfig("logoSlackware" == true)) {
-        return "slackware"
+    var distrosLogoNames = ["logoTux", "logoTuz",
+                            "logoSlackware", "logoUbuntu",
+                            "logoKubuntu"]
+    for (i in distrosLogoNames) {
+        if (plasmoid.readConfig(distrosLogoNames[i]) == true) {
+            return distrosLogoNames[i].replace("logo","").toLowerCase()
+        }
     }
 }
 
 function configListener() {
-    distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
+    if (plasmoid.readConfig("standard") == true)
+        plasmoid.setBackgroundHints(StandardBackground)
+    else if (plasmoid.readConfig("crystal") == true)
+        plasmoid.setBackgroundHints(NoBackground)
+    else if (plasmoid.readConfig("translucent") == true)
+        plasmoid.setBackgroundHints(TranslucentBackground)
+    distroLogo.source = "monitorWidgets/images/distro-"+getLogoInfo()+".png"
     swapArea.visible=plasmoid.readConfig("showSwap")
     uptimePicker.visible=plasmoid.readConfig("showUptime")
     coreTempList.highTemp =plasmoid.readConfig("cpuHighTemp")

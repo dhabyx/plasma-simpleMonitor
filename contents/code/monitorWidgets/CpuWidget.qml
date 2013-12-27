@@ -3,7 +3,10 @@ import QtQuick 1.1
 ListView {
     id: cpuListView
     model: cpuModel
-
+    FontLoader {
+        id: doppioOneRegular
+        source: "../fonts/Doppio_One/DoppioOne-Regular.ttf"
+    }
     delegate: Item {
         id: cpuListItem
         implicitHeight: 25

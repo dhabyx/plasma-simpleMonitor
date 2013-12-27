@@ -3,6 +3,11 @@ import "js/monitorActions.js" as MonitorActions
 
 Item {
     property string distroName : "tux"
+    FontLoader {
+        id: mondaRegular
+        source: "../fonts/Monda/Monda-Regular.ttf"
+    }
+
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: -8
