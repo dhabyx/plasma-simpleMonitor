@@ -2,7 +2,7 @@ import QtQuick 1.1
 import "js/monitorActions.js" as MonitorActions
 
 Item {
-
+    property string distroName : "tux"
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: -8
@@ -19,6 +19,7 @@ Item {
                     if (xhr.readyState == XMLHttpRequest.DONE) {
                         var osInfo = MonitorActions.parseOsRelease(xhr.responseText)
                         text = osInfo.name+" "+osInfo.version
+                        distroName = osInfo.name
                     }
                 }
                 xhr.send();
