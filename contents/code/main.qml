@@ -132,6 +132,10 @@ Rectangle {
                 connectSource(source)
                 return
             }
+            if (source.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+                connectSource(source)
+                return
+            }
             if (source.match("^mem/.*")) {
                 connectSource(source)
                 return
@@ -148,7 +152,8 @@ Rectangle {
                 MonitorActions.modelAddData(cpuModel,cpuNumber,{'val':data.value})
                 return
             }
-            if (sourceName.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+")) {
+            if (sourceName.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+") ||
+                sourceName.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
                 MonitorActions.modelAddData(
                             coreTempModel,
                             data.name.split(' ')[1],
