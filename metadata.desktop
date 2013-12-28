@@ -8,7 +8,7 @@ Icon=icon.svg
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=code/main.qml
-X-Plasma-DefaultSize=380,360
+X-Plasma-DefaultSize=370,360
 
 X-KDE-PluginInfo-Author=DhabyX
 X-KDE-PluginInfo-Email=slack.dhabyx@gmail.com

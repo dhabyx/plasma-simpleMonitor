@@ -9,21 +9,31 @@ Item {
     }
 
     Column {
-        anchors.horizontalCenter: parent.horizontalCenter
-        spacing: -8
+        spacing: 1
+        anchors.fill: parent
         Text {
             id: distroInfo
             text: "Distro "
             color: "white"
-            anchors.horizontalCenter: parent.horizontalCenter
-            font { family: mondaRegular.name; pointSize: 10 }
+            width: parent.width
+            lineHeight: 0.6
+            horizontalAlignment: Text.AlignHCenter
+            font { family: mondaRegular.name; pointSize: 9 }
             Component.onCompleted: {
                 var xhr = new XMLHttpRequest;
                 xhr.open("GET", "/etc/os-release");
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == XMLHttpRequest.DONE) {
                         var osInfo = MonitorActions.parseOsRelease(xhr.responseText)
-                        text = osInfo.name+" "+osInfo.version
+                        if (osInfo.version.indexOf(',')>=0) {
+                            var distroStr=osInfo.name+" "
+                            distroStr +=osInfo.version.substring(0,osInfo.version.indexOf(','))+'\n'
+                            distroStr +=osInfo.version.substring(
+                                        osInfo.version.indexOf(',')+2,
+                                        osInfo.version.length)
+                            text = distroStr
+                        } else
+                            text = osInfo.name+" "+osInfo.version
                         distroName = osInfo.name
                     }
                 }
@@ -35,8 +45,10 @@ Item {
             id: kernelInfo
             text:"Kernel"
             color: "white"
-            anchors.horizontalCenter: parent.horizontalCenter
-            font { family: mondaRegular.name; pointSize: 10 }
+            width: parent.width
+            lineHeight: 0.6
+            horizontalAlignment: Text.AlignHCenter
+            font { family: mondaRegular.name; pointSize: 9 }
             Component.onCompleted: {
                 var xhr = new XMLHttpRequest;
                 xhr.open("GET", "/proc/version");

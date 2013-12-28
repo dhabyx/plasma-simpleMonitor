@@ -38,6 +38,8 @@ function parseKernelRelease(text){
     var arrayResult = []
     var textLineSplit =text.split(' ')
     arrayResult["name"]=textLineSplit[0]
+    if (textLineSplit[2].indexOf('-')>=0)
+        textLineSplit[2]=textLineSplit[2].split('-')[0]
     arrayResult["version"]=textLineSplit[2]
     return arrayResult
 }

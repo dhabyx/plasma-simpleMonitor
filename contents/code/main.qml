@@ -4,7 +4,7 @@ import "monitorWidgets/js/monitorActions.js" as MonitorActions
 import "monitorWidgets"
 
 Rectangle {
-    width: 360
+    width: 370
     height: 360
 
     color: "transparent"
@@ -16,7 +16,7 @@ Rectangle {
         id: distroLogo
         source: "monitorWidgets/images/distro-tux.png"
         y: 73
-        x: 0
+        anchors.horizontalCenter: osInfoItem.horizontalCenter
     }
 
     DatePicker {
@@ -24,13 +24,6 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: 15
-    }
-
-    OsInfoItem {
-        id: osInfoItem
-        width: distroLogo.width
-        anchors.top: distroLogo.bottom
-        anchors.left: distroLogo.left
     }
 
     Rectangle {
@@ -49,6 +42,14 @@ Rectangle {
         anchors.right: topBar.right
         anchors.bottom: topBar.top
         anchors.bottomMargin: 2
+    }
+
+
+    OsInfoItem {
+        id: osInfoItem
+        width: coreTempList.x-5
+        anchors.top: distroLogo.bottom
+        anchors.left: parent.left
     }
 
     CpuWidget {
@@ -181,7 +182,7 @@ Rectangle {
                 var uptimeArray =[]
                 uptimeArray['d'] = Math.floor(data.value/86400)
                 uptimeArray['h'] = Math.floor(data.value/3600)-24*uptimeArray['d']
-                uptimeArray['m'] = Math.floor(data.value/60)-60*uptimeArray['h']
+                uptimeArray['m'] = Math.floor(data.value/60)-60*uptimeArray['h']-1440*uptimeArray['d']
                 uptimePicker.uptime = uptimeArray['d']+'d '+uptimeArray['h']
                         +':'+MonitorActions.formatNumberLength(uptimeArray['m'],2)
                 return
