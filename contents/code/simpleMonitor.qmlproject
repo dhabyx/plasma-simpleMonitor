@@ -17,5 +17,5 @@ Project {
     }
     /* List of plugin directories passed to QML runtime */
     // importPaths: [ "../exampleplugin" ]
-    importPaths: [ "/usr/lib64/kde4/imports" ]
+    importPaths: [ "/usr/lib64/kde4/imports"]
 }

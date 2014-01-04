@@ -199,7 +199,7 @@ Rectangle {
 
     Component.onCompleted: {
         if (MonitorActions.getLogoInfo() != "tux") {
-            distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
+            distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfos()+".png"
         }
         plasmoid.addEventListener('ConfigChanged', MonitorActions.configListener)
     }
