@@ -2,7 +2,7 @@ import QtQuick 1.1
 
 ListView {
     id: cpuListView
-    property int direction: Qt.RightToLeft
+    property int direction: Qt.LeftToRight
     property color progressColor: "#993de515"
     model: cpuModel
     FontLoader {
@@ -23,7 +23,6 @@ ListView {
         id: itemElement
         width: parent.width
         height: cpuListItem.height+1
-        property color finalColor : progressColor
         Column {
             id: cpuListItem
             width: parent.width
@@ -52,7 +51,6 @@ ListView {
                 color: "transparent"
                 //clip: true
                 width: parent.width
-                property color finalColor : itemElement.finalColor
                 Rectangle {
                     // clear background
                     width: parent.width
@@ -90,7 +88,6 @@ ListView {
                         // rectangle of color, in background for less cpu load
                         height: progressBar.width
                         width: progressBar.height
-                        property color finalColor: progressBar.finalColor
                         gradient: Gradient {
                             GradientStop {
                                 position: 1.00;
@@ -98,19 +95,29 @@ ListView {
                             }
                             GradientStop {
                                 position: 0.00;
-                                color: bgGradient.finalColor;
+                                color: progressColor;
                             }
                         }
                         transform: [
-                            Rotation { origin.x:0; origin.y:0; angle:90 },
-                            Translate { x: width } ]
+                            Rotation { id: colorRotation; origin.x:0; origin.y:0; angle:0 },
+                            Translate { id: colorTraslation; x: 0; y:0 } ]
+                        Component.onCompleted: {
+                            if (direction === Qt.RightToLeft) {
+                                colorRotation.angle = 270
+                                colorTraslation.y = width
+                                anchors.left = parent.left
+                            }
+                            else {
+                                colorRotation.angle = 90
+                                colorTraslation.x = height
+                            }
+                        }
 
                     }
                     Rectangle {
                         // rectangle of shadow, in background for less cpu load
                         height: progressBar.height
                         width: progressBar.width
-                        anchors.left: parent.left
                         gradient: Gradient {
                             GradientStop {
                                 position: 0.00;
@@ -130,14 +137,25 @@ ListView {
                             }
                         }
                     }
+                    Component.onCompleted: {
+                        if (direction === Qt.RightToLeft)
+                            anchors.right = progressBar.right
+                        else
+                            anchors.left= parent.left
+                    }
                 }
                 Rectangle {
                     height: progressBar.height+4
                     width: 5
                     radius: 2
-                    anchors.left: rectValue.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: "#88ffffff"
+                    Component.onCompleted: {
+                        if (direction === Qt.RightToLeft)
+                            anchors.right = rectValue.left
+                        else
+                            anchors.left = rectValue.right
+                    }
                 }
             }
         }
