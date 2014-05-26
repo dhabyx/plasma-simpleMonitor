@@ -49,6 +49,10 @@
             <label>Show Swap Secction</label>
             <default>true</default>
         </entry>
+	<entry name="fahrenheit" type="Bool">
+            <label>Use Celsius degrees</label>
+            <default>false</default>
+        </entry>
 
         <!-- System Section -->
         <entry name="cpuHighTemp" type="Int">

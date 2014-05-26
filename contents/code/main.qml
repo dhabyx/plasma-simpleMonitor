@@ -12,6 +12,9 @@ Rectangle {
     property int minimumHeight: 340
     //color: "black"
 
+    // control for atk sensor
+    property bool atkPresent:false
+
     Image {
         id: distroLogo
         source: "monitorWidgets/images/distro-tux.png"
@@ -123,10 +126,31 @@ Rectangle {
                 connectSource(source)
                 return
             }
+
             if (source.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+                /* if atk is present then not connect */
+                if (!atkPresent)
+                    connectSource(source)
+                return
+            }
+
+            /* Some AMD sensors works better with atk data*/
+            if (source.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
+                /* Remove k# temp sensors previously connected*/
+                if (!atkPresent)
+                for (i in connectedSources) {
+                    if (i.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+                        console.log("discconect: "+i)
+                        disconnectSource(i)
+                        coreTempModel.clear()
+                    }
+
+                }
+                atkPresent=true
                 connectSource(source)
                 return
             }
+
             if (source.match("^mem/.*")) {
                 connectSource(source)
                 return
@@ -144,10 +168,17 @@ Rectangle {
                 return
             }
             if (sourceName.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+") ||
-                sourceName.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+                sourceName.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+") ||
+                sourceName.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
+                var dataName="0"
+                if (atkPresent) {
+                    dataName=sourceName.replace(/^lmsensors\/atk\\d+-acpi-/i,"").replace(/\/CPU_Temperature/i,"")
+                }
+                else
+                    dataName=data.name.split(' ')[1]
                 MonitorActions.modelAddData(
                             coreTempModel,
-                            data.name.split(' ')[1],
+                            dataName,
                             {'val':data.value, 'units':data.units}
                             )
                 return
@@ -198,8 +229,9 @@ Rectangle {
     }
 
     Component.onCompleted: {
+        atkPresent = false
         if (MonitorActions.getLogoInfo() != "tux") {
-            distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfos()+".png"
+            distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
         }
         plasmoid.addEventListener('ConfigChanged', MonitorActions.configListener)
     }

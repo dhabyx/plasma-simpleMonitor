@@ -17,7 +17,8 @@ ListView {
     }
 
     boundsBehavior: Flickable.StopAtBounds
-    highlight: highlightCpu
+    /* No higlights on CPU, temporarily until next release*/
+    //highlight: highlightCpu
     highlightFollowsCurrentItem: false
     delegate: Item {
         id: itemElement

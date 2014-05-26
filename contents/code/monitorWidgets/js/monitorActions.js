@@ -75,4 +75,5 @@ function configListener() {
     uptimePicker.visible=plasmoid.readConfig("showUptime")
     coreTempList.highTemp =plasmoid.readConfig("cpuHighTemp")
     coreTempList.criticalTemp =plasmoid.readConfig("cpuCritTemp")
+    coreTempList.tempUnit = plasmoid.readConfig("fahrenheit")
 }

@@ -7,6 +7,10 @@ ListView {
 
     property int highTemp: 87
     property int criticalTemp : 105
+    /* tempUnit
+        used for change how to show temperature unit
+        0=Celsius 1=Fahrenheit */
+    property int tempUnit : 0
 
     FontLoader {
         id: doppioOneRegular
@@ -24,7 +28,8 @@ ListView {
             color: "#ffdd55"
         }
         Text {
-            text: Math.floor(val)+units
+            text: if (tempUnit==0) Math.floor(val)+units
+                  else Math.floor(val*9/5+32)+"°F"
             font.bold: true
             font.pointSize: 10
             color: "white"
