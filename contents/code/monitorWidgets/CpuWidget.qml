@@ -3,7 +3,14 @@ import QtQuick 1.1
 ListView {
     id: cpuListView
     property int direction: Qt.LeftToRight
+    property bool multipleColor: false
     property color progressColor: "#993de515"
+    property color progressColorCritical: "red"
+    property color progressColorHigh: "#ffac2a"
+    property color progressColorNormal: "#85a9ff"
+    property int highValue: 87
+    property int criticalVaue : 105
+    property string labelData: "CPU"
     model: cpuModel
     FontLoader {
         id: doppioOneRegular
@@ -29,7 +36,7 @@ ListView {
             Row {
                 Text {
                     id: cpuLabel
-                    text: 'CPU '+model.index+':'
+                    text: labelData+' '+model.index+':'
                     font.bold: true
                     font { family: doppioOneRegular.name; pointSize: 10 }
                     color: "#ffdd55"
@@ -77,7 +84,7 @@ ListView {
 
                 Rectangle {
                     id: rectValue
-                    // rectangle whit value change and crop
+                    // rectangle with value changed and crop
                     height: parent.height
                     color: "transparent"
                     clip: true
@@ -95,7 +102,11 @@ ListView {
                             }
                             GradientStop {
                                 position: 0.00;
-                                color: progressColor;
+                                color: if (multipleColor == false) progressColor
+                                       else { if (val>=criticalVaue) progressColorCritical
+                                           else if (val>=highValue) progressColorHigh
+                                           else progressColorNormal
+                                       }
                             }
                         }
                         transform: [

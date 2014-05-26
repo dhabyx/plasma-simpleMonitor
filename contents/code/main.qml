@@ -72,13 +72,18 @@ Rectangle {
         anchors.rightMargin: 5
     }
 
-    CoreTempList {
+    CpuWidget {
         id: coreTempList
         anchors.right: midBar.left
         anchors.rightMargin: 5
         anchors.top: topBar.bottom
         anchors.topMargin: 5
         model: coreTempModel
+        width: 100
+        height: 100
+        direction: Qt.RightToLeft
+        labelData: "Core"
+        multipleColor: true
     }
 
     MemArea {
