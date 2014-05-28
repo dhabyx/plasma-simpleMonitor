@@ -1,7 +1,7 @@
 Simple Monitor for Plasma
 =========================
 
-A simple monitor for plasma, completely written in QML amd Javascript. 
+A simple monitor for plasma, completely written in QML and Javascript. 
 
 Packaging
 =========
@@ -28,3 +28,9 @@ If you want update:
 ````Shell
 $ plasmapkg -u plasma-simpleMonitor.plasmoid
 ````
+
+License
+=======
+Simple Monitor for Plasma is licensed under the GNU General Public License Version 3 or later.
+
+You can modify or/and distribute it under the conditions of this license.
