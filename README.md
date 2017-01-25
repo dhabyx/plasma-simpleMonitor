@@ -1,7 +1,10 @@
 Simple Monitor for Plasma
 =========================
 
-A simple monitor for plasma, completely written in QML and Javascript. 
+A simple monitor for plasma, completely written in QML and Javascript.
+
+This branch is only for KDE4 versión, if you want the port for KDE5 you can use
+master branch or other specific branch.
 
 Packaging
 =========
