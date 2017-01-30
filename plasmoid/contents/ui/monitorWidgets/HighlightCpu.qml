@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2014 Dhaby Xiloj
+ * Copyright 2013-2016 Dhaby Xiloj, Konstantin Shtepa
  *
  * This file is part of plasma-simpleMonitor.
  *
@@ -17,7 +17,7 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 1.1
+import QtQuick 2.0
 
 Rectangle {
     visible: false

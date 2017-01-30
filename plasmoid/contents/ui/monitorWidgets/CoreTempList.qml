@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2014 Dhaby Xiloj
+ * Copyright 2013-2016 Dhaby Xiloj, Konstantin Shtepa
  *
  * This file is part of plasma-simpleMonitor.
  *
@@ -17,38 +17,39 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 1.1
+import QtQuick 2.0
 
 ListView {
     id: coreTempList
-    width: 100
-    height: 100
+
+    implicitHeight: count * 25
+    implicitWidth: 100
+
+    interactive: false
 
     property int highTemp: 87
     property int criticalTemp : 105
     /* tempUnit
         used for change how to show temperature unit
         0=Celsius 1=Fahrenheit */
-    property int tempUnit : 0
+    property int tempUnit: 0
 
-    FontLoader {
-        id: doppioOneRegular
-        source: "../fonts/Doppio_One/DoppioOne-Regular.ttf"
-    }
     delegate: Item {
         id: coreListTemp
         implicitHeight: 25
+        implicitWidth: coreLabel.implicitWidth + unitLabel.implicitWidth
         width: parent.width
         Text {
             id: coreLabel
-            text: 'Core '+model.index+':'
+            text: i18n('Core ') + model.index + ':'
             font.bold: true
             font { family: doppioOneRegular.name; pointSize: 10 }
             color: "#ffdd55"
         }
         Text {
-            text: if (tempUnit==0) Math.floor(val)+units
-                  else Math.floor(val*9/5+32)+"°F"
+            id: unitLabel
+            text: if (tempUnit === 0) Math.floor(val) + units
+                  else Math.floor(val*9/5+32) + "°F"
             font.bold: true
             font.pointSize: 10
             color: "white"
@@ -59,8 +60,8 @@ ListView {
             id: rectValue
             height: 9
             width: Math.floor(val/coreTempList.criticalTemp*parent.width)
-            color: if (val>=coreTempList.criticalTemp) "red"
-                   else if (val>=coreTempList.highTemp) "#ffac2a"
+            color: if (val >= coreTempList.criticalTemp) "red"
+                   else if (val >= coreTempList.highTemp) "#ffac2a"
                    else "#85a9ff"
             anchors.top: coreLabel.bottom
             anchors.right: parent.right
@@ -70,5 +71,10 @@ ListView {
             PropertyAction { target: coreListTemp; property: "height"; value: 0 }
             NumberAnimation { target: coreListTemp; property: "height"; to: 25; duration: 250; easing.type: Easing.InOutQuad }
         }
+    }
+
+    FontLoader {
+        id: doppioOneRegular
+        source: "../../fonts/Doppio_One/DoppioOne-Regular.ttf"
     }
 }

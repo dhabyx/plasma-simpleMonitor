@@ -4,54 +4,60 @@
      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
-    <group name="simpleConfig">
+
+    <group name="General">
+        <!-- Skins Section -->
+        <entry name="skin" type="Enum">
+            <label>Backgroung color</label>
+            <choices>
+                <choice name="Standard"/>
+                <choice name="Column"/>
+            </choices>
+            <default>1</default>
+        </entry>
+
         <!-- Background Section -->
-        <entry name="standard" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>true</default>
+        <entry name="bgColor" type="Enum">
+            <label>Backgroung color</label>
+            <choices>
+                <choice name="Standard"/>
+                <choice name="Crystal"/>
+                <choice name="Translucent"/>
+            </choices>
+            <default>0</default>
         </entry>
-        <entry name="crystal" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
-        <entry name="translucent" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
+
         <!-- Logos Section -->
-        <entry name="logoTux" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>true</default>
+        <entry name="logo" type="Enum">
+            <label>Distribution logo</label>
+            <choices>
+                <choice name="Default"/>
+                <choice name="Tux"/>
+                <choice name="Tuz"/>
+                <choice name="Slackware"/>
+                <choice name="Ubuntu"/>
+                <choice name="Kubuntu"/>
+                <choice name="OpenSUSE"/>
+            </choices>
+            <default>0</default>
         </entry>
-        <entry name="logoTuz" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
-        <entry name="logoSlackware" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
-        <entry name="logoUbuntu" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
-        <entry name="logoKubuntu" type="Bool">
-            <label>Distribution logo choice</label>
-            <default>false</default>
-        </entry>
-        
+
         <!-- Displays Section -->
         <entry name="showSwap" type="Bool">
-            <label>Show Swap Secction</label>
+            <label>Show Swap</label>
             <default>true</default>
         </entry>
         <entry name="showUptime" type="Bool">
-            <label>Show Swap Secction</label>
+            <label>Show Uptime</label>
             <default>true</default>
         </entry>
-	<entry name="fahrenheit" type="Bool">
-            <label>Use Celsius degrees</label>
-            <default>false</default>
+        <entry name="tempUnit" type="Enum">
+            <label>Temperature Units</label>
+            <choices>
+                <choice name="Celsius °C"/>
+                <choice name="Fahrenheit °F"/>
+            </choices>
+            <default>0</default>
         </entry>
 
         <!-- System Section -->
@@ -63,6 +69,5 @@
             <label>CPU Critical Temp</label>
             <default>105</default>
         </entry>
-        
     </group>
 </kcfg>

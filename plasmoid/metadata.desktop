@@ -1,24 +1,31 @@
 [Desktop Entry]
-Name=Simple Monitor
-Name[es]=Monitor de sistema simple
 Encoding=UTF-8
+Name=Simple Monitor
+Name[ru_RU]=Простой системный монитор
+Name[es]=Monitor de sistema simple
 Comment=Plasma Simple System Monitor
+Comment[ru_RU]=Простой системный монитор-плазмоид
 Comment[es]=Monitor de Sistema simple para Plasma
-Icon=icon.svg
+
+Type=Service
+Icon=../plasma/plasmoids/simpleMonitor/contents/images/simpleMonitor.svg
+
+X-KDE-ServiceTypes=Plasma/Applet
 
 X-Plasma-API=declarativeappletscript
-X-Plasma-MainScript=code/main.qml
-X-Plasma-DefaultSize=370,360
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-StandAloneApp=true
 
-X-KDE-PluginInfo-Author=DhabyX
-X-KDE-PluginInfo-Email=slack.dhabyx@gmail.com
-X-KDE-PluginInfo-Website=http://plasma.kde.org/
-X-KDE-PluginInfo-Category=System Information
 X-KDE-PluginInfo-Name=simpleMonitor
-X-KDE-PluginInfo-Version=0.5
-
+X-KDE-PluginInfo-Category=System Information
+X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Author=DhabyX, Konstantin Shtepa
+X-KDE-PluginInfo-Email=slack.dhabyx@gmail.com, oss.konstantin.shtepa@yandex.ru
+X-KDE-PluginInfo-License=GPL3
 X-KDE-PluginInfo-Depends=
-X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-KDE-ServiceTypes=Plasma/Applet
-Type=Service
+X-KDE-FormFactors=tablet,mediacenter,desktop
+
+X-Plasma-Requires-FileDialog=Unused
+X-Plasma-Requires-LaunchApp=Unused

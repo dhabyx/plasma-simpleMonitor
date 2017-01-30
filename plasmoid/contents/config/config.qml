@@ -18,28 +18,12 @@
  **/
 
 import QtQuick 2.0
+import org.kde.plasma.configuration 2.0
 
-Row {
-    property int uptime: 0
-
-    spacing: 3
-
-    onUptimeChanged: {
-        var dhm = [];
-        dhm['d'] = Math.floor(uptime/86400);
-        dhm['h'] = Math.floor(uptime/3600) - 24*dhm['d'];
-        dhm['m'] = Math.floor(uptime/60) - 60*dhm['h'] - 1440*dhm['d']
-        uptimeLabel.text = dhm['d'] + 'd ' + dhm['h'] + ':'+ ((dhm['m'] < 10) ? '0' : '') + dhm['m'];
-    }
-
-    Text {
-        text: i18n("Uptime:")
-        color: "#b3b3b3"
-    }
-
-    Text {
-        id: uptimeLabel
-        text: "0d 0:00"
-        color: "white"
+ConfigModel {
+    ConfigCategory {
+        name: i18n('General')
+        icon: Qt.resolvedUrl('../images/simpleMonitor.svg').replace('file://', '')
+        source: 'config/ConfigGeneral.qml'
     }
 }

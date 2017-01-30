@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2014 Dhaby Xiloj
+ * Copyright 2013-2016 Dhaby Xiloj, Konstantin Shtepa
  *
  * This file is part of plasma-simpleMonitor.
  *
@@ -17,39 +17,40 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 1.1
+import QtQuick 2.0
 
 ListView {
     id: cpuListView
+
     property int direction: Qt.LeftToRight
     property color progressColor: "#993de515"
+
+    implicitWidth: 100
+    implicitHeight: childrenRect.height
+
     model: cpuModel
-    FontLoader {
-        id: doppioOneRegular
-        source: "../fonts/Doppio_One/DoppioOne-Regular.ttf"
-    }
-    HighlightCpu {
+    interactive: false
+
+    /* No higlights on CPU, temporarily until next release*/
+    highlightFollowsCurrentItem: true
+    highlight: HighlightCpu {
         id: highlightCpu
         width: cpuListView.width
-        height: if (cpuListView.currentItem) cpuListView.currentItem.height; else 0
-        y: if (cpuListView.currentItem) cpuListView.currentItem.y; else 0
+        height: (cpuListView.currentItem) ? cpuListView.currentItem.height : 0
+        y: (cpuListView.currentItem) ? cpuListView.currentItem.y : 0
     }
 
-    boundsBehavior: Flickable.StopAtBounds
-    /* No higlights on CPU, temporarily until next release*/
-    //highlight: highlightCpu
-    highlightFollowsCurrentItem: false
     delegate: Item {
         id: itemElement
         width: parent.width
-        height: cpuListItem.height+1
+        height: cpuListItem.height + 1
         Column {
             id: cpuListItem
             width: parent.width
             Row {
                 Text {
                     id: cpuLabel
-                    text: 'CPU '+model.index+':'
+                    text: i18n('CPU') + ' ' + model.index + ':'
                     font.bold: true
                     font { family: doppioOneRegular.name; pointSize: 10 }
                     color: "#ffdd55"
@@ -73,10 +74,7 @@ ListView {
                 width: parent.width
                 Rectangle {
                     // clear background
-                    width: parent.width
-                    height: parent.height
-                    y:0
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.fill: parent
                     radius: 2
                     gradient: Gradient {
                         GradientStop {
@@ -184,17 +182,22 @@ ListView {
             hoverEnabled: true
             onEntered: {
                 cpuListView.currentIndex = index
-                highlightCpu.visible = true
+//                highlightCpu.visible = true
             }
-            onExited: {
-                highlightCpu.visible = false
-            }
+//            onExited: {
+//                highlightCpu.visible = false
+//            }
         }
 
         ListView.onAdd: SequentialAnimation {
             PropertyAction { target: cpuListItem; property: "height"; value: 0 }
             NumberAnimation { target: cpuListItem; property: "height"; to: 25; duration: 250; easing.type: Easing.InOutQuad }
         }
+    }
+
+    FontLoader {
+        id: doppioOneRegular
+        source: "../../fonts/Doppio_One/DoppioOne-Regular.ttf"
     }
 
 }

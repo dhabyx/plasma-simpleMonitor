@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2014 Dhaby Xiloj
+ * Copyright 2013-2016 Dhaby Xiloj, Konstantin Shtepa
  *
  * This file is part of plasma-simpleMonitor.
  *
@@ -17,111 +17,106 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import "monitorWidgets/js/monitorActions.js" as MonitorActions
-import "monitorWidgets"
+import QtQuick 2.0
+import QtQuick.Layouts 1.1
+import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick.Controls 1.0
+
+import "../code/code.js" as Code
 
 Rectangle {
-    width: 370
-    height: 360
+    id: root
 
-    color: "transparent"
-    property int minimumWidth: 240
-    property int minimumHeight: 340
-    //color: "black"
+    width: implicitWidth
+    height: implicitHeight
+
+    implicitWidth: loader.implicitWidth
+    implicitHeight: loader.implicitHeight
+
+    Layout.minimumWidth: implicitWidth
+    Layout.minimumHeight: implicitHeight
+    Layout.preferredWidth: implicitWidth
+    Layout.preferredHeight: implicitHeight
+
+    Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
+
+    color: "black"
 
     // control for atk sensor
-    property bool atkPresent:false
+    property bool atkPresent: false
 
-    Image {
-        id: distroLogo
-        source: "monitorWidgets/images/distro-tux.png"
-        y: 73
-        anchors.horizontalCenter: osInfoItem.horizontalCenter
-    }
+    Component.onCompleted: atkPresent = false
 
-    DatePicker {
-        id: datePicker
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.leftMargin: 15
-    }
+    QtObject {
+        id: confEngine
 
-    Rectangle {
-        id: topBar
-        color: "white"
-        y: 102
-        x: 108
-        height: 3
-        width: parent.width-x-5
-    }
+        // cfg properties
+        property int skin:          plasmoid.configuration.skin
+        property int bgColor:       plasmoid.configuration.bgColor
+        property int logo:          plasmoid.configuration.logo
+        property bool showSwap:     plasmoid.configuration.showSwap
+        property bool showUptime:   plasmoid.configuration.showUptime
+        property int tempUnit:      plasmoid.configuration.tempUnit
+        property int cpuHighTemp:   plasmoid.configuration.cpuHighTemp
+        property int cpuCritTemp:   plasmoid.configuration.cpuCritTemp
 
-    UptimePicker {
-        id: uptimePicker
-        height: 15
-        width: 115
-        anchors.right: topBar.right
-        anchors.bottom: topBar.top
-        anchors.bottomMargin: 2
-    }
+        property string distroName: "tux"
+        property string distroId: "tux"
+        property string distroVersion: ""
+        property string kernelName: ""
+        property string kernelVersion: ""
 
+        onSkinChanged: {
+            switch (skin) {
+            default:
+            case 0:
+                loader.source = "skins/DefaultSkin.qml";
+                root.Layout.maximumWidth = root.Layout.preferredWidth;
+                root.Layout.maximumHeight = root.Layout.preferredHeight;
+                root.Layout.maximumWidth = Number.POSITIVE_INFINITY;
+                root.Layout.maximumHeight = Number.POSITIVE_INFINITY;
+                break;
+            case 1:
+                loader.source = "skins/ColumnSkin.qml"
+                root.Layout.maximumWidth = root.Layout.preferredWidth;
+                root.Layout.maximumHeight = root.Layout.preferredHeight;
+                root.Layout.maximumWidth = Number.POSITIVE_INFINITY;
+                root.Layout.maximumHeight = Number.POSITIVE_INFINITY;
+                break;
+            }
+        }
 
-    OsInfoItem {
-        id: osInfoItem
-        width: coreTempList.x-5
-        anchors.top: distroLogo.bottom
-        anchors.left: parent.left
-    }
+        onBgColorChanged: {
+            switch (bgColor) {
+            default:
+            case 0:
+                root.color = "black";
+                plasmoid.backgroundHints = "StandardBackground";
+                break;
+            case 1:
+                root.color = "transparent";
+                plasmoid.backgroundHints = "NoBackground";
+                break;
+            case 2:
+                root.color = "transparent";
+                plasmoid.backgroundHints = "TranslucentBackground";
+                break;
+            }
+        }
 
-    CpuWidget {
-        id: cpuList
-        width: 140
-        height: 205
-        anchors.right: parent.right
-        anchors.top: topBar.bottom
-        anchors.topMargin: 5
-    }
+        Component.onCompleted: {
+            Code.getDistroInfo(function(info) {
+                distroName = info['name']
+                distroId = info['id']
+                distroVersion = info['version']
+            }, this);
 
-    Rectangle {
-        id: midBar
-        color: "white"
-        height: 206
-        width: topBar.height
-        anchors.right: cpuList.left
-        anchors.top: topBar.bottom
-        anchors.topMargin: 5
-        anchors.rightMargin: 5
-    }
-
-    CoreTempList {
-        id: coreTempList
-        anchors.right: midBar.left
-        anchors.rightMargin: 5
-        anchors.top: topBar.bottom
-        anchors.topMargin: 5
-        model: coreTempModel
-    }
-
-    MemArea {
-        id: memArea
-        anchors.top: osInfoItem.bottom
-        anchors.margins: 50
-        anchors.left: parent.left
-        anchors.leftMargin: 15
-        anchors.right: midBar.left
-        anchors.rightMargin: 5
-    }
-
-    MemArea {
-        id: swapArea
-        anchors.top: memArea.bottom
-        anchors.margins: 50
-        anchors.left: parent.left
-        anchors.leftMargin: 15
-        anchors.right: midBar.left
-        anchors.rightMargin: 5
-        memTypeLabel: qsTr("Swap:")
+            Code.getKernelInfo(function(info){
+                kernelName = info['name']
+                kernelVersion = info['version']
+            }, this);
+        }
     }
 
     ListModel {
@@ -136,124 +131,143 @@ Rectangle {
         id: systemInfoDataSource
         engine: "systemmonitor"
         interval: 1000
-        onSourceAdded : {
+
+        property alias delegate: loader.item
+
+        function tryAddSource(source) {
+            if (connectedSources.indexOf(source) !== -1)
+                return;
+
+            // connect to cpu load sources
             if (source.match("^cpu/cpu\\d+/TotalLoad")) {
-                connectSource(source)
-                return
-            }
-            if (source.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+")) {
-                connectSource(source)
-                return
+                connectSource(source);
+                return;
             }
 
+            // connect to cpu temp sources
+            if (source.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+")) {
+                connectSource(source);
+                return;
+            }
             if (source.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
                 /* if atk is present then not connect */
-                if (!atkPresent)
-                    connectSource(source)
-                return
+                if (!root.atkPresent)
+                    connectSource(source);
+                return;
             }
-
             /* Some AMD sensors works better with atk data*/
             if (source.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
                 /* Remove k# temp sensors previously connected*/
-                if (!atkPresent)
-                for (i in connectedSources) {
-                    if (i.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
-                        console.log("discconect: "+i)
-                        disconnectSource(i)
-                        coreTempModel.clear()
+                if (!root.atkPresent) {
+                    for (i in connectedSources) {
+                        if (i.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+                            disconnectSource(i);
+                            coreTempModel.clear();
+                        }
+
                     }
-
                 }
-                atkPresent=true
-                connectSource(source)
-                return
+                root.atkPresent = true;
+                connectSource(source);
+                return;
             }
 
+            // connect memory sources
             if (source.match("^mem/.*")) {
-                connectSource(source)
-                return
+                connectSource(source);
+                return;
             }
+
+            // connect uptime source
             if (source.match("^system/uptime")) {
-                connectSource(source)
-                return
+                connectSource(source);
+                return;
             }
         }
+
+        onSourceAdded: tryAddSource(source)
+
         onNewData: {
-            if (data.value === undefined ) {return}
+            if (data.value === undefined || delegate === undefined)
+                return;
+
+            // cpu load
             if (sourceName.match("^cpu/cpu\\d+/TotalLoad")) {
-                var cpuNumber = sourceName.split('/')[1].match(/\d+/)
-                MonitorActions.modelAddData(cpuModel,cpuNumber,{'val':data.value})
-                return
-            }
-            if (sourceName.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+") ||
-                sourceName.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+") ||
-                sourceName.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
-                var dataName="0"
-                if (atkPresent) {
-                    dataName=sourceName.replace(/^lmsensors\/atk\\d+-acpi-/i,"").replace(/\/CPU_Temperature/i,"")
-                }
+                var cpuNumber = sourceName.split('/')[1].match(/\d+/);
+                if (cpuModel.count <= cpuNumber)
+                    cpuModel.append({'val':data.value});
                 else
-                    dataName=data.name.split(' ')[1]
-                MonitorActions.modelAddData(
-                            coreTempModel,
-                            dataName,
-                            {'val':data.value, 'units':data.units}
-                            )
-                return
+                    cpuModel.set(cpuNumber,{'val':data.value});
+                return;
             }
+
+            // cpu temp
+            if (sourceName.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+")
+                    || sourceName.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")
+                    || sourceName.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
+                var dataName = "0";
+                if (root.atkPresent)
+                    dataName=sourceName.replace(/^lmsensors\/atk\\d+-acpi-/i,"").replace(/\/CPU_Temperature/i,"");
+                else
+                    dataName=data.name.split(' ')[1];
+
+                if (coreTempModel.count <= dataName)
+                    coreTempModel.append({'val':data.value, 'units':data.units});
+                else
+                    coreTempModel.set(dataName,{'val':data.value, 'units':data.units});
+
+                return;
+            }
+
+            // memory
             if (sourceName.match("^mem/physical/free")) {
-                memArea.memFree=data.value/1048576
-                memArea.memTotal=data.max/1048576
-                return
+                delegate.memFree=data.value/1048576;
+                delegate.memTotal=data.max/1048576;
+                return;
             }
             if (sourceName.match("^mem/physical/used")) {
-                memArea.memUsed=data.value/1048576
-                return
+                delegate.memUsed=data.value/1048576;
+                return;
             }
             if (sourceName.match("^mem/physical/buf")) {
-                memArea.memBuffers=data.value/1048576
-                return
+                delegate.memBuffers=data.value/1048576;
+                return;
             }
             if (sourceName.match("^mem/physical/cached")) {
-                memArea.memCached=data.value/1048576
-                return
+                delegate.memCached=data.value/1048576;
+                return;
             }
             if (sourceName.match("^mem/swap/used")) {
-                swapArea.memUsed=data.value/1048576
-                swapArea.memTotal=data.max/1048576
-                return
+                delegate.swapUsed=data.value/1048576;
+                delegate.swapTotal=data.max/1048576;
+                return;
             }
             if (sourceName.match("^mem/swap/free")) {
-                swapArea.memFree=data.value/1048576
-                return
+                delegate.swapFree=data.value/1048576;
+                return;
             }
+
+            // uptime
             if (sourceName.match("^system/uptime")) {
-                var uptimeArray =[]
-                uptimeArray['d'] = Math.floor(data.value/86400)
-                uptimeArray['h'] = Math.floor(data.value/3600)-24*uptimeArray['d']
-                uptimeArray['m'] = Math.floor(data.value/60)-60*uptimeArray['h']-1440*uptimeArray['d']
-                uptimePicker.uptime = uptimeArray['d']+'d '+uptimeArray['h']
-                        +':'+MonitorActions.formatNumberLength(uptimeArray['m'],2)
-                return
+                delegate.uptime = data.value;
+                return;
             }
         }
+
+        Component.onCompleted: {
+            for (var i in systemInfoDataSource.sources)
+                systemInfoDataSource.tryAddSource(systemInfoDataSource.sources[i]);
+        }
+
         Component.onDestruction: {
-            interval = 0
-            for (i in connectedSources) {
-                console.log("discconect: "+connectedSources[0])
-                disconnectSource(connectedSources[0])
-            }
+            for (var i = connectedSources.length; i > 0; --i)
+                disconnectSource(connectedSources[i - 1]);
         }
     }
 
-    Component.onCompleted: {
-        atkPresent = false
-        if (MonitorActions.getLogoInfo() != "tux") {
-            distroLogo.source = "monitorWidgets/images/distro-"+MonitorActions.getLogoInfo()+".png"
-        }
-        plasmoid.addEventListener('ConfigChanged', MonitorActions.configListener)
+    Loader {
+        id: loader
+        anchors.fill: parent
+        source: "skins/DefaultSkin.qml"
     }
-
 }
-

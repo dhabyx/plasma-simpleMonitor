@@ -10,8 +10,8 @@ Simple way for make plasmoid package:
 
 ````Shell
 $ git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
-$ cd plasma-simpleMonitor
-$ zip -r plasma-simpleMonitor.plasmoid contents icon.svg metadata.desktop
+$ cd plasma-simpleMonitor/plasmoid
+$ zip -r plasma-simpleMonitor.plasmoid contents metadata.desktop
 ````
 
 Installation
@@ -21,12 +21,12 @@ In KDE you can use asistant for installation.
 
 In a terminal you can use plasmapkg command:
 ````Shell
-$ plasmapkg -i plasma-simpleMonitor.plasmoid
+$ plasmapkg2 -i plasma-simpleMonitor.plasmoid
 ````
 
 If you want update:
 ````Shell
-$ plasmapkg -u plasma-simpleMonitor.plasmoid
+$ plasmapkg2 -u plasma-simpleMonitor.plasmoid
 ````
 
 Development
