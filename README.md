@@ -29,6 +29,11 @@ If you want update:
 $ plasmapkg -u plasma-simpleMonitor.plasmoid
 ````
 
+Development
+===========
+
+Use build.sh script to launch and debug plasma-simpleMonitor plasmoid.
+
 License
 =======
 Simple Monitor for Plasma is licensed under the GNU General Public License Version 3 or later.
