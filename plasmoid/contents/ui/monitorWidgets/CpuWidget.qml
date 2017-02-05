@@ -23,6 +23,9 @@ ListView {
     id: cpuListView
 
     property int direction: Qt.LeftToRight
+    LayoutMirroring.enabled: direction === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
     property color progressColor: "#993de515"
 
     implicitWidth: 100
@@ -42,12 +45,13 @@ ListView {
 
     delegate: Item {
         id: itemElement
-        width: parent.width
+        width: cpuListView.width
         height: cpuListItem.height + 1
         Column {
             id: cpuListItem
             width: parent.width
             Row {
+                anchors.left: parent.left
                 Text {
                     id: cpuLabel
                     text: i18n('CPU') + ' ' + model.index + ':'
@@ -61,15 +65,10 @@ ListView {
                     font.pointSize: 10
                     color: "white"
                 }
-                Component.onCompleted: {
-                    if (direction === Qt.RightToLeft)
-                        anchors.right = parent.right
-                }
             }
-            Rectangle {
+            Item {
                 id: progressBar
                 height: 8
-                color: "transparent"
                 //clip: true
                 width: parent.width
                 Rectangle {
@@ -96,6 +95,7 @@ ListView {
                 Rectangle {
                     id: rectValue
                     // rectangle whit value change and crop
+                    anchors.left: parent.left
                     height: parent.height
                     color: "transparent"
                     clip: true
@@ -104,6 +104,7 @@ ListView {
                     Rectangle {
                         id: bgGradient
                         // rectangle of color, in background for less cpu load
+                        anchors.left: parent.left
                         height: progressBar.width
                         width: progressBar.height
                         gradient: Gradient {
@@ -120,20 +121,21 @@ ListView {
                             Rotation { id: colorRotation; origin.x:0; origin.y:0; angle:0 },
                             Translate { id: colorTraslation; x: 0; y:0 } ]
                         Component.onCompleted: {
-                            if (direction === Qt.RightToLeft) {
+                            if (LayoutMirroring.enabled) {
                                 colorRotation.angle = 270
-                                colorTraslation.y = width
-                                anchors.left = parent.left
+                                colorTraslation.y = Qt.binding(function() { return width });
+                                colorTraslation.x = Qt.binding(function() { return -height + width });
                             }
                             else {
                                 colorRotation.angle = 90
-                                colorTraslation.x = height
+                                colorTraslation.x = Qt.binding(function() { return height });
                             }
                         }
 
                     }
                     Rectangle {
                         // rectangle of shadow, in background for less cpu load
+                        anchors.left: parent.left
                         height: progressBar.height
                         width: progressBar.width
                         gradient: Gradient {
@@ -155,25 +157,14 @@ ListView {
                             }
                         }
                     }
-                    Component.onCompleted: {
-                        if (direction === Qt.RightToLeft)
-                            anchors.right = progressBar.right
-                        else
-                            anchors.left= parent.left
-                    }
                 }
                 Rectangle {
                     height: progressBar.height+4
                     width: 5
                     radius: 2
+                    anchors.left: rectValue.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: "#88ffffff"
-                    Component.onCompleted: {
-                        if (direction === Qt.RightToLeft)
-                            anchors.right = rectValue.left
-                        else
-                            anchors.left = rectValue.right
-                    }
                 }
             }
         }
