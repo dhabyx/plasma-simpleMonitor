@@ -63,11 +63,11 @@
         <!-- System Section -->
         <entry name="cpuHighTemp" type="Int">
             <label>CPU High Temp</label>
-            <default>87</default>
+            <default>60</default>
         </entry>
         <entry name="cpuCritTemp" type="Int">
             <label>CPU Critical Temp</label>
-            <default>105</default>
+            <default>70</default>
         </entry>
     </group>
 </kcfg>

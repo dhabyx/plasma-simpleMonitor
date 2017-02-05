@@ -37,8 +37,7 @@ Item {
     Layout.minimumHeight: implicitHeight
     Layout.preferredWidth: implicitWidth
     Layout.preferredHeight: implicitHeight
-    
-    property alias cfg_skin: skinComboBox.currentIndex
+
     property int cfg_bgColor
     property alias cfg_logo: logoComboBox.currentIndex
     property alias cfg_showSwap: showSwapCheckBox.checked
@@ -55,14 +54,6 @@ Item {
         Component.onCompleted: {
             Code.getDistroInfo(function(arrayResult) {
                 osId = arrayResult["id"];
-                if (typeof osId === 'undefined') {
-                    defLogoLabel.text = i18n("Undefined")
-                } else {
-                    var outText = osId
-                    if (Code.logos.indexOf(osId.toLowerCase()) === -1)
-                        outText += i18n("(unknown, def - Tux)")
-                    defLogoLabel.text = outText
-                }
             }, this)
         }
     }
@@ -81,7 +72,7 @@ Item {
             case 1: tempUnitTypeGroup.current = fahrenheitTemp; break;
         }
     }
-    
+
     Component.onCompleted: {
         cfg_bgColorChanged();
         cfg_tempUnitChanged();
@@ -100,59 +91,6 @@ Item {
         anchors.fill: parent
 
         GroupBox {
-            title: i18n("Skins")
-            Layout.fillWidth: true
-
-            RowLayout {
-                Label {
-                    text: i18n("Skin:")
-                }
-                ComboBox {
-                    id: skinComboBox
-                    model: ["Default", "Column"]
-                }
-            }
-        }
-
-        GroupBox {
-            title: i18n("Logo settings:")
-            Layout.fillWidth: true
-
-            GridLayout {
-                columns: 3
-
-                Label {
-                    text: i18n("DefaultLogo:")
-                    Layout.alignment: Qt.AlignRight
-                }
-
-                Label {
-                    id: defLogoLabel
-                    text: i18n("Undefined")
-                    Layout.alignment: Qt.AlignRight
-                }
-
-                Image {
-                    id: logoImage
-                    source: "../" + Code.getStandardLogo(logoComboBox.currentIndex, d.osId)
-                    Layout.rowSpan: 3
-                    Layout.alignment: Qt.AlignCenter
-                }
-
-                Label {
-                    text: i18n("Logo:")
-                    Layout.alignment: Qt.AlignRight
-//                    anchors.verticalCenter: logoComboBox.verticalCenter
-                }
-
-                ComboBox {
-                    id: logoComboBox
-                    model: ["Default", "Tux", "Tuz", "Slackware", "Ubuntu", "Kubuntu", "OpenSUSE"]
-                }
-            }
-        }
-
-        GroupBox {
             title: i18n("Parts settings:")
             Layout.fillWidth: true
 
@@ -160,10 +98,40 @@ Item {
                 columns: 2
 
                 Label {
+                    text: i18n("Logo:")
+                    Layout.alignment: Qt.AlignRight
+                    anchors.verticalCenter: logoComboBox.verticalCenter
+                }
+
+                ComboBox {
+                    id: logoComboBox
+                    model: ["Default", "Tux", "Tuz", "Slackware", "Ubuntu", "Kubuntu", "OpenSUSE"]
+                }
+
+                Rectangle {
+                    Layout.columnSpan: 2
+                    anchors.horizontalCenter: logoComboBox.horizontalCenter
+
+                    implicitHeight: logoImage.implicitHeight + 2 * radius
+                    implicitWidth:  logoImage.implicitWidth + 2 * radius
+
+                    color: "transparent"
+                    border.width: 1
+                    radius: 2
+
+                    Image {
+                        id: logoImage
+                        anchors.centerIn: parent
+                        source: "../" + Code.getStandardLogo(logoComboBox.currentIndex, d.osId)
+                        Layout.alignment: Qt.AlignCenter
+                    }
+                }
+
+                Label {
                     text: i18n("Background color:")
                     Layout.alignment: Qt.AlignRight
                     Layout.rowSpan: 3
-//                    anchors.verticalCenter: standardBgColor.verticalCenter
+                    anchors.verticalCenter: standardBgColor.verticalCenter
                 }
 
                 RadioButton {
@@ -191,7 +159,7 @@ Item {
                     text: i18n("Show:")
                     Layout.alignment: Qt.AlignRight
                     Layout.rowSpan: 2
-//                    anchors.verticalCenter: showSwapCheckBox.verticalCenter
+                    anchors.verticalCenter: showSwapCheckBox.verticalCenter
                 }
 
                 CheckBox {
@@ -217,7 +185,7 @@ Item {
                     text: i18n("Temperature units:")
                     Layout.alignment: Qt.AlignRight
                     Layout.rowSpan: 2
-//                    anchors.verticalCenter: celsiusTemp.verticalCenter
+                    anchors.verticalCenter: celsiusTemp.verticalCenter
                 }
 
                 RadioButton {
@@ -237,7 +205,7 @@ Item {
                 Label {
                     text: i18n("CPU High Temperature:")
                     Layout.alignment: Qt.AlignRight
-//                    anchors.verticalCenter: cpuHighTempSpinBox.verticalCenter
+                    anchors.verticalCenter: cpuHighTempSpinBox.verticalCenter
                 }
 
                 SpinBox {
@@ -247,8 +215,7 @@ Item {
                 Label {
                     text: i18n("CPU Critical Temperature:")
                     Layout.alignment: Qt.AlignRight
-//                    Layout.verticalCenter: cpuCritTempSpinBox.verticalCenter
-//                    anchors.verticalCenter: cpuCritTempSpinBox.verticalCenter
+                    anchors.verticalCenter: cpuCritTempSpinBox.verticalCenter
                 }
 
                 SpinBox {

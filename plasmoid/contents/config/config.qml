@@ -26,4 +26,9 @@ ConfigModel {
         icon: Qt.resolvedUrl('../images/simpleMonitor.svg').replace('file://', '')
         source: 'config/ConfigGeneral.qml'
     }
+    ConfigCategory {
+        name: i18n('Skins')
+        icon: Qt.resolvedUrl('../images/simpleMonitor-skins.svg').replace('file://', '')
+        source: 'config/ConfigSkins.qml'
+    }
 }

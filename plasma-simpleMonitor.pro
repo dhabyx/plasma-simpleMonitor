@@ -47,6 +47,10 @@ DISTFILES += \
     plasmoid/contents/ui/skins/BaseSkin.qml \
     plasmoid/contents/ui/skins/ColumnSkin.qml \
     plasmoid/contents/ui/skins/DefaultSkin.qml \
-    plasmoid/contents/ui/main.qml
+    plasmoid/contents/ui/main.qml \
+    plasmoid/contents/ui/config/ConfigSkins.qml \
+    plasmoid/contents/images/defaultSkin-preview.png \
+    plasmoid/contents/images/columnSkin-preview.png \
+    plasmoid/contents/images/simpleMonitor-skins.svg
 
 
