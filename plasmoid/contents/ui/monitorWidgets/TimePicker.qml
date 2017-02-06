@@ -23,6 +23,7 @@ Item {
     id: timePicker
 
     LayoutMirroring.enabled: false
+    LayoutMirroring.childrenInherit: true
 
     implicitWidth: secs.x + secs.width
     implicitHeight: hour.implicitHeight - 11
