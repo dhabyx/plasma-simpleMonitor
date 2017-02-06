@@ -38,6 +38,9 @@
                 <choice name="Ubuntu"/>
                 <choice name="Kubuntu"/>
                 <choice name="OpenSUSE"/>
+                <choice name="Manjaro"/>
+                <choice name="Arch"/>
+                <choice name="Fedora"/>
             </choices>
             <default>0</default>
         </entry>
