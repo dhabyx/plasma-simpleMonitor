@@ -150,6 +150,7 @@ BaseSkin {
                 highTemp: cpuHighTemp
                 criticalTemp: criticalTemp
                 tempUnit: root.tempUnit
+                direction: root.direction
 
                 Layout.leftMargin: 5
                 Layout.rightMargin: 5
@@ -171,10 +172,13 @@ BaseSkin {
             Layout.minimumHeight: height
             Layout.maximumHeight: height
             Layout.preferredHeight: height
+            Layout.topMargin: 5
         }
 
         CpuWidget {
             id: cpuList
+
+            direction: root.direction
 
             Layout.leftMargin: 5
             Layout.topMargin: 5

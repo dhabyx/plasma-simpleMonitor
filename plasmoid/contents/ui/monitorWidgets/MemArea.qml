@@ -56,7 +56,7 @@ Item {
                 color: "white"
             }
         }
-        
+
         RowLayout {
             id: memoryInfoLabels
             spacing: 3
@@ -84,7 +84,7 @@ Item {
                 font.pointSize: memoryInfoLabels.fontSize
             }
         }
-        
+
         Rectangle {
             id: rectTotalMemory
             height: 5
@@ -92,6 +92,7 @@ Item {
             color: "#7ec264"
             Rectangle {
                 id: rectUsedMemory
+                anchors.left: parent.left
                 height: parent.height
                 width: (memUsed-(memBuffers+memCached))/memTotal*parent.width
                 color: "red"

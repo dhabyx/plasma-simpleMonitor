@@ -22,6 +22,8 @@ import QtQuick 2.0
 Row {
     id: timePicker
 
+    LayoutMirroring.enabled: false
+
     FontLoader {
         id: playRegular
         source: "../../fonts/Play/Play-Regular.ttf"
