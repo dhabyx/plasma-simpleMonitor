@@ -51,6 +51,7 @@ ListView {
             id: cpuListItem
             width: parent.width
             Row {
+                spacing: 5
                 anchors.left: parent.left
                 Text {
                     id: cpuLabel

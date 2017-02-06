@@ -108,7 +108,6 @@ BaseSkin {
             id: uptimePicker
 
             visible: showUptime
-            height: 15
             uptime: root.uptime
 
             Layout.alignment: Qt.AlignRight | Qt.AlignBottom
