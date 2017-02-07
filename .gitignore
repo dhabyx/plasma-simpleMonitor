@@ -36,6 +36,8 @@ Thumbs.db
 /.qmake.stash
 build
 *.kdev4
+*.jsc
+*.qmlc
 
 
 # qtcreator generated files
