@@ -9,10 +9,10 @@ Installation using CMake
 Having root permission:
 
 ````Shell
-$ git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
+git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
 make
 make install
 ````
@@ -20,10 +20,10 @@ make install
 Having non-root permission:
 
 ````Shell
-$ git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --localprefix` -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
+git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --localprefix` -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
 make
 make install
 ````
