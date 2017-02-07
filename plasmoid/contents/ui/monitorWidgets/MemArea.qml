@@ -51,7 +51,7 @@ Item {
                 color: "#ffdd55"
             }
             Text {
-                text: memTotal.toFixed(2) + ' ' + i18n("GiB")
+                text: i18n("%1 GiB", memTotal.toFixed(2))
                 font { family: doppioOneRegular.name; pointSize: 12 }
                 color: "white"
             }
@@ -68,18 +68,18 @@ Item {
             }
             Text {
                 id: memUsedText
-                text: (memUsed-(memBuffers+memCached)).toFixed(2) + ' ' + i18n("GiB")
+                text: i18n("%1 GiB", (memUsed-(memBuffers+memCached)).toFixed(2))
                 color: "white"
                 font.pointSize: memoryInfoLabels.fontSize
             }
             Text {
-                text: i18n("Free")
+                text: i18n("Free:")
                 color: "#7ec264"
                 font.pointSize: memoryInfoLabels.fontSize
             }
             Text {
                 id: memFreeText
-                text: (memFree+(memBuffers+memCached)).toFixed(2) + ' ' + i18n("GiB")
+                text: i18n("%1 GiB", (memFree+(memBuffers+memCached)).toFixed(2))
                 color: "white"
                 font.pointSize: memoryInfoLabels.fontSize
             }

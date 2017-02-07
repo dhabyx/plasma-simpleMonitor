@@ -46,7 +46,7 @@ ListView {
         Text {
             id: coreLabel
             anchors.left: parent.left
-            text: i18n('Core %1:').arg(model.index)
+            text: i18n('Core %1:', model.index)
             font.bold: true
             font { family: doppioOneRegular.name; pointSize: 10 }
             color: "#ffdd55"

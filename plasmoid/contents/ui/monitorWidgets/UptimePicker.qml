@@ -40,7 +40,7 @@ Row {
 
     Text {
         id: uptimeLabel
-        text: i18n("%1d %2:%3").arg(d.days).arg(d.hours).arg(((d.minutes < 10) ? '0' : '') + d.minutes)
+        text: i18n("%1d %2:%3", d.days, d.hours, ((d.minutes < 10) ? '0' : '') + d.minutes)
         color: "white"
     }
 }
