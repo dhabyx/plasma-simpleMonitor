@@ -32,7 +32,7 @@ $ plasmapkg2 -u plasma-simpleMonitor.plasmoid
 Development
 ===========
 
-Use build.sh script to launch and debug plasma-simpleMonitor plasmoid.
+Use launch.sh script to launch and debug plasma-simpleMonitor plasmoid without install it.
 
 License
 =======

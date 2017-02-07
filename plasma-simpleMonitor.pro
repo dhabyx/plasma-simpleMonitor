@@ -19,6 +19,7 @@ DISTFILES += \
     plasmoid/contents/fonts/Play/Play-Bold.ttf \
     plasmoid/contents/fonts/Play/Play-Regular.ttf \
     build.sh \
+    launch.sh \
     plasmoid/contents/config/main.xml \
     plasmoid/contents/images/distro-kubuntu.png \
     plasmoid/contents/images/distro-opensuse.png \
