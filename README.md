@@ -34,6 +34,8 @@ Development
 
 Use launch.sh script to launch and debug plasma-simpleMonitor plasmoid without install it.
 
+If you love QtCreator IDE visit the [wiki](https://github.com/dhabyx/plasma-simpleMonitor/wiki) for more details.
+
 License
 =======
 Simple Monitor for Plasma is licensed under the GNU General Public License Version 3 or later.
