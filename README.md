@@ -1,7 +1,7 @@
 Simple Monitor for Plasma
 =========================
 
-A simple monitor for plasma, completely written in QML and Javascript. 
+A simple monitor for plasma, completely written in QML and Javascript.
 
 Packaging
 =========
