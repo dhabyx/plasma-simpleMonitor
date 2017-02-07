@@ -22,6 +22,10 @@ import QtQuick 2.0
 ListView {
     id: coreTempList
 
+    property int direction: Qt.LeftToRight
+    LayoutMirroring.enabled: direction === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
     implicitHeight: count * 25
     implicitWidth: 100
 
@@ -41,7 +45,8 @@ ListView {
         width: parent.width
         Text {
             id: coreLabel
-            text: i18n('Core ') + model.index + ':'
+            anchors.left: parent.left
+            text: i18n('Core %1:', model.index)
             font.bold: true
             font { family: doppioOneRegular.name; pointSize: 10 }
             color: "#ffdd55"
@@ -55,7 +60,7 @@ ListView {
             color: "white"
             anchors.right: parent.right
         }
-        
+
         Rectangle {
             id: rectValue
             height: 9

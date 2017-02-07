@@ -40,32 +40,26 @@ BaseSkin {
         anchors.margins: 5
         spacing: 0
 
-        RowLayout {
+        Item {
+            implicitHeight: datePicker.implicitHeight
+            implicitWidth: datePicker.implicitWidth
+
             Layout.fillWidth: true
+            Layout.minimumHeight: implicitHeight
+            Layout.minimumWidth: implicitWidth
 
             DatePicker {
                 id: datePicker
 
-                Layout.leftMargin: 10
-                Layout.minimumWidth: implicitWidth
-                Layout.minimumHeight: implicitHeight
-                Layout.maximumHeight: implicitHeight
+                anchors { left: parent.left; leftMargin: 10 }
             }
 
-            Item {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignTop
-                Layout.bottomMargin: 2
-                Layout.minimumWidth: uptimePicker.implicitWidth
-                Layout.minimumHeight: uptimePicker.implicitHeight
+            UptimePicker {
+                id: uptimePicker
 
-                UptimePicker {
-                    id: uptimePicker
-
-                    anchors { top: parent.top; right: parent.right }
-                    visible: showUptime
-                    uptime: root.uptime
-                }
+                anchors { top: parent.top; right: parent.right }
+                visible: showUptime
+                uptime: root.uptime
             }
         }
 
@@ -76,6 +70,7 @@ BaseSkin {
             rowSpacing: 0
 
             Layout.fillWidth: true
+            Layout.topMargin: 5
 
             ColumnLayout {
                 id: distroInfo
@@ -150,6 +145,7 @@ BaseSkin {
                 highTemp: cpuHighTemp
                 criticalTemp: criticalTemp
                 tempUnit: root.tempUnit
+                direction: root.direction
 
                 Layout.leftMargin: 5
                 Layout.rightMargin: 5
@@ -171,10 +167,13 @@ BaseSkin {
             Layout.minimumHeight: height
             Layout.maximumHeight: height
             Layout.preferredHeight: height
+            Layout.topMargin: 5
         }
 
         CpuWidget {
             id: cpuList
+
+            direction: root.direction
 
             Layout.leftMargin: 5
             Layout.topMargin: 5

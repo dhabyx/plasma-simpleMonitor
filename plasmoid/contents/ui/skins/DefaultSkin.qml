@@ -108,7 +108,6 @@ BaseSkin {
             id: uptimePicker
 
             visible: showUptime
-            height: 15
             uptime: root.uptime
 
             Layout.alignment: Qt.AlignRight | Qt.AlignBottom
@@ -139,6 +138,7 @@ BaseSkin {
             highTemp: cpuHighTemp
             criticalTemp: criticalTemp
             tempUnit: root.tempUnit
+            direction: root.direction
 
             Layout.leftMargin: 5
             Layout.rightMargin: 5
@@ -166,6 +166,8 @@ BaseSkin {
 
         CpuWidget {
             id: cpuList
+
+            direction: root.direction
 
             Layout.rowSpan: 6
             Layout.leftMargin: 5

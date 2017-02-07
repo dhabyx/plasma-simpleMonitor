@@ -45,4 +45,8 @@ Item {
     property double swapUsed
 
     property int uptime
+
+    property int direction: confEngine.direction
+    LayoutMirroring.enabled: direction === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
 }

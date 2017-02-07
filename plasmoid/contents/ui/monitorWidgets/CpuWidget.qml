@@ -51,10 +51,11 @@ ListView {
             id: cpuListItem
             width: parent.width
             Row {
+                spacing: 5
                 anchors.left: parent.left
                 Text {
                     id: cpuLabel
-                    text: i18n('CPU') + ' ' + model.index + ':'
+                    text: i18n('CPU %1:', model.index)
                     font.bold: true
                     font { family: doppioOneRegular.name; pointSize: 10 }
                     color: "#ffdd55"

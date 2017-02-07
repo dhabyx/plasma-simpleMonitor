@@ -19,8 +19,14 @@
 
 import QtQuick 2.0
 
-Row {
+Item {
     id: timePicker
+
+    LayoutMirroring.enabled: false
+    LayoutMirroring.childrenInherit: true
+
+    implicitWidth: secs.x + secs.width
+    implicitHeight: hour.implicitHeight - 11
 
     FontLoader {
         id: playRegular
@@ -42,8 +48,9 @@ Row {
 
     Text {
         id: hour
-//        height: 41
+        anchors.left: parent.left
         anchors.bottom: parent.bottom
+        height: 44
         text: "00:"
         font {
             family: playRegular.name
@@ -53,8 +60,9 @@ Row {
     }
     Text {
         id: mins
-//        height: 29
+        anchors.left: hour.right
         anchors.bottom: parent.bottom
+        height: 29
         text: "00:"
         font {
             family: playRegular.name
@@ -64,7 +72,9 @@ Row {
     }
     Text {
         id: secs
+        anchors.left: mins.right
         anchors.bottom: parent.bottom
+        height: 21
         text: "00"
         font {
             family: playRegular.name

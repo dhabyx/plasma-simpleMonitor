@@ -105,7 +105,7 @@ Item {
 
                 ComboBox {
                     id: logoComboBox
-                    model: ["Default", "Tux", "Tuz", "Slackware", "Ubuntu", "Kubuntu", "OpenSUSE"]
+                    model: ["Default", "Tux", "Tuz", "Slackware", "Ubuntu", "Kubuntu", "OpenSUSE", "Manjaro", "Arch", "Fedora"]
                 }
 
                 Rectangle {

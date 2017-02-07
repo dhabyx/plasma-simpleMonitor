@@ -52,6 +52,12 @@ DISTFILES += \
     plasmoid/contents/ui/config/ConfigSkins.qml \
     plasmoid/contents/images/defaultSkin-preview.png \
     plasmoid/contents/images/columnSkin-preview.png \
-    plasmoid/contents/images/simpleMonitor-skins.svg
+    plasmoid/contents/images/simpleMonitor-skins.svg \
+    plasmoid/contents/images/distro-arch.png \
+    plasmoid/contents/images/distro-fedora.png \
+    plasmoid/contents/images/distro-manjaro.png \
+    plasmoid/contents/images/distro-arch.svg \
+    plasmoid/contents/images/distro-fedora.svg \
+    plasmoid/contents/images/distro-manjaro.svg
 
 

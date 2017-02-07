@@ -24,12 +24,13 @@ Row {
 
     spacing: 3
 
-    onUptimeChanged: {
-        var dhm = [];
-        dhm['d'] = Math.floor(uptime/86400);
-        dhm['h'] = Math.floor(uptime/3600) - 24*dhm['d'];
-        dhm['m'] = Math.floor(uptime/60) - 60*dhm['h'] - 1440*dhm['d']
-        uptimeLabel.text = dhm['d'] + 'd ' + dhm['h'] + ':'+ ((dhm['m'] < 10) ? '0' : '') + dhm['m'];
+    QtObject {
+        id: d
+
+        property int days: Math.floor(uptime / 86400)
+        property int hours: Math.floor((uptime % 86400) / 3600)
+        property int minutes: Math.floor((uptime % 3600) / 60)
+        property int seconds: Math.floor(uptime % 60)
     }
 
     Text {
@@ -39,7 +40,7 @@ Row {
 
     Text {
         id: uptimeLabel
-        text: "0d 0:00"
+        text: i18n("%1d %2:%3", d.days, d.hours, ((d.minutes < 10) ? '0' : '') + d.minutes)
         color: "white"
     }
 }

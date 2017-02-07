@@ -67,6 +67,8 @@ Rectangle {
         property string kernelName: ""
         property string kernelVersion: ""
 
+        property int direction: Qt.LeftToRight
+
         onSkinChanged: {
             switch (skin) {
             default:
