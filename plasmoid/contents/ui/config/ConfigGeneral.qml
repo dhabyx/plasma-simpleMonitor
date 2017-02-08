@@ -179,57 +179,56 @@ Item {
             Layout.fillWidth: true
 
             GridLayout {
-                flow: GridLayout.TopToBottom
-                Layout.fillWidth: true
+                columns: 2
+                rowSpacing: 2
+
                 Label {
-                    color: "#3b3131"
-                    text: i18n("You can use the <strong>sensors</strong> command to place the appropriate values ​​for this section.")
+                    Layout.columnSpan: 2
+                    text: i18n("<i>(You can use the <strong>sensors</strong> command to place the appropriate values ​​for this section.)</i>")
+                    color: theme.highlightColor
                     wrapMode: Text.WordWrap
                 }
-                GridLayout {
-                    columns: 2
 
-                    Label {
-                        text: i18n("Temperature units:")
-                        Layout.alignment: Qt.AlignRight
-                        Layout.rowSpan: 2
-                        anchors.verticalCenter: celsiusTemp.verticalCenter
-                    }
+                Label {
+                    text: i18n("Temperature units:")
+                    Layout.alignment: Qt.AlignRight
+                    Layout.rowSpan: 2
+                    anchors.verticalCenter: celsiusTemp.verticalCenter
+                }
 
-                    RadioButton {
-                        id: celsiusTemp
-                        exclusiveGroup: tempUnitTypeGroup
-                        text: i18n("Celsius °C")
-                        onCheckedChanged: if (checked) cfg_tempUnit = 0;
-                    }
+                RadioButton {
+                    id: celsiusTemp
+                    exclusiveGroup: tempUnitTypeGroup
+                    text: i18n("Celsius °C")
+                    onCheckedChanged: if (checked) cfg_tempUnit = 0;
+                }
 
-                    RadioButton {
-                        id: fahrenheitTemp
-                        exclusiveGroup: tempUnitTypeGroup
-                        text: i18n("Fahrenheit °F")
-                        onCheckedChanged: if (checked) cfg_tempUnit = 1;
-                    }
+                RadioButton {
+                    id: fahrenheitTemp
+                    exclusiveGroup: tempUnitTypeGroup
+                    text: i18n("Fahrenheit °F")
+                    onCheckedChanged: if (checked) cfg_tempUnit = 1;
+                }
 
-                    Label {
-                        text: i18n("CPU High Temperature:")
-                        Layout.alignment: Qt.AlignRight
-                        anchors.verticalCenter: cpuHighTempSpinBox.verticalCenter
-                    }
+                Label {
+                    text: i18n("CPU High Temperature:")
+                    Layout.alignment: Qt.AlignRight
+                    anchors.verticalCenter: cpuHighTempSpinBox.verticalCenter
+                }
 
-                    SpinBox {
-                        id: cpuHighTempSpinBox
-                    }
+                SpinBox {
+                    id: cpuHighTempSpinBox
+                }
 
-                    Label {
-                        text: i18n("CPU Critical Temperature:")
-                        Layout.alignment: Qt.AlignRight
-                        anchors.verticalCenter: cpuCritTempSpinBox.verticalCenter
-                    }
+                Label {
+                    text: i18n("CPU Critical Temperature:")
+                    Layout.alignment: Qt.AlignRight
+                    anchors.verticalCenter: cpuCritTempSpinBox.verticalCenter
+                }
 
-                    SpinBox {
-                        id: cpuCritTempSpinBox
-                        maximumValue: 150
-                    }
+                SpinBox {
+                    id: cpuCritTempSpinBox
+                    maximumValue: 150
                 }
             }
         }
