@@ -12,7 +12,7 @@ Having root permission:
 git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
+cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
 make
 make install
 ````
@@ -23,7 +23,7 @@ Having non-root permission:
 git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --localprefix` -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
+cmake -DCMAKE_INSTALL_PREFIX='~/.kde' -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
 make
 make install
 ````
