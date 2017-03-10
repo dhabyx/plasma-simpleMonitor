@@ -21,12 +21,6 @@ DISTFILES += \
     build.sh \
     launch.sh \
     plasmoid/contents/config/main.xml \
-    plasmoid/contents/images/distro-kubuntu.png \
-    plasmoid/contents/images/distro-opensuse.png \
-    plasmoid/contents/images/distro-slackware.png \
-    plasmoid/contents/images/distro-tux.png \
-    plasmoid/contents/images/distro-tuz.png \
-    plasmoid/contents/images/distro-ubuntu.png \
     plasmoid/contents/images/distro-slackware.svg \
     plasmoid/contents/images/simpleMonitor.svg \
     plasmoid/contents/fonts/Doppio_One/OFL.txt \
@@ -53,11 +47,12 @@ DISTFILES += \
     plasmoid/contents/images/defaultSkin-preview.png \
     plasmoid/contents/images/columnSkin-preview.png \
     plasmoid/contents/images/simpleMonitor-skins.svg \
-    plasmoid/contents/images/distro-arch.png \
-    plasmoid/contents/images/distro-fedora.png \
-    plasmoid/contents/images/distro-manjaro.png \
     plasmoid/contents/images/distro-arch.svg \
     plasmoid/contents/images/distro-fedora.svg \
-    plasmoid/contents/images/distro-manjaro.svg
+    plasmoid/contents/images/distro-manjaro.svg \
+    plasmoid/contents/images/distro-kubuntu.svg \
+    plasmoid/contents/images/distro-opensuse.svg \
+    plasmoid/contents/images/distro-tux.svg \
+    plasmoid/contents/images/distro-ubuntu.svg
 
 

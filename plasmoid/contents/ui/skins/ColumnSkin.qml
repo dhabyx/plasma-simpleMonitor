@@ -83,14 +83,22 @@ BaseSkin {
                 Layout.preferredWidth: implicitWidth
                 Layout.preferredHeight: implicitHeight
 
-                Image {
-                    id: distroLogo
+                Item {
+                    Layout.minimumWidth: (distroLogo.implicitHeight > distroLogo.implicitWidth) ? 10 : 100
+                    Layout.minimumHeight: (distroLogo.implicitHeight > distroLogo.implicitWidth) ? 100 : 10
+                    Layout.preferredWidth: (distroLogo.implicitHeight > distroLogo.implicitWidth) ? 100 * distroLogo.implicitWidth / distroLogo.implicitHeight : 100
+                    Layout.fillWidth: true
 
-                    source: "../" + Code.getStandardLogo(logo, osInfoItem.distroId)
+                    implicitHeight: distroLogo.width * distroLogo.implicitHeight / distroLogo.implicitWidth
 
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: implicitWidth
-                    Layout.preferredHeight: implicitHeight
+                    Image {
+                        id: distroLogo
+
+                        anchors.fill: parent
+
+                        source: "../" + Code.getStandardLogo(logo, osInfoItem.distroId)
+                        fillMode: Image.PreserveAspectFit
+                    }
                 }
 
                 OsInfoItem {
@@ -104,7 +112,6 @@ BaseSkin {
 
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                     Layout.topMargin: 2
-                    Layout.fillWidth: true
                     Layout.minimumHeight: implicitHeight
                     Layout.maximumHeight: implicitHeight
                     Layout.minimumWidth: implicitWidth
@@ -132,6 +139,7 @@ BaseSkin {
                 color: "white"
                 height: 3
 
+                Layout.leftMargin: 2
                 Layout.fillWidth: true
                 Layout.minimumHeight: height
                 Layout.maximumHeight: height

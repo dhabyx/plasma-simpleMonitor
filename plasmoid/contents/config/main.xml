@@ -33,7 +33,6 @@
             <choices>
                 <choice name="Default"/>
                 <choice name="Tux"/>
-                <choice name="Tuz"/>
                 <choice name="Slackware"/>
                 <choice name="Ubuntu"/>
                 <choice name="Kubuntu"/>

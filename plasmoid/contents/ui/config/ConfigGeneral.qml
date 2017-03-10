@@ -105,25 +105,28 @@ Item {
 
                 ComboBox {
                     id: logoComboBox
-                    model: ["Default", "Tux", "Tuz", "Slackware", "Ubuntu", "Kubuntu", "OpenSUSE", "Manjaro", "Arch", "Fedora"]
+                    model: ["Default", "Tux", "Slackware", "Ubuntu", "Kubuntu", "OpenSUSE", "Manjaro", "Arch", "Fedora"]
                 }
 
                 Rectangle {
+
                     Layout.columnSpan: 2
                     anchors.horizontalCenter: logoComboBox.horizontalCenter
 
-                    implicitHeight: logoImage.implicitHeight + 2 * radius
-                    implicitWidth:  logoImage.implicitWidth + 2 * radius
+                    implicitHeight: logoImage.height + 10
+                    implicitWidth:  logoImage.width + 10
 
                     color: "transparent"
-                    border.width: 1
+                    border { width: 1; color: theme.buttonTextColor }
                     radius: 2
 
                     Image {
                         id: logoImage
+
                         anchors.centerIn: parent
+
                         source: "../" + Code.getStandardLogo(logoComboBox.currentIndex, d.osId)
-                        Layout.alignment: Qt.AlignCenter
+                        sourceSize.height: 100
                     }
                 }
 
