@@ -53,6 +53,8 @@ DISTFILES += \
     plasmoid/contents/images/distro-kubuntu.svg \
     plasmoid/contents/images/distro-opensuse.svg \
     plasmoid/contents/images/distro-tux.svg \
-    plasmoid/contents/images/distro-ubuntu.svg
+    plasmoid/contents/images/distro-ubuntu.svg \
+    plasmoid/contents/images/resize.svg \
+    plasmoid/contents/ui/components/LogoImage.qml
 
 

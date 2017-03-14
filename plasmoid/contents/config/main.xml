@@ -43,6 +43,10 @@
             </choices>
             <default>0</default>
         </entry>
+        <entry name="logoScale" type="Double">
+            <label>Logo scaling</label>
+            <default>1.0</default>
+        </entry>
 
         <!-- Displays Section -->
         <entry name="showSwap" type="Bool">

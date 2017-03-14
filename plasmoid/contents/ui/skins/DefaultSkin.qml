@@ -19,8 +19,10 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import "../monitorWidgets"
+import "../components"
 import "../../code/code.js" as Code
 
 BaseSkin {
@@ -35,7 +37,7 @@ BaseSkin {
         anchors.fill: parent
         anchors.margins: 5
         columns: 4
-        rows: 9
+        rows: 8
         columnSpacing: 0
         rowSpacing: 0
 
@@ -56,29 +58,42 @@ BaseSkin {
             Layout.rowSpan: 3
             Layout.topMargin: 5
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
             Layout.preferredWidth: implicitWidth
             Layout.preferredHeight: implicitHeight
 
-            Item {
-                Layout.minimumWidth: (distroLogo.implicitHeight > distroLogo.implicitWidth) ? 10 : 100
-                Layout.minimumHeight: (distroLogo.implicitHeight > distroLogo.implicitWidth) ? 100 : 10
-                Layout.preferredWidth: (distroLogo.implicitHeight > distroLogo.implicitWidth) ? 100 * distroLogo.implicitWidth / distroLogo.implicitHeight : 100
-                Layout.fillWidth: true
+            LogoImage {
+                id: distroLogo
+                Layout.minimumWidth: (implicitWidth < implicitHeight) ? 100*implicitWidth/implicitHeight : 100
+                Layout.minimumHeight: (implicitHeight < implicitWidth) ? 100*implicitHeight/implicitWidth : 100
+                Layout.preferredWidth: (Layout.fillWidth) ? Layout.minimumWidth : height * implicitWidth/implicitHeight
+                Layout.preferredHeight: (Layout.fillHeight) ? Layout.minimumHeight : width * implicitHeight/implicitWidth
+                Layout.fillWidth: (implicitWidth < implicitHeight) ? false: true
+                Layout.fillHeight: !Layout.fillWidth
+                Layout.alignment: Qt.AlignCenter
 
-                implicitHeight: distroLogo.width * distroLogo.implicitHeight / distroLogo.implicitWidth
+                image.source: "../" + Code.getStandardLogo(logo, osInfoItem.distroId)
 
-                Image {
-                    id: distroLogo
+                fillScale: plasmoid.configuration.logoScale
+                onFillScaleChanged: if (fillScale !== plasmoid.configuration.logoScale) plasmoid.configuration.logoScale = fillScale
 
+                MouseArea {
                     anchors.fill: parent
+                    acceptedButtons: Qt.RightButton
+                    onClicked: logoPopup.open(mouse.x, mouse.y)
+                }
 
-                    source: "../" + Code.getStandardLogo(logo, osInfoItem.distroId)
-                    fillMode: Image.PreserveAspectFit
+                PlasmaComponents.ContextMenu {
+                    id: logoPopup
+
+                    PlasmaComponents.MenuItem {
+                        text: distroLogo.editMode ? i18n("Lock image scaling") : i18n("Unlock image scaling")
+                        onClicked: distroLogo.editMode = !distroLogo.editMode
+                    }
                 }
             }
-
 
             OsInfoItem {
                 id: osInfoItem
@@ -149,6 +164,7 @@ BaseSkin {
             Layout.rightMargin: 5
             Layout.topMargin: 5
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
             Layout.preferredWidth: implicitWidth
@@ -158,7 +174,7 @@ BaseSkin {
         Rectangle {
             color: "white"
 
-            Layout.rowSpan: 6
+            Layout.rowSpan: 5
             Layout.minimumWidth: 3
             Layout.maximumWidth: 3
             Layout.preferredWidth: 3
@@ -171,7 +187,7 @@ BaseSkin {
 
             direction: root.direction
 
-            Layout.rowSpan: 6
+            Layout.rowSpan: 5
             Layout.leftMargin: 5
             Layout.topMargin: 5
             Layout.fillWidth: true
@@ -245,12 +261,6 @@ BaseSkin {
             Layout.minimumHeight: implicitHeight
             Layout.preferredWidth: implicitWidth
             Layout.maximumHeight: implicitHeight
-        }
-
-        Item {
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-            Layout.fillHeight: true
         }
     }
 }
