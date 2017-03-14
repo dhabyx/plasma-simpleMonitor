@@ -134,16 +134,13 @@ BaseSkin {
             }
 
             Rectangle {
-                id: topBar
-
                 color: "white"
-                height: 3
 
                 Layout.leftMargin: 2
                 Layout.fillWidth: true
-                Layout.minimumHeight: height
-                Layout.maximumHeight: height
-                Layout.preferredHeight: height
+                Layout.minimumHeight: 3
+                Layout.maximumHeight: 3
+                Layout.preferredHeight: 3
             }
 
             CoreTempList {
@@ -169,12 +166,11 @@ BaseSkin {
 
         Rectangle {
             color: "white"
-            height: 3
 
             Layout.fillWidth: true
-            Layout.minimumHeight: height
-            Layout.maximumHeight: height
-            Layout.preferredHeight: height
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
             Layout.topMargin: 5
         }
 
@@ -193,10 +189,12 @@ BaseSkin {
         }
 
         Rectangle {
-            height: 3
             color: "white"
 
             Layout.fillWidth: true
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
             Layout.topMargin: 5
         }
 
@@ -221,11 +219,13 @@ BaseSkin {
         }
 
         Rectangle {
-            height: 3
             visible: showSwap
             color: "white"
 
             Layout.fillWidth: true
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
             Layout.topMargin: 5
         }
 

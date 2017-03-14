@@ -126,17 +126,14 @@ BaseSkin {
         }
 
         Rectangle {
-            id: topBar
-
             color: "white"
-            height: 3
 
             Layout.columnSpan: 3
-            Layout.leftMargin: 2
             Layout.fillWidth: true
-            Layout.minimumHeight: height
-            Layout.maximumHeight: height
-            Layout.preferredHeight: height
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
+            Layout.leftMargin: 2
         }
 
         CoreTempList {
@@ -159,17 +156,14 @@ BaseSkin {
         }
 
         Rectangle {
-            id: midBar
-
             color: "white"
-            width: 3
 
             Layout.rowSpan: 6
-            Layout.topMargin: 5
+            Layout.minimumWidth: 3
+            Layout.maximumWidth: 3
+            Layout.preferredWidth: 3
             Layout.fillHeight: true
-            Layout.minimumWidth: width
-            Layout.maximumWidth: width
-            Layout.preferredWidth: width
+            Layout.topMargin: 5
         }
 
         CpuWidget {
@@ -189,11 +183,13 @@ BaseSkin {
         }
 
         Rectangle {
-            height: 3
             color: "white"
 
             Layout.columnSpan: 2
             Layout.fillWidth: true
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
             Layout.topMargin: 5
             Layout.rightMargin: 5
         }
@@ -219,12 +215,14 @@ BaseSkin {
         }
 
         Rectangle {
-            height: 3
             visible: showSwap
             color: "white"
 
             Layout.columnSpan: 2
             Layout.fillWidth: true
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
             Layout.topMargin: 5
             Layout.rightMargin: 5
         }
