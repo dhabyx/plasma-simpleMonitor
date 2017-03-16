@@ -30,6 +30,7 @@ DISTFILES += \
     plasmoid/contents/fonts/Play/OFL.txt \
     COPYING \
     README.md \
+    CHANGELOG.md \
     plasmoid/contents/config/config.qml \
     plasmoid/contents/ui/config/ConfigGeneral.qml \
     plasmoid/contents/ui/monitorWidgets/CoreTempList.qml \
