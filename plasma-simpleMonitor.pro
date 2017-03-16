@@ -56,6 +56,11 @@ DISTFILES += \
     plasmoid/contents/images/distro-tux.svg \
     plasmoid/contents/images/distro-ubuntu.svg \
     plasmoid/contents/images/resize.svg \
-    plasmoid/contents/ui/components/LogoImage.qml
+    plasmoid/contents/ui/components/LogoImage.qml \
+    translations/Messages.sh \
+    translations/CMakeLists.txt \
+    CMakeLists.txt \
+    translations/plasma_applet_org.kde.simpleMonitor.pot \
+    translations/README.md
 
 

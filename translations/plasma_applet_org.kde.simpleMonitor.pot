@@ -1,0 +1,157 @@
+# plasma-simpleMonitor language translation file.
+# Copyright (C) 2013-2016 Dhaby Xiloj, Konstantin Shtepa
+# This file is distributed under the same license as the plasma-simpleMonitor package.
+# 
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-16 17:39+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
+msgid "Skin:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
+msgid "preview:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
+msgid "Parts settings:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
+msgid "Logo:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
+msgid "Background color:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:143
+msgid "Standard"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:150
+msgid "Crystal"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:157
+msgid "Translucent"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:162
+msgid "Show:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:170
+msgid "Swap"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:175
+msgid "Uptime"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:181
+msgid "Temp settings:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:190
+msgid ""
+"<i>(You can use the <strong>sensors</strong> command to place the "
+"appropriate values ​​for this section.)</i>"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:196
+msgid "Temperature units:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:205
+msgid "Celsius °C"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:212
+msgid "Fahrenheit °F"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:217
+msgid "CPU High Temperature:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:227
+msgid "CPU Critical Temperature:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
+msgid "Core %1:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
+msgid "CPU %1:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
+msgid "mie"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
+msgid "dic"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
+msgid "Mem:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:54
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:71
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:82
+msgid "%1 GiB"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:65
+msgid "Used:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:76
+msgid "Free:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr ""
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Lock image scaling"
+msgstr ""
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Unlock image scaling"
+msgstr ""
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
+msgid "Swap:"
+msgstr ""
