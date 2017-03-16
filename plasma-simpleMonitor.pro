@@ -20,6 +20,7 @@ DISTFILES += \
     plasmoid/contents/fonts/Play/Play-Regular.ttf \
     build.sh \
     launch.sh \
+    clearLaunch.sh \
     plasmoid/contents/config/main.xml \
     plasmoid/contents/images/distro-slackware.svg \
     plasmoid/contents/images/simpleMonitor.svg \
