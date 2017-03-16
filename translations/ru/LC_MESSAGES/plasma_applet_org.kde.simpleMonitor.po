@@ -1,0 +1,159 @@
+# plasma-simpleMonitor language translation file.
+# Copyright (C) 2013-2016 Dhaby Xiloj, Konstantin Shtepa
+# This file is distributed under the same license as the plasma-simpleMonitor package.
+#
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-16 17:34+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr "Основные"
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
+msgstr "Темы"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
+msgid "Skin:"
+msgstr "Тема:"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
+msgid "preview:"
+msgstr "предпросмотр:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
+msgid "Parts settings:"
+msgstr "Настройки элементов:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
+msgid "Logo:"
+msgstr "Логотип:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
+msgid "Background color:"
+msgstr "Цвет фона:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:143
+msgid "Standard"
+msgstr "Стандарно"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:150
+msgid "Crystal"
+msgstr "Чисто"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:157
+msgid "Translucent"
+msgstr "Прозрачно"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:162
+msgid "Show:"
+msgstr "Показать:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:170
+msgid "Swap"
+msgstr "Подкачка"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:175
+msgid "Uptime"
+msgstr "Время работы"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:181
+msgid "Temp settings:"
+msgstr "Настройки температуры:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:190
+msgid ""
+"<i>(You can use the <strong>sensors</strong> command to place the "
+"appropriate values ​​for this section.)</i>"
+msgstr ""
+"<i>(Вы можете использовать команду <strong>sensors</strong> для задания "
+"значений в этой секции.)</i>"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:196
+msgid "Temperature units:"
+msgstr "Температурные единицы:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:205
+msgid "Celsius °C"
+msgstr "Цельсии °C"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:212
+msgid "Fahrenheit °F"
+msgstr "Фаренгейты °F"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:217
+msgid "CPU High Temperature:"
+msgstr "Высокая температура процессора:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:227
+msgid "CPU Critical Temperature:"
+msgstr "Критическая температура процессора:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
+msgid "Core %1:"
+msgstr "Ядро %1:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
+msgid "CPU %1:"
+msgstr "ЦПУ %1:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
+msgid "mie"
+msgstr "пон"
+
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
+msgid "dic"
+msgstr "янв"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
+msgid "Mem:"
+msgstr "Память:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:54
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:71
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:82
+msgid "%1 GiB"
+msgstr "%1 ГиБ"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:65
+msgid "Used:"
+msgstr "Занято:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:76
+msgid "Free:"
+msgstr "Свободно:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr "Время работы:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr "%1д %2:%3"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Lock image scaling"
+msgstr "Заблокировать масштабирование изображения"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Unlock image scaling"
+msgstr "Разблокировать масштабирование изображения"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
+msgid "Swap:"
+msgstr "Подкачка:"
