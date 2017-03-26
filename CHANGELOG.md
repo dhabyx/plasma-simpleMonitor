@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## [0.6-Unreleased] - 2017-xx-xx
+## [0.6] - 2017-03-19
     ### Added
     - Translation support.
     - ru translation.
@@ -21,10 +21,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
     ### Fixed
     - Plasmoid name and version in .desktop file.
     - Items positions.
-    
+
     ## Removed
     - Tuz logo.
-    
+
 ## [0.6-rc1] - 2017-02-07
     ### Added
     - Plasma 5 support.
@@ -45,7 +45,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
     ### Fixed
     - Additional plasmoid don't work with database.
-    
+
     ## Removed
     - Plasma(KDE4) support.
 
@@ -54,22 +54,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
     - Fahrenheit support.
     - Visual improvements.
     - Plasma style support.
-    
+
     ### Changed
     - LoadBar completed.
-    
+
 ## [0.4] - 2013-12-28
     ### Fixed
     - Elements alignments.
     - Bad uptime.
-    
+
 ## [0.3] - 2013-12-28
     ### Added
     - Background settings.
     - Logos for Kubuntu, Ubuntu and tuz.
     ### Changed
     - Detection of distro name.
-    
+
     ### Fixed
     - Fonts.
 
@@ -78,6 +78,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
     - AMD K7 support for lmsensors.
     - Temperature settings.
     - README.
-    
+
 ## [0.1] - 2013-12-27
     - Initial Commit.
