@@ -8,7 +8,7 @@ Comment[ru_RU]=Простой системный монитор-плазмоид
 Comment[es]=Monitor de Sistema simple para Plasma
 
 Type=Service
-Icon=../plasma/plasmoids/simpleMonitor/contents/images/simpleMonitor.svg
+Icon=../plasma/plasmoids/org.kde.simpleMonitor/contents/images/simpleMonitor.svg
 
 X-KDE-ServiceTypes=Plasma/Applet
 
