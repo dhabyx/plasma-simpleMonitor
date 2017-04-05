@@ -10,7 +10,7 @@ Please fork this repository and sync with master if you haven't done so.
 6. Save
 7. Run `./Messages.sh` again to update .mo files
 
-###Before commiting:###
+### Before commiting: ###
 1. Check that your translations works and looks fine(test it)
 2. Run git status and check that other translations not affected by your actions. 
 3. Exclude .pot file from commit(if it doesn't has any major changes other that creation date)
