@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [Unreleased] - 2017-xx-xx
+    ### Added 
+    - Chinese(simplified) translation.
+    
+    ### Fixed
+    - Plasmoid logo path in .desktop file.
+
 ## [0.6] - 2017-03-19
     ### Added
     - Translation support.
