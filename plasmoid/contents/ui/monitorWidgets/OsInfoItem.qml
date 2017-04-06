@@ -56,7 +56,7 @@ Item {
 
             lineHeight: 0.6
             Layout.alignment: Qt.AlignHCenter
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: Text.AlignHRight
             font { family: mondaRegular.name; pointSize: 9 }
         }
         
