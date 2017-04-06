@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [Unreleased] - 2017-xx-xx
     ### Added 
     - Chinese(simplified) translation.
+    - Polish translation.
     
     ### Fixed
     - Plasmoid logo path in .desktop file.
