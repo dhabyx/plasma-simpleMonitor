@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-05 10:27+0200\n"
+"POT-Creation-Date: 2017-04-06 02:39+0700\n"
 "PO-Revision-Date: 2017-03-31 23:18+0100\n"
 "Last-Translator: Tomasz Bojczuk <seelook@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -22,62 +22,21 @@ msgstr ""
 "X-Language: pl_PL\n"
 "X-Source-Language: C\n"
 
-#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
-msgid "Core %1:"
-msgstr "Rdzeń %1:"
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr "Ogólne"
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
-msgid "Mem:"
-msgstr "Pamięć:"
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
+msgstr "Skórki"
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:54
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:71
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:82
-msgid "%1 GiB"
-msgstr ""
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
+msgid "Skin:"
+msgstr "Skórka:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:65
-msgid "Used:"
-msgstr "Używane:"
-
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:76
-msgid "Free:"
-msgstr "Wolne:"
-
-#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
-msgid "Uptime:"
-msgstr "Czas pracy:"
-
-#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
-msgid "%1d %2:%3"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
-msgid "CPU %1:"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
-msgid "mie"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
-msgid "dic"
-msgstr ""
-
-#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
-#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
-msgid "Lock image scaling"
-msgstr "Zablokuj skalowanie obrazków"
-
-#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
-#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
-msgid "Unlock image scaling"
-msgstr "Odblokuj skalowanie obrazków"
-
-#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
-#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
-msgid "Swap:"
-msgstr ""
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
+msgid "preview:"
+msgstr "podgląd:"
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
 msgid "Parts settings:"
@@ -147,18 +106,59 @@ msgstr "Najwyższa temperatura procesora:"
 msgid "CPU Critical Temperature:"
 msgstr "Krytyczna temperatura procesora:"
 
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
-msgid "Skin:"
-msgstr "Skórka:"
+#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
+msgid "Core %1:"
+msgstr "Rdzeń %1:"
 
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
-msgid "preview:"
-msgstr "podgląd:"
+#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
+msgid "CPU %1:"
+msgstr ""
 
-#: ../plasmoid/contents/config/config.qml:25
-msgid "General"
-msgstr "Ogólne"
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
+msgid "mie"
+msgstr ""
 
-#: ../plasmoid/contents/config/config.qml:30
-msgid "Skins"
-msgstr "Skórki"
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
+msgid "dic"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
+msgid "Mem:"
+msgstr "Pamięć:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:54
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:71
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:82
+msgid "%1 GiB"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:65
+msgid "Used:"
+msgstr "Używane:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:76
+msgid "Free:"
+msgstr "Wolne:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr "Czas pracy:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr ""
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Lock image scaling"
+msgstr "Zablokuj skalowanie obrazków"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Unlock image scaling"
+msgstr "Odblokuj skalowanie obrazków"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
+msgid "Swap:"
+msgstr ""
