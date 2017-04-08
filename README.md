@@ -25,10 +25,11 @@ If you need localisation (i18n/l10n) support, please use `cmake` to install this
 
 ````Shell
 git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
-cd plasma-simpleMonitor/plasmoid
+cd plasma-simpleMonitor
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
+make
 sudo make install
 ````
 ### Plasma PKG ###
