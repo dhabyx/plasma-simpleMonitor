@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 256 256"
+   height="256"
+   width="256">
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-796.36216)"
+     id="layer1">
+    <rect
+       ry="1.6947"
+       y="798.81384"
+       x="2.5253813"
+       height="251.52798"
+       width="252.03307"
+       id="rect3340"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.26800001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1.0" />
+    <rect
+       ry="1.7307529"
+       rx="1.7963943"
+       y="1026.5066"
+       x="9.6865778"
+       height="9.2847815"
+       width="237.71066"
+       id="rect3342-3-1-9-6"
+       style="opacity:1;fill:#00ff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.91761589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <g
+       id="g4297">
+      <rect
+         style="opacity:1;fill:#00ff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.91761589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-3"
+         width="117.45901"
+         height="9.3889475"
+         x="52.696056"
+         y="907.9693"
+         rx="0.88764495"
+         ry="1.7501701" />
+      <rect
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.18873;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342"
+         width="195.54942"
+         height="9.163065"
+         x="52.518497"
+         y="908.08221"
+         rx="1.4777788"
+         ry="1.7080641" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         x="7.9879718"
+         y="917.10712"
+         id="text4159"><tspan
+           id="tspan4161"
+           x="7.9879718"
+           y="917.10712">CPU 0</tspan></text>
+    </g>
+    <flowRoot
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"
+       id="flowRoot4163"
+       xml:space="preserve"><flowRegion
+         id="flowRegion4165"><rect
+           y="85.284218"
+           x="-14.647212"
+           height="64.649765"
+           width="308.09653"
+           id="rect4167" /></flowRegion><flowPara
+         id="flowPara4169"></flowPara></flowRoot>    <g
+       id="g4291">
+      <rect
+         style="opacity:1;fill:#00ff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.91761589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-3-6"
+         width="60.890465"
+         height="9.3889475"
+         x="52.696064"
+         y="932.81714"
+         rx="0.46015298"
+         ry="1.7501701" />
+      <rect
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.18873;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-7"
+         width="195.54942"
+         height="9.163065"
+         x="52.518497"
+         y="932.93005"
+         rx="1.4777788"
+         ry="1.7080641" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         x="7.9879718"
+         y="941.95496"
+         id="text4159-5"><tspan
+           id="tspan4161-3"
+           x="7.9879718"
+           y="941.95496">CPU 1</tspan></text>
+    </g>
+    <g
+       id="g4285">
+      <rect
+         style="opacity:1;fill:#00ff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.91761589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-3-5"
+         width="172.51231"
+         height="9.3889475"
+         x="52.696056"
+         y="957.66504"
+         rx="1.3036863"
+         ry="1.7501701" />
+      <rect
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.18873;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-6"
+         width="195.54942"
+         height="9.163065"
+         x="52.51849"
+         y="957.77795"
+         rx="1.4777788"
+         ry="1.7080641" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         x="7.9879718"
+         y="966.80286"
+         id="text4159-2"><tspan
+           id="tspan4161-9"
+           x="7.9879718"
+           y="966.80286">CPU 2</tspan></text>
+    </g>
+    <g
+       id="g4307">
+      <rect
+         style="opacity:1;fill:#00ff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.91761589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-3-1"
+         width="94.730576"
+         height="9.3889475"
+         x="52.696056"
+         y="982.51288"
+         rx="0.7158848"
+         ry="1.7501701" />
+      <rect
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.18873;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3342-2"
+         width="195.54942"
+         height="9.163065"
+         x="52.518505"
+         y="982.62579"
+         rx="1.4777788"
+         ry="1.7080641" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         x="7.9879718"
+         y="991.6507"
+         id="text4159-7"><tspan
+           id="tspan4161-0"
+           x="7.9879718"
+           y="991.6507">CPU 3</tspan></text>
+    </g>
+    <rect
+       ry="1.7307529"
+       rx="0.71116644"
+       y="1026.5066"
+       x="9.4728279"
+       height="9.2847815"
+       width="94.106201"
+       id="rect3342-3-1-9"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.91761589;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       ry="1.6886339"
+       rx="1.8012356"
+       y="1026.6196"
+       x="9.3662329"
+       height="9.0588293"
+       width="238.35136"
+       id="rect3342-2-3"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.30490661;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       id="text4328"
+       y="1016.9865"
+       x="105.22343"
+       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="1016.9865"
+         x="105.22343"
+         id="tspan4330">Memory</tspan></text>
+    <text
+       id="text4332"
+       y="843.2193"
+       x="127.91747"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-size:30px"
+         id="tspan4336"
+         y="843.2193"
+         x="127.91747">Simple</tspan></text>
+    <text
+       id="text4467"
+       y="878.50507"
+       x="127.91747"
+       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';text-align:center;text-anchor:middle;fill:#ffffff"
+         y="878.50507"
+         x="127.91747"
+         id="tspan4469">System Monitor</tspan></text>
+    <flowRoot
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:20px;line-height:125%;letter-spacing:0px;word-spacing:0px"
+       id="flowRoot4471"
+       xml:space="preserve"><flowRegion
+         id="flowRegion4473"><rect
+           y="43.857143"
+           x="317.85715"
+           height="25"
+           width="132.85715"
+           id="rect4475" /></flowRegion><flowPara
+         id="flowPara4477"></flowPara></flowRoot>  </g>
+</svg>
