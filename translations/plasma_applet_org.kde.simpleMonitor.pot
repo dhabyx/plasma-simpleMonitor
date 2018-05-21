@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 17:39+0700\n"
+"POT-Creation-Date: 2018-05-21 08:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,22 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../plasmoid/contents/config/config.qml:25
-msgid "General"
-msgstr ""
-
-#: ../plasmoid/contents/config/config.qml:30
-msgid "Skins"
-msgstr ""
-
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
-msgid "Skin:"
-msgstr ""
-
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
-msgid "preview:"
-msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
 msgid "Parts settings:"
@@ -99,20 +83,36 @@ msgstr ""
 msgid "CPU Critical Temperature:"
 msgstr ""
 
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
+msgid "Skin:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Default"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Column"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
+msgid "preview:"
+msgstr ""
+
 #: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
 msgid "Core %1:"
 msgstr ""
 
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr ""
+
 #: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
 msgid "CPU %1:"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
-msgid "mie"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
-msgid "dic"
 msgstr ""
 
 #: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
@@ -133,12 +133,12 @@ msgstr ""
 msgid "Free:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
-msgid "Uptime:"
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
+msgid "mie"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
-msgid "%1d %2:%3"
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
+msgid "dic"
 msgstr ""
 
 #: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
@@ -154,4 +154,12 @@ msgstr ""
 #: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
 #: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
 msgid "Swap:"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
 msgstr ""
