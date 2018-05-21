@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 17:39+0700\n"
+"POT-Creation-Date: 2018-05-21 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,49 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../plasmoid/contents/config/config.qml:25
-msgid "General"
-msgstr ""
-
-#: ../plasmoid/contents/config/config.qml:30
-msgid "Skins"
-msgstr ""
-
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
-msgid "Skin:"
-msgstr ""
-
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
-msgid "preview:"
-msgstr ""
-
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
 msgid "Parts settings:"
 msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
 msgid "Logo:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Default"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Tux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Slackware"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Ubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Kubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "OpenSUSE"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Manjaro"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Arch"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Fedora"
 msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
@@ -99,20 +120,32 @@ msgstr ""
 msgid "CPU Critical Temperature:"
 msgstr ""
 
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
+msgid "Skin:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Column"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
+msgid "preview:"
+msgstr ""
+
 #: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
 msgid "Core %1:"
 msgstr ""
 
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr ""
+
 #: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
 msgid "CPU %1:"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
-msgid "mie"
-msgstr ""
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
-msgid "dic"
 msgstr ""
 
 #: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
@@ -133,12 +166,12 @@ msgstr ""
 msgid "Free:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
-msgid "Uptime:"
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
+msgid "mie"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
-msgid "%1d %2:%3"
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
+msgid "dic"
 msgstr ""
 
 #: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
@@ -154,4 +187,12 @@ msgstr ""
 #: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
 #: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
 msgid "Swap:"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
 msgstr ""
