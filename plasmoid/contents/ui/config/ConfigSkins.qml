@@ -55,7 +55,7 @@ Item {
 
             ComboBox {
                 id: skinComboBox
-                model: ["Default", "Column"]
+                model: [i18n("Default"), i18n("Column")]
 
                 onCurrentIndexChanged: {
                     switch (currentIndex)  {
