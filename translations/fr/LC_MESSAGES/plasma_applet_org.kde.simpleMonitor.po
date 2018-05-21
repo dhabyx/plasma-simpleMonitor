@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-20 07:52+0200\n"
+"POT-Creation-Date: 2018-05-21 07:44+0200\n"
 "PO-Revision-Date: 2018-05-20 08:23+0100\n"
 "Last-Translator: Kevin Minions <keevin.minions@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
 msgid "Parts settings:"
-msgstr "Paramètres de composants :"
+msgstr "Paramètres des composants :"
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
 msgid "Logo:"
@@ -91,9 +91,17 @@ msgstr "Processeur - Température critique :"
 msgid "Skin:"
 msgstr "Habillage :"
 
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Default"
+msgstr "Par défaut"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Column"
+msgstr "Colonne"
+
 #: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
 msgid "preview:"
-msgstr "aperçu :"
+msgstr "Aperçu :"
 
 #: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
 msgid "Core %1:"
@@ -159,4 +167,3 @@ msgstr "Général"
 #: ../plasmoid/contents/config/config.qml:30
 msgid "Skins"
 msgstr "Habillages"
-
