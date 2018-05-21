@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-21 08:48+0200\n"
+"POT-Creation-Date: 2018-05-21 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,43 @@ msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
 msgid "Logo:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Default"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Tux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Slackware"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Ubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Kubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "OpenSUSE"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Manjaro"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Arch"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
+msgid "Fedora"
 msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
@@ -85,10 +122,6 @@ msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
 msgid "Skin:"
-msgstr ""
-
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
-msgid "Default"
 msgstr ""
 
 #: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
