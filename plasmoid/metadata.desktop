@@ -3,9 +3,11 @@ Encoding=UTF-8
 Name=Simple Monitor
 Name[ru_RU]=Простой системный монитор
 Name[es]=Monitor de sistema simple
+Name[fr]=Moniteur simple
 Comment=Plasma Simple System Monitor
 Comment[ru_RU]=Простой системный монитор-плазмоид
 Comment[es]=Monitor de Sistema simple para Plasma
+Comment[fr]=Moniteur de système simple pour Plasma
 
 Type=Service
 Icon=../plasma/plasmoids/org.kde.simpleMonitor/contents/images/simpleMonitor_icon.svg
