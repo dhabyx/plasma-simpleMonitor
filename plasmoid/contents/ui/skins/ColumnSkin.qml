@@ -39,7 +39,7 @@ BaseSkin {
         id: mainLayout
 
         anchors.fill: parent
-        anchors.margins: 5
+        anchors.margins: 5 * units.devicePixelRatio
         spacing: 0
 
         Item {
@@ -72,7 +72,7 @@ BaseSkin {
             rowSpacing: 0
 
             Layout.fillWidth: true
-            Layout.topMargin: 5
+            Layout.topMargin: 5 * units.devicePixelRatio
 
             ColumnLayout {
                 id: distroInfo
@@ -87,8 +87,8 @@ BaseSkin {
 
                 LogoImage {
                     id: distroLogo
-                    Layout.minimumWidth: (implicitWidth < implicitHeight) ? 100*implicitWidth/implicitHeight : 100
-                    Layout.minimumHeight: (implicitHeight < implicitWidth) ? 100*implicitHeight/implicitWidth : 100
+                    Layout.minimumWidth: (implicitWidth < implicitHeight) ? 100*implicitWidth/implicitHeight : 100 * units.devicePixelRatio
+                    Layout.minimumHeight: (implicitHeight < implicitWidth) ? 100*implicitHeight/implicitWidth : 100 * units.devicePixelRatio
                     Layout.preferredWidth: (Layout.fillWidth) ? Layout.minimumWidth : height * implicitWidth/implicitHeight
                     Layout.preferredHeight: (Layout.fillHeight) ? Layout.minimumHeight : width * implicitHeight/implicitWidth
                     Layout.fillWidth: (implicitWidth < implicitHeight) ? false: true
@@ -126,7 +126,7 @@ BaseSkin {
                     kernelVersion: root.kernelVersion
 
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                    Layout.topMargin: 2
+                    Layout.topMargin: 2 * units.devicePixelRatio
                     Layout.minimumHeight: implicitHeight
                     Layout.maximumHeight: implicitHeight
                     Layout.minimumWidth: implicitWidth
@@ -139,9 +139,9 @@ BaseSkin {
                 id: timePicker
 
                 Layout.alignment: Qt.AlignLeft
-                Layout.topMargin: -5
-                Layout.leftMargin: 10
-                Layout.bottomMargin: 5
+                Layout.topMargin: -5 * units.devicePixelRatio
+                Layout.leftMargin: 10 * units.devicePixelRatio
+                Layout.bottomMargin: 5 * units.devicePixelRatio
                 Layout.minimumHeight: implicitHeight
                 Layout.maximumHeight: implicitHeight
                 Layout.preferredWidth: implicitWidth
@@ -153,9 +153,9 @@ BaseSkin {
 
                 Layout.leftMargin: 2
                 Layout.fillWidth: true
-                Layout.minimumHeight: 3
-                Layout.maximumHeight: 3
-                Layout.preferredHeight: 3
+                Layout.minimumHeight: 3 * units.devicePixelRatio
+                Layout.maximumHeight: 3 * units.devicePixelRatio
+                Layout.preferredHeight: 3 * units.devicePixelRatio
             }
 
             CoreTempList {
@@ -167,9 +167,9 @@ BaseSkin {
                 tempUnit: root.tempUnit
                 direction: root.direction
 
-                Layout.leftMargin: 5
-                Layout.rightMargin: 5
-                Layout.topMargin: 5
+                Layout.leftMargin: 5 * units.devicePixelRatio
+                Layout.rightMargin: 5 * units.devicePixelRatio
+                Layout.topMargin: 5 * units.devicePixelRatio
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumWidth: implicitWidth
@@ -183,10 +183,10 @@ BaseSkin {
             color: "white"
 
             Layout.fillWidth: true
-            Layout.minimumHeight: 3
-            Layout.maximumHeight: 3
-            Layout.preferredHeight: 3
-            Layout.topMargin: 5
+            Layout.minimumHeight: 3 * units.devicePixelRatio
+            Layout.maximumHeight: 3 * units.devicePixelRatio
+            Layout.preferredHeight: 3 * units.devicePixelRatio
+            Layout.topMargin: 5 * units.devicePixelRatio
         }
 
         CpuWidget {
@@ -194,8 +194,8 @@ BaseSkin {
 
             direction: root.direction
 
-            Layout.leftMargin: 5
-            Layout.topMargin: 5
+            Layout.leftMargin: 5 * units.devicePixelRatio
+            Layout.topMargin: 5 * units.devicePixelRatio
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
@@ -207,10 +207,10 @@ BaseSkin {
             color: "white"
 
             Layout.fillWidth: true
-            Layout.minimumHeight: 3
-            Layout.maximumHeight: 3
-            Layout.preferredHeight: 3
-            Layout.topMargin: 5
+            Layout.minimumHeight: 3 * units.devicePixelRatio
+            Layout.maximumHeight: 3 * units.devicePixelRatio
+            Layout.preferredHeight: 3 * units.devicePixelRatio
+            Layout.topMargin: 5 * units.devicePixelRatio
         }
 
         MemArea {
@@ -223,9 +223,9 @@ BaseSkin {
             memBuffers: root.memBuffers
 
             Layout.columnSpan: 2
-            Layout.topMargin: 2
-            Layout.leftMargin: 10
-            Layout.rightMargin: 5
+            Layout.topMargin: 2 * units.devicePixelRatio
+            Layout.leftMargin: 10 * units.devicePixelRatio
+            Layout.rightMargin: 5 * units.devicePixelRatio
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
@@ -238,10 +238,10 @@ BaseSkin {
             color: "white"
 
             Layout.fillWidth: true
-            Layout.minimumHeight: 3
-            Layout.maximumHeight: 3
-            Layout.preferredHeight: 3
-            Layout.topMargin: 5
+            Layout.minimumHeight: 3 * units.devicePixelRatio
+            Layout.maximumHeight: 3 * units.devicePixelRatio
+            Layout.preferredHeight: 3 * units.devicePixelRatio
+            Layout.topMargin: 5 * units.devicePixelRatio
         }
 
         MemArea {
@@ -254,9 +254,9 @@ BaseSkin {
             memUsed: root.swapUsed
 
             Layout.columnSpan: 2
-            Layout.topMargin: 2
-            Layout.leftMargin: 10
-            Layout.rightMargin: 5
+            Layout.topMargin: 2 * units.devicePixelRatio
+            Layout.leftMargin: 10 * units.devicePixelRatio
+            Layout.rightMargin: 5 * units.devicePixelRatio
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight

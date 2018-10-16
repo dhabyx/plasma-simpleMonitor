@@ -28,7 +28,7 @@ ListView {
 
     property color progressColor: "#993de515"
 
-    implicitWidth: 100
+    implicitWidth: 100 * units.devicePixelRatio
     implicitHeight: childrenRect.height
 
     model: cpuModel
@@ -46,12 +46,12 @@ ListView {
     delegate: Item {
         id: itemElement
         width: cpuListView.width
-        height: cpuListItem.height + 1
+        height: cpuListItem.height + units.devicePixelRatio
         Column {
             id: cpuListItem
             width: parent.width
             Row {
-                spacing: 5
+                spacing: 5 * units.devicePixelRatio
                 anchors.left: parent.left
                 Text {
                     id: cpuLabel
@@ -69,7 +69,7 @@ ListView {
             }
             Item {
                 id: progressBar
-                height: 8
+                height: 10 * units.devicePixelRatio
                 //clip: true
                 width: parent.width
                 Rectangle {
@@ -160,9 +160,9 @@ ListView {
                     }
                 }
                 Rectangle {
-                    height: progressBar.height+4
-                    width: 5
-                    radius: 2
+                    height: progressBar.height + 4 * units.devicePixelRatio
+                    width: 5 * units.devicePixelRatio
+                    radius: 2 * units.devicePixelRatio
                     anchors.left: rectValue.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: "#88ffffff"
@@ -183,7 +183,7 @@ ListView {
 
         ListView.onAdd: SequentialAnimation {
             PropertyAction { target: cpuListItem; property: "height"; value: 0 }
-            NumberAnimation { target: cpuListItem; property: "height"; to: 25; duration: 250; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: cpuListItem; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
         }
     }
 
