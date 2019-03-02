@@ -77,3 +77,4 @@ build
 *.dll
 *.exe
 *.plasmoid
+.idea/
