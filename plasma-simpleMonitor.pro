@@ -53,6 +53,7 @@ DISTFILES += \
     plasmoid/contents/images/distro-fedora.svg \
     plasmoid/contents/images/distro-manjaro.svg \
     plasmoid/contents/images/distro-kubuntu.svg \
+    plasmoid/contents/images/distro-neon.svg \
     plasmoid/contents/images/distro-opensuse.svg \
     plasmoid/contents/images/distro-tux.svg \
     plasmoid/contents/images/distro-ubuntu.svg \
@@ -63,5 +64,3 @@ DISTFILES += \
     CMakeLists.txt \
     translations/plasma_applet_org.kde.simpleMonitor.pot \
     translations/README.md
-
-

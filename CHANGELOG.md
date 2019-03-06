@@ -3,11 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [Unreleased] - 2019-03-04
+    ### Added
+    - KDE Neon logo
+
 ## [Unreleased] - 2017-xx-xx
-    ### Added 
+    ### Added
     - Chinese(simplified) translation.
     - Polish translation.
-    
+
     ### Fixed
     - Plasmoid logo path in .desktop file.
 
