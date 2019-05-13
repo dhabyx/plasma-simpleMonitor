@@ -38,6 +38,7 @@ build
 *.kdev4
 *.jsc
 *.qmlc
+node_modules/
 
 
 # qtcreator generated files
