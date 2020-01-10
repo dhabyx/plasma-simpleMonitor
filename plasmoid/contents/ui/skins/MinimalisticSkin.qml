@@ -128,6 +128,33 @@ BaseSkin {
         }
 
         ColumnLayout {
+
+            AverageCPU {
+                id: avgCPU
+
+                Layout.columnSpan: 2
+                Layout.topMargin: 2
+                Layout.leftMargin: 10
+                Layout.rightMargin: 5
+                Layout.fillWidth: true
+                Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: implicitHeight
+                Layout.preferredWidth: implicitWidth
+                Layout.maximumHeight: implicitHeight
+            }
+
+            Rectangle {
+                color: "white"
+
+                Layout.columnSpan: 2
+                Layout.fillWidth: true
+                Layout.minimumHeight: 3
+                Layout.maximumHeight: 3
+                Layout.preferredHeight: 3
+                Layout.topMargin: 5
+                Layout.rightMargin: 5
+            }
+
             MemArea {
                 id: memArea
 
