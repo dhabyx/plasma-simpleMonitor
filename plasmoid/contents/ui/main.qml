@@ -86,6 +86,13 @@ Rectangle {
                 root.Layout.maximumWidth = Number.POSITIVE_INFINITY;
                 root.Layout.maximumHeight = Number.POSITIVE_INFINITY;
                 break;
+            case 2:
+                loader.source = "skins/MinimalisticSkin.qml"
+                root.Layout.maximumWidth = root.Layout.preferredWidth;
+                root.Layout.maximumHeight = root.Layout.preferredHeight;
+                root.Layout.maximumWidth = Number.POSITIVE_INFINITY;
+                root.Layout.maximumHeight = Number.POSITIVE_INFINITY;
+                break;
             }
         }
 
