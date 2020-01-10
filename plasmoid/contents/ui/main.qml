@@ -86,6 +86,13 @@ Rectangle {
                 root.Layout.maximumWidth = Number.POSITIVE_INFINITY;
                 root.Layout.maximumHeight = Number.POSITIVE_INFINITY;
                 break;
+            case 2:
+                loader.source = "skins/MinimalisticSkin.qml"
+                root.Layout.maximumWidth = root.Layout.preferredWidth;
+                root.Layout.maximumHeight = root.Layout.preferredHeight;
+                root.Layout.maximumWidth = Number.POSITIVE_INFINITY;
+                root.Layout.maximumHeight = Number.POSITIVE_INFINITY;
+                break;
             }
         }
 
@@ -123,10 +130,26 @@ Rectangle {
 
     ListModel {
         id: cpuModel
+
+        function getAll() {
+            let list = [];
+            for(let i=0; i < cpuModel.count; i++) {
+                list.push(cpuModel.get(i));
+            }
+            return list;
+        }
     }
 
     ListModel {
         id: coreTempModel
+
+        function getAll() {
+            let list = [];
+            for(let i=0; i < coreTempModel.count; i++) {
+                list.push(coreTempModel.get(i));
+            }
+            return list;
+        }
     }
 
     PlasmaCore.DataSource {

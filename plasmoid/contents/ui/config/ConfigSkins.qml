@@ -55,7 +55,7 @@ Item {
 
             ComboBox {
                 id: skinComboBox
-                model: ["Default", "Column"]
+                model: ["Default", "Column", "Minimalistic"]
 
                 onCurrentIndexChanged: {
                     switch (currentIndex)  {
@@ -67,6 +67,9 @@ Item {
                         break
                     case 1:
                         skinImage.source = "../../images/columnSkin-preview.png"
+                        break
+                    case 2:
+                        skinImage.source = "../../images/minimalisticSkin-preview.png"
                         break
                     }
                 }
