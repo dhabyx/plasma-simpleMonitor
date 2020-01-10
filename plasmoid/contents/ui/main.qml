@@ -130,10 +130,26 @@ Rectangle {
 
     ListModel {
         id: cpuModel
+
+        function getAll() {
+            let list = [];
+            for(let i=0; i < cpuModel.count; i++) {
+                list.push(cpuModel.get(i));
+            }
+            return list;
+        }
     }
 
     ListModel {
         id: coreTempModel
+
+        function getAll() {
+            let list = [];
+            for(let i=0; i < coreTempModel.count; i++) {
+                list.push(coreTempModel.get(i));
+            }
+            return list;
+        }
     }
 
     PlasmaCore.DataSource {
