@@ -1,0 +1,160 @@
+# plasma-simpleMonitor language translation file.
+# Copyright (C) 2013-2016 Dhaby Xiloj, Konstantin Shtepa
+# This file is distributed under the same license as the plasma-simpleMonitor package.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-16 17:39+0700\n"
+"PO-Revision-Date: 2020-04-05 13:30+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: eu_ES\n"
+
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr "Orokorra"
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
+msgstr "Larruak"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
+msgid "Skin:"
+msgstr "Larrua:"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
+msgid "preview:"
+msgstr "aurre-ikusi:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
+msgid "Parts settings:"
+msgstr "Piezen konfigurazioa:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
+msgid "Logo:"
+msgstr "Logoa:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
+msgid "Background color:"
+msgstr "Atzekaldeko kolorea:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:143
+msgid "Standard"
+msgstr "Estandarra"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:150
+msgid "Crystal"
+msgstr "Kristala"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:157
+msgid "Translucent"
+msgstr "Zeharrargia"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:162
+msgid "Show:"
+msgstr "Erakutsi:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:170
+msgid "Swap"
+msgstr "Swap"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:175
+msgid "Uptime"
+msgstr "Jardun"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:181
+msgid "Temp settings:"
+msgstr "Temp konfigurazioa:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:190
+msgid ""
+"<i>(You can use the <strong>sensors</strong> command to place the "
+"appropriate values ​​for this section.)</i>"
+msgstr ""
+"<i> (<strong> Sensors </strong> komandoa erabil dezakezu atal "
+"honetan balio egokiak jartzeko.) </i>"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:196
+msgid "Temperature units:"
+msgstr "Temperatura unitateak:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:205
+msgid "Celsius °C"
+msgstr "Celsius °C"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:212
+msgid "Fahrenheit °F"
+msgstr "Fahrenheit °F"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:217
+msgid "CPU High Temperature:"
+msgstr "CPU tenperatura altua:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:227
+msgid "CPU Critical Temperature:"
+msgstr "CPU tenperatura kritikoa:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
+msgid "Core %1:"
+msgstr "Core %1:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
+msgid "CPU %1:"
+msgstr "CPU %1:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
+msgid "mie"
+msgstr "az."
+
+#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
+msgid "dic"
+msgstr "urt"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
+msgid "Mem:"
+msgstr "Mem:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:54
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:71
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:82
+msgid "%1 GiB"
+msgstr "%1 GiB"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:65
+msgid "Used:"
+msgstr "Erabilita:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:76
+msgid "Free:"
+msgstr "Libre:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr "Jardun:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr "%1d %2:%3"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Lock image scaling"
+msgstr "Blokeatu irudien eskala"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+msgid "Unlock image scaling"
+msgstr "Desblokeatu irudien eskala"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
+msgid "Swap:"
+msgstr "Swap:"
