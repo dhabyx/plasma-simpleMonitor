@@ -26,7 +26,7 @@ ListView {
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    property color progressColor: "#993de515"
+    property bool cpuLoadFlat: true
 
     implicitWidth: 100 * units.devicePixelRatio
     implicitHeight: childrenRect.height
@@ -34,7 +34,7 @@ ListView {
     model: cpuModel
     interactive: false
 
-    /* No higlights on CPU, temporarily until next release*/
+    /* No higlights on CPU, temporarily until next release. */
     highlightFollowsCurrentItem: true
     highlight: HighlightCpu {
         id: highlightCpu
@@ -51,7 +51,7 @@ ListView {
             id: cpuListItem
             width: parent.width
             Row {
-                spacing: 5 * units.devicePixelRatio
+                spacing: 0
                 anchors.left: parent.left
                 Text {
                     id: cpuLabel
@@ -60,7 +60,13 @@ ListView {
                     font { family: doppioOneRegular.name; pointSize: 10 }
                     color: "#ffdd55"
                 }
+                Rectangle {
+                    color: "transparent"
+                    height: 1
+                    width: cpuListItem.width - cpuLabel.width - cpuText.width
+                }
                 Text {
+                    id: cpuText
                     text: Math.floor(val)+'%'
                     font.bold: true
                     font.pointSize: 10
@@ -73,8 +79,9 @@ ListView {
                 //clip: true
                 width: parent.width
                 Rectangle {
-                    // clear background
+                    // Clear background.
                     anchors.fill: parent
+                    visible: !cpuLoadFlat
                     radius: 2
                     gradient: Gradient {
                         GradientStop {
@@ -95,28 +102,26 @@ ListView {
 
                 Rectangle {
                     id: rectValue
-                    // rectangle whit value change and crop
+                    // Rectangle with value change and crop.
                     anchors.left: parent.left
                     height: parent.height
                     color: "transparent"
                     clip: true
                     border.color: "#33ffffff"
-                    width: Math.floor(val/100*(parent.width-5))
+                    width: if (cpuLoadFlat) Math.floor(val/100*parent.width); else Math.floor(val/100*(parent.width-5))
                     Rectangle {
                         id: bgGradient
-                        // rectangle of color, in background for less cpu load
+                        // Rectangle of color, in background for less CPU load.
                         anchors.left: parent.left
                         height: progressBar.width
                         width: progressBar.height
+                        color: if (val >= 75) "red"; else if (val >= 50) "#ffac2a"; else "#7ec264";
                         gradient: Gradient {
-                            GradientStop {
-                                position: 1.00;
-                                color: "#4dffffff";
-                            }
-                            GradientStop {
-                                position: 0.00;
-                                color: progressColor;
-                            }
+                            GradientStop { position: 1.00; color: "#7ec264"; } 
+                            GradientStop { position: 0.60; color: "#7ec264"; }
+                            GradientStop { position: 0.35; color: "#ffdd55"; }
+                            GradientStop { position: 0.10; color: "red"; }
+                            GradientStop { position: 0.00; color: "red"; } 
                         }
                         transform: [
                             Rotation { id: colorRotation; origin.x:0; origin.y:0; angle:0 },
@@ -135,10 +140,11 @@ ListView {
 
                     }
                     Rectangle {
-                        // rectangle of shadow, in background for less cpu load
+                        // Rectangle of shadow, in background for less CPU load.
                         anchors.left: parent.left
                         height: progressBar.height
                         width: progressBar.width
+                        visible: !cpuLoadFlat
                         gradient: Gradient {
                             GradientStop {
                                 position: 0.00;
@@ -166,6 +172,7 @@ ListView {
                     anchors.left: rectValue.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: "#88ffffff"
+                    visible: !cpuLoadFlat
                 }
             }
         }
