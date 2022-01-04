@@ -158,24 +158,59 @@ BaseSkin {
                 Layout.preferredHeight: 3 * units.devicePixelRatio
             }
 
-            CoreTempList {
-                id: coreTempList
-
-                model: coreTempModel
-                highTemp: cpuHighTemp
-                criticalTemp: criticalTemp
-                tempUnit: root.tempUnit
-                direction: root.direction
-
-                Layout.leftMargin: 5 * units.devicePixelRatio
-                Layout.rightMargin: 5 * units.devicePixelRatio
-                Layout.topMargin: 5 * units.devicePixelRatio
+            GridLayout {
+                id: tempLayout
+    
+                columns: 1
+                rows: 2
+                columnSpacing: 0
+                rowSpacing: 0
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumWidth: implicitWidth
                 Layout.minimumHeight: implicitHeight
                 Layout.preferredWidth: implicitWidth
                 Layout.preferredHeight: implicitHeight
+    
+                CoreTempList {
+                    id: coreTempList
+    
+                    model: coreTempModel
+                    highTemp: cpuHighTemp
+                    criticalTemp: criticalTemp
+                    tempUnit: root.tempUnit
+                    direction: root.direction
+    
+                    Layout.leftMargin: 5 * units.devicePixelRatio
+                    Layout.rightMargin: 5 * units.devicePixelRatio
+                    Layout.topMargin: 5 * units.devicePixelRatio
+                    Layout.fillWidth: true
+                    Layout.fillHeight: false
+                    Layout.minimumWidth: implicitWidth
+                    Layout.minimumHeight: implicitHeight
+                    Layout.preferredWidth: implicitWidth
+                    Layout.preferredHeight: implicitHeight
+                }
+    
+                GpuTempList {
+                    id: gpuTempList
+    
+                    model: gpuTempModel
+                    highTemp: cpuHighTemp
+                    criticalTemp: criticalTemp
+                    tempUnit: root.tempUnit
+                    direction: root.direction
+    
+                    Layout.leftMargin: 5 * units.devicePixelRatio
+                    Layout.rightMargin: 5 * units.devicePixelRatio
+                    Layout.topMargin: 1 * units.devicePixelRatio
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.minimumWidth: implicitWidth
+                    Layout.minimumHeight: implicitHeight
+                    Layout.preferredWidth: implicitWidth
+                    Layout.preferredHeight: implicitHeight
+                }
             }
         }
 

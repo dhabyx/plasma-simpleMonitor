@@ -74,7 +74,7 @@ Item {
         }
 
         Label {
-            text: i18n("preview:")
+            text: i18n("Preview:")
         }
 
         Image {

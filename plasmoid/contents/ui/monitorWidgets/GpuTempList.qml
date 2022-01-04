@@ -20,13 +20,13 @@
 import QtQuick 2.0
 
 ListView {
-    id: coreTempList
+    id: gpuTempList
 
     property int direction: Qt.LeftToRight
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    implicitHeight: childrenRect.height
+    implicitHeight: count * 25 * units.devicePixelRatio
     implicitWidth: 100 * units.devicePixelRatio
 
     interactive: false
@@ -40,14 +40,14 @@ ListView {
     property int tempUnit: 0
 
     delegate: Item {
-        id: coreListTemp
+        id: gpuListTemp
         implicitHeight: 25 * units.devicePixelRatio
-        implicitWidth: coreLabel.implicitWidth + unitLabel.implicitWidth
+        implicitWidth: gpuLabel.implicitWidth + unitLabel.implicitWidth
         width: parent.width
         Text {
-            id: coreLabel
+            id: gpuLabel
             anchors.left: parent.left
-            text: if (coreLabelStr == "") i18n('CPU %1:', model.index); else i18n(coreLabelStr)
+            text: if (gpuLabelStr == "") i18n('GPU %1:', model.index); else i18n(gpuLabelStr)
             font.bold: true
             font { family: doppioOneRegular.name; pointSize: 10 }
             color: "#ffdd55"
@@ -65,17 +65,17 @@ ListView {
         Rectangle {
             id: rectValue
             height: 10 * units.devicePixelRatio
-            width: Math.round(val/coreTempList.maxTemp*parent.width)
+            width: Math.round(val/gpuTempList.maxTemp*parent.width)
             color: if (Math.round(val) >= coreTempList.criticalTemp) "red"
-                   else if (Math.round(val) >= coreTempList.highTemp) "#ffac2a"
+                   else if (Math.round(val) >= gpuTempList.highTemp) "#ffac2a"
                    else "#85a9ff"
-            anchors.top: coreLabel.bottom
+            anchors.top: gpuLabel.bottom
             anchors.right: parent.right
             anchors.topMargin: units.devicePixelRatio
         }
         ListView.onAdd: SequentialAnimation {
-            PropertyAction { target: coreListTemp; property: "height"; value: 0 }
-            NumberAnimation { target: coreListTemp; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
+            PropertyAction { target: gpuListTemp; property: "height"; value: 0 }
+            NumberAnimation { target: gpuListTemp; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
         }
     }
 

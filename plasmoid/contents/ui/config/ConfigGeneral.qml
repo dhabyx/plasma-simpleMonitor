@@ -91,7 +91,7 @@ Item {
         anchors.fill: parent
 
         GroupBox {
-            title: i18n("Parts settings:")
+            title: i18n("Appearance settings:")
             Layout.fillWidth: true
 
             GridLayout {
@@ -178,7 +178,7 @@ Item {
         }
 
         GroupBox {
-            title: i18n("Temp settings:")
+            title: i18n("Temperature settings:")
             Layout.fillWidth: true
 
             GridLayout {

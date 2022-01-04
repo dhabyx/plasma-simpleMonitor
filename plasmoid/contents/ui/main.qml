@@ -129,6 +129,10 @@ Rectangle {
         id: coreTempModel
     }
 
+    ListModel {
+        id: gpuTempModel
+    }
+
     PlasmaCore.DataSource {
         id: systemInfoDataSource
         engine: "systemmonitor"
@@ -209,18 +213,20 @@ Rectangle {
                     || sourceName.match("^lmsensors/k\\d+temp-pci-.+/.+")
                     || sourceName.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
                 var dataName = "0";
+                var coreLabelStr = ""
                 if (root.atkPresent) {
                     dataName=sourceName.replace(/^lmsensors\/atk\\d+-acpi-/i,"").replace(/\/CPU_Temperature/i,"");
                 } else if(sourceName.match("^lmsensors/k10temp-pci-.+/.+")) {
                     dataName = Code.k10CoreIndex(sourceName.replace(/^lmsensors\/k10temp-pci-/i,""));
+                    coreLabelStr = sourceName.replace(/^lmsensors\/k10temp-pci-.+\//i,"")
                 } else {
                     dataName=data.name.split(' ')[1];
                 }
 
                 if (coreTempModel.count <= dataName)
-                    coreTempModel.append({'val':data.value, 'dataUnits':data.units});
+                    coreTempModel.append({'val':data.value, 'dataUnits':data.units, 'coreLabelStr':coreLabelStr});
                 else
-                    coreTempModel.set(dataName,{'val':data.value, 'dataUnits':data.units});
+                    coreTempModel.set(dataName,{'val':data.value, 'dataUnits':data.units, 'coreLabelStr':coreLabelStr});
 
                 return;
             }
@@ -268,6 +274,56 @@ Rectangle {
         Component.onDestruction: {
             for (var i = connectedSources.length; i > 0; --i)
                 disconnectSource(connectedSources[i - 1]);
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: nvidiaDataSource
+        engine: 'executable'
+        interval: 1000
+
+        connectedSources: [ 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader' ]
+
+        onNewData: {
+            var dataName = "0";
+            var gpuLabelStr = "NVIDIA GPU"
+            var temperature = 0
+            if (data['exit code'] > 0) {
+//                print('NVIDIA data error: ' + data.stderr)
+                return
+            } else {
+                temperature = parseFloat(data.stdout)
+            }
+
+            if (gpuTempModel.count <= 0)
+                gpuTempModel.append({'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+            else
+                gpuTempModel.set(dataName,{'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: atiDataSource
+        engine: 'executable'
+        interval: 1000
+
+        connectedSources: [ 'aticonfig --od-gettemperature | tail -1 | cut -c 43-44' ]
+
+        onNewData: {
+            var dataName = "0";
+            var gpuLabelStr = "ATI GPU"
+            var temperature = 0
+            if (data['exit code'] > 0) {
+//                print('ATI data error: ' + data.stderr)
+                return
+            } else {
+                temperature = parseFloat(data.stdout)
+            }
+
+            if (gpuTempModel.count <= 0)
+                gpuTempModel.append({'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+            else
+                gpuTempModel.set(dataName,{'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
         }
     }
 
