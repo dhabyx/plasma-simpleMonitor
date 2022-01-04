@@ -20,13 +20,15 @@
 import QtQuick 2.0
 
 Item {
-    property int bgColor:       confEngine.bgColor
-    property int logo:          confEngine.logo
-    property bool showSwap:     confEngine.showSwap
-    property bool showUptime:   confEngine.showUptime
-    property int tempUnit:      confEngine.tempUnit
-    property int cpuHighTemp:   confEngine.cpuHighTemp
-    property int cpuCritTemp:   confEngine.cpuCritTemp
+    property int bgColor:           confEngine.bgColor
+    property int logo:              confEngine.logo
+    property bool showSwap:         confEngine.showSwap
+    property bool showUptime:       confEngine.showUptime
+    property int tempUnit:          confEngine.tempUnit
+    property int cpuHighTemp:       confEngine.cpuHighTemp
+    property int cpuCritTemp:       confEngine.cpuCritTemp
+    property bool flatCpuLoad:      confEngine.flatCpuLoad
+    property int indicatorHeight:   confEngine.indicatorHeight
 
     property string distroName:     confEngine.distroName
     property string distroId:       confEngine.distroId

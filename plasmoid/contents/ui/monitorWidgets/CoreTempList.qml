@@ -44,6 +44,7 @@ ListView {
         implicitHeight: 25 * units.devicePixelRatio
         implicitWidth: coreLabel.implicitWidth + unitLabel.implicitWidth
         width: parent.width
+        height: (20 + indicatorHeight) * units.devicePixelRatio
         Text {
             id: coreLabel
             anchors.left: parent.left
@@ -64,7 +65,7 @@ ListView {
 
         Rectangle {
             id: rectValue
-            height: 10 * units.devicePixelRatio
+            height: indicatorHeight * units.devicePixelRatio
             width: Math.round(val/coreTempList.maxTemp*parent.width)
             color: if (Math.round(val) >= coreTempList.criticalTemp) "red"
                    else if (Math.round(val) >= coreTempList.highTemp) "#ffac2a"
@@ -75,7 +76,7 @@ ListView {
         }
         ListView.onAdd: SequentialAnimation {
             PropertyAction { target: coreListTemp; property: "height"; value: 0 }
-            NumberAnimation { target: coreListTemp; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: coreListTemp; property: "height"; to: (20 + indicatorHeight) * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
         }
     }
 

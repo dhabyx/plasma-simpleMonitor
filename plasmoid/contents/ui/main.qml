@@ -43,7 +43,7 @@ Rectangle {
 
     color: "black"
 
-    // control for atk sensor
+    // Control for atk sensor.
     property bool atkPresent: false
 
     Component.onCompleted: atkPresent = false
@@ -51,15 +51,17 @@ Rectangle {
     QtObject {
         id: confEngine
 
-        // cfg properties
-        property int skin:          plasmoid.configuration.skin
-        property int bgColor:       plasmoid.configuration.bgColor
-        property int logo:          plasmoid.configuration.logo
-        property bool showSwap:     plasmoid.configuration.showSwap
-        property bool showUptime:   plasmoid.configuration.showUptime
-        property int tempUnit:      plasmoid.configuration.tempUnit
-        property int cpuHighTemp:   plasmoid.configuration.cpuHighTemp
-        property int cpuCritTemp:   plasmoid.configuration.cpuCritTemp
+        // Configuration properties.
+        property int skin:              plasmoid.configuration.skin
+        property int bgColor:           plasmoid.configuration.bgColor
+        property int logo:              plasmoid.configuration.logo
+        property bool showSwap:         plasmoid.configuration.showSwap
+        property bool showUptime:       plasmoid.configuration.showUptime
+        property int tempUnit:          plasmoid.configuration.tempUnit
+        property int cpuHighTemp:       plasmoid.configuration.cpuHighTemp
+        property int cpuCritTemp:       plasmoid.configuration.cpuCritTemp
+        property bool flatCpuLoad:      plasmoid.configuration.flatCpuLoad
+        property int indicatorHeight:   plasmoid.configuration.indicatorHeight
 
         property string distroName: "tux"
         property string distroId: "tux"

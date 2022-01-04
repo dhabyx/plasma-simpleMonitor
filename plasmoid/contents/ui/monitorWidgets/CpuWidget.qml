@@ -26,8 +26,6 @@ ListView {
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    property bool cpuLoadFlat: true
-
     implicitWidth: 100 * units.devicePixelRatio
     implicitHeight: childrenRect.height
 
@@ -50,6 +48,7 @@ ListView {
         Column {
             id: cpuListItem
             width: parent.width
+            height: (20 + indicatorHeight) * units.devicePixelRatio
             Row {
                 spacing: 0
                 anchors.left: parent.left
@@ -75,13 +74,13 @@ ListView {
             }
             Item {
                 id: progressBar
-                height: 10 * units.devicePixelRatio
+                height: indicatorHeight * units.devicePixelRatio
                 //clip: true
                 width: parent.width
                 Rectangle {
                     // Clear background.
                     anchors.fill: parent
-                    visible: !cpuLoadFlat
+                    visible: !flatCpuLoad
                     radius: 2
                     gradient: Gradient {
                         GradientStop {
@@ -108,7 +107,7 @@ ListView {
                     color: "transparent"
                     clip: true
                     border.color: "#33ffffff"
-                    width: if (cpuLoadFlat) Math.floor(val/100*parent.width); else Math.floor(val/100*(parent.width-5))
+                    width: if (flatCpuLoad) Math.floor(val/100*parent.width); else Math.floor(val/100*(parent.width-5))
                     Rectangle {
                         id: bgGradient
                         // Rectangle of color, in background for less CPU load.
@@ -144,7 +143,7 @@ ListView {
                         anchors.left: parent.left
                         height: progressBar.height
                         width: progressBar.width
-                        visible: !cpuLoadFlat
+                        visible: !flatCpuLoad
                         gradient: Gradient {
                             GradientStop {
                                 position: 0.00;
@@ -172,7 +171,7 @@ ListView {
                     anchors.left: rectValue.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: "#88ffffff"
-                    visible: !cpuLoadFlat
+                    visible: !flatCpuLoad
                 }
             }
         }
@@ -190,7 +189,7 @@ ListView {
 
         ListView.onAdd: SequentialAnimation {
             PropertyAction { target: cpuListItem; property: "height"; value: 0 }
-            NumberAnimation { target: cpuListItem; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: cpuListItem; property: "height"; to: (20 + indicatorHeight) * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
         }
     }
 

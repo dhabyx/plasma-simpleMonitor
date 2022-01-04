@@ -24,7 +24,7 @@
                 <choice name="Crystal"/>
                 <choice name="Translucent"/>
             </choices>
-            <default>0</default>
+            <default>1</default>
         </entry>
 
         <!-- Logos Section -->
@@ -74,6 +74,16 @@
         <entry name="cpuCritTemp" type="Int">
             <label>CPU Critical Temp</label>
             <default>70</default>
+        </entry>
+
+        <!-- Style Section -->
+        <entry name="flatCpuLoad" type="Bool">
+            <label>Flat CPU load indicators.</label>
+            <default>true</default>
+        </entry>
+        <entry name="indicatorHeight" type="Int">
+            <label>Height of CPU load indicators.</label>
+            <default>10</default>
         </entry>
     </group>
 </kcfg>
