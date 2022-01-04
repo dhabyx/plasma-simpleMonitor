@@ -53,8 +53,8 @@ ListView {
         }
         Text {
             id: unitLabel
-            text: if (tempUnit === 0) Math.floor(val) + dataUnits
-                  else Math.floor(val*9/5+32) + "°F"
+            text: if (tempUnit === 0) Math.round(val) + dataUnits
+                  else Math.round(val*9/5+32) + "°F"
             font.bold: true
             font.pointSize: 10
             color: "white"
