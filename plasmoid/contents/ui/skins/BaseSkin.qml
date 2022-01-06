@@ -30,6 +30,7 @@ Item {
     property bool coloredCpuLoad:   confEngine.coloredCpuLoad
     property bool flatCpuLoad:      confEngine.flatCpuLoad
     property int indicatorHeight:   confEngine.indicatorHeight
+    property double updateInterval: confEngine.updateInterval
 
     property string distroName:     confEngine.distroName
     property string distroId:       confEngine.distroId

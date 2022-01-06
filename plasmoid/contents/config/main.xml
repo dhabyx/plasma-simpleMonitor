@@ -89,5 +89,11 @@
             <label>Height of CPU load indicators.</label>
             <default>10</default>
         </entry>
+
+        <!-- Performance Section -->
+        <entry name="updateInterval" type="Double">
+            <label>Update interval in seconds.</label>
+            <default>1.0</default>
+        </entry>
     </group>
 </kcfg>

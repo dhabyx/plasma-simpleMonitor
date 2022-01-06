@@ -48,6 +48,9 @@ Rectangle {
 
     Component.onCompleted: atkPresent = false
 
+    // Configuration properties.
+    property double updateInterval: plasmoid.configuration.updateInterval
+
     QtObject {
         id: confEngine
 
@@ -139,7 +142,7 @@ Rectangle {
     PlasmaCore.DataSource {
         id: systemInfoDataSource
         engine: "systemmonitor"
-        interval: 1000
+        interval: updateInterval * 1000
 
         property alias delegate: loader.item
 
@@ -283,7 +286,7 @@ Rectangle {
     PlasmaCore.DataSource {
         id: nvidiaDataSource
         engine: 'executable'
-        interval: 1000
+        interval: updateInterval * 1000
 
         connectedSources: [ 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader' ]
 
@@ -308,7 +311,7 @@ Rectangle {
     PlasmaCore.DataSource {
         id: atiDataSource
         engine: 'executable'
-        interval: 1000
+        interval: updateInterval * 1000
 
         connectedSources: [ 'aticonfig --od-gettemperature | tail -1 | cut -c 43-44' ]
 

@@ -48,6 +48,7 @@ Item {
     property alias cfg_coloredCpuLoad: coloredCpuLoadCheckBox.checked
     property alias cfg_flatCpuLoad: flatCpuLoadCheckBox.checked
     property alias cfg_indicatorHeight: indicatorHeightSpinBox.value
+    property alias cfg_updateInterval: updateIntervalSpinBox.value
 
     QtObject {
         id: d
@@ -281,6 +282,29 @@ Item {
                     Layout.alignment: Qt.AlignRight
                     Layout.row: 2
                     Layout.column: 0
+                }
+            }
+        }
+
+        GroupBox {
+            title: i18n("Performance settings:")
+            Layout.fillWidth: true
+
+            GridLayout {
+                columns: 2
+
+                Label {
+                    text: i18n('Update interval:')
+                    Layout.alignment: Qt.AlignRight
+                }
+
+                SpinBox {
+                    id: updateIntervalSpinBox
+                    decimals: 1
+                    stepSize: 0.1
+                    minimumValue: 0.1
+                    maximumValue: 10.0
+                    suffix: i18nc('Abbreviation for seconds', 's')
                 }
             }
         }
