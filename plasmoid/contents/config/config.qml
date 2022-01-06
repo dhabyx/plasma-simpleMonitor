@@ -31,4 +31,9 @@ ConfigModel {
         icon: Qt.resolvedUrl('../images/simpleMonitor-skins.svg').replace('file://', '')
         source: 'config/ConfigSkins.qml'
     }
+    ConfigCategory {
+         name: i18n('Miscellaneous')
+         icon: 'preferences-system-other'
+         source: 'config/ConfigMisc.qml'
+    }
 }
