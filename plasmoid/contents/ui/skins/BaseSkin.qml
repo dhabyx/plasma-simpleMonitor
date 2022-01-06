@@ -27,6 +27,7 @@ Item {
     property int tempUnit:          confEngine.tempUnit
     property int cpuHighTemp:       confEngine.cpuHighTemp
     property int cpuCritTemp:       confEngine.cpuCritTemp
+    property bool coloredCpuLoad:   confEngine.coloredCpuLoad
     property bool flatCpuLoad:      confEngine.flatCpuLoad
     property int indicatorHeight:   confEngine.indicatorHeight
 

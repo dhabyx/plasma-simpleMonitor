@@ -60,6 +60,7 @@ Rectangle {
         property int tempUnit:          plasmoid.configuration.tempUnit
         property int cpuHighTemp:       plasmoid.configuration.cpuHighTemp
         property int cpuCritTemp:       plasmoid.configuration.cpuCritTemp
+        property bool coloredCpuLoad:   plasmoid.configuration.coloredCpuLoad
         property bool flatCpuLoad:      plasmoid.configuration.flatCpuLoad
         property int indicatorHeight:   plasmoid.configuration.indicatorHeight
 

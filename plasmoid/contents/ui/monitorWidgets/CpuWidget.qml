@@ -116,11 +116,11 @@ ListView {
                         width: progressBar.height
                         color: if (val >= 75) "red"; else if (val >= 50) "#ffac2a"; else "#7ec264";
                         gradient: Gradient {
-                            GradientStop { position: 1.00; color: "#7ec264"; } 
-                            GradientStop { position: 0.60; color: "#7ec264"; }
-                            GradientStop { position: 0.35; color: "#ffdd55"; }
-                            GradientStop { position: 0.10; color: "red"; }
-                            GradientStop { position: 0.00; color: "red"; } 
+                            GradientStop { position: if (coloredCpuLoad) 1.00; else 1.00; color: if (coloredCpuLoad) "#7ec264"; else "#4dffffff";} 
+                            GradientStop { position: if (coloredCpuLoad) 0.60; else 1.00; color: if (coloredCpuLoad) "#7ec264"; else "#4dffffff";}
+                            GradientStop { position: if (coloredCpuLoad) 0.35; else 1.00; color: if (coloredCpuLoad) "#ffdd55"; else "#4dffffff";}
+                            GradientStop { position: if (coloredCpuLoad) 0.10; else 1.00; color: if (coloredCpuLoad) "red";     else "#4dffffff";}
+                            GradientStop { position: if (coloredCpuLoad) 0.00; else 0.00; color: if (coloredCpuLoad) "red";     else "#993de515";} 
                         }
                         transform: [
                             Rotation { id: colorRotation; origin.x:0; origin.y:0; angle:0 },
@@ -136,7 +136,6 @@ ListView {
                                 colorTraslation.x = Qt.binding(function() { return height });
                             }
                         }
-
                     }
                     Rectangle {
                         // Rectangle of shadow, in background for less CPU load.

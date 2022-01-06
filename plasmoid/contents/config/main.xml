@@ -77,6 +77,10 @@
         </entry>
 
         <!-- Style Section -->
+        <entry name="coloredCpuLoad" type="Bool">
+            <label>Colored CPU load indicators.</label>
+            <default>true</default>
+        </entry>
         <entry name="flatCpuLoad" type="Bool">
             <label>Flat CPU load indicators.</label>
             <default>true</default>

@@ -45,6 +45,7 @@ Item {
     property int cfg_tempUnit
     property alias cfg_cpuHighTemp: cpuHighTempSpinBox.value
     property alias cfg_cpuCritTemp: cpuCritTempSpinBox.value
+    property alias cfg_coloredCpuLoad: coloredCpuLoadCheckBox.checked
     property alias cfg_flatCpuLoad: flatCpuLoadCheckBox.checked
     property alias cfg_indicatorHeight: indicatorHeightSpinBox.value
 
@@ -243,30 +244,43 @@ Item {
             Layout.fillWidth: true
 
             GridLayout {
+                rows: 3
                 columns: 2
 
                 Label {
                     text: i18n("CPU load indicator style:")
                     Layout.alignment: Qt.AlignRight
-                    Layout.rowSpan: 2
-                    anchors.verticalCenter: flatCpuLoadCheckBox.verticalCenter
+                    Layout.row: 0
+                    Layout.column: 0
+                }
+
+                CheckBox {
+                    id: coloredCpuLoadCheckBox
+                    text: i18n("Colored")
+                    Layout.row: 0
+                    Layout.column: 1
                 }
 
                 CheckBox {
                     id: flatCpuLoadCheckBox
                     text: i18n("Flat")
+                    Layout.row: 1
+                    Layout.column: 1
                 }
 
                 SpinBox {
                     id: indicatorHeightSpinBox
                     minimumValue: 1
                     maximumValue: 99
+                    Layout.row: 2
+                    Layout.column: 1
                 }
 
                 Label {
                     text: i18n("CPU load indicator height:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: indicatorHeightSpinBox.verticalCenter
+                    Layout.row: 2
+                    Layout.column: 0
                 }
             }
         }
