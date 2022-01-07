@@ -22,6 +22,7 @@ import QtQuick 2.0
 Item {
     property int bgColor:           confEngine.bgColor
     property int logo:              confEngine.logo
+    property bool showGpuTemp:      confEngine.showGpuTemp
     property bool showSwap:         confEngine.showSwap
     property bool showUptime:       confEngine.showUptime
     property int tempUnit:          confEngine.tempUnit

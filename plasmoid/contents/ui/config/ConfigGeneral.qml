@@ -40,6 +40,7 @@ Item {
 
     property int cfg_bgColor
     property alias cfg_logo: logoComboBox.currentIndex
+    property alias cfg_showGpuTemp: showGpuTempCheckBox.checked
     property alias cfg_showSwap: showSwapCheckBox.checked
     property alias cfg_showUptime: showUptimeCheckBox.checked
     property int cfg_tempUnit
@@ -161,8 +162,13 @@ Item {
                 Label {
                     text: i18n("Show:")
                     Layout.alignment: Qt.AlignRight
-                    Layout.rowSpan: 2
-                    anchors.verticalCenter: showSwapCheckBox.verticalCenter
+                    Layout.rowSpan: 3
+                    anchors.verticalCenter: showGpuTempCheckBox.verticalCenter
+                }
+
+                CheckBox {
+                    id: showGpuTempCheckBox
+                    text: i18n("GPU Temperature")
                 }
 
                 CheckBox {

@@ -45,6 +45,7 @@ ListView {
         implicitWidth: gpuLabel.implicitWidth + unitLabel.implicitWidth
         width: parent.width
         height: (20 + indicatorHeight) * units.devicePixelRatio
+        visible: showGpuTemp
         Text {
             id: gpuLabel
             anchors.left: parent.left

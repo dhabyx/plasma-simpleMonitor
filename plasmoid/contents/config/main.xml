@@ -49,6 +49,10 @@
         </entry>
 
         <!-- Displays Section -->
+        <entry name="showGpuTemp" type="Bool">
+            <label>Show GPU Temperature</label>
+            <default>true</default>
+        </entry>
         <entry name="showSwap" type="Bool">
             <label>Show Swap</label>
             <default>true</default>
@@ -68,11 +72,11 @@
 
         <!-- System Section -->
         <entry name="cpuHighTemp" type="Int">
-            <label>CPU High Temp</label>
+            <label>CPU High Temperature</label>
             <default>60</default>
         </entry>
         <entry name="cpuCritTemp" type="Int">
-            <label>CPU Critical Temp</label>
+            <label>CPU Critical Temperature</label>
             <default>70</default>
         </entry>
 
