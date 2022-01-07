@@ -70,7 +70,8 @@ BaseSkin {
                 Layout.minimumHeight: (implicitHeight < implicitWidth) ? 100*implicitHeight/implicitWidth : 100 * units.devicePixelRatio
                 Layout.preferredWidth: (Layout.fillWidth) ? Layout.minimumWidth : height * implicitWidth/implicitHeight
                 Layout.preferredHeight: (Layout.fillHeight) ? Layout.minimumHeight : width * implicitHeight/implicitWidth
-                Layout.fillWidth: (implicitWidth < implicitHeight) ? false: true
+//                Layout.fillWidth: (implicitWidth < implicitHeight) ? false: true
+                Layout.fillWidth: true
                 Layout.fillHeight: !Layout.fillWidth
                 Layout.alignment: Qt.AlignCenter
 

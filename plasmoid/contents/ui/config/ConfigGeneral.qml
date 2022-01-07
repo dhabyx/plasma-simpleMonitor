@@ -101,21 +101,26 @@ Item {
                 Label {
                     text: i18n("Logo:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: logoComboBox.verticalCenter
+                    Layout.row: 0
+                    Layout.column: 0
                 }
 
                 ComboBox {
                     id: logoComboBox
                     model: [i18n("Default"), i18n("Tux"), i18n("Slackware"), i18n("Ubuntu"), i18n("Kubuntu"), i18n("OpenSUSE"), i18n("Manjaro"), i18n("Arch"), i18n("Fedora")]
+                    Layout.row: 0
+                    Layout.column: 1
                 }
 
                 Rectangle {
 
                     Layout.columnSpan: 2
-                    anchors.horizontalCenter: logoComboBox.horizontalCenter
+                    Layout.alignment: Qt.AlignLeft
+                    Layout.row: 1
+                    Layout.column: 1
 
                     implicitHeight: logoImage.height + 10
-                    implicitWidth:  logoImage.width + 10
+                    implicitWidth:  logoComboBox.width + 10
 
                     color: "transparent"
                     border { width: 1; color: theme.buttonTextColor }
@@ -134,8 +139,8 @@ Item {
                 Label {
                     text: i18n("Background color:")
                     Layout.alignment: Qt.AlignRight
-                    Layout.rowSpan: 3
-                    anchors.verticalCenter: standardBgColor.verticalCenter
+                    Layout.row: 2
+                    Layout.column: 0
                 }
 
                 RadioButton {
@@ -143,6 +148,8 @@ Item {
                     exclusiveGroup: bgColorTypeGroup
                     text: i18n("Standard")
                     onCheckedChanged: if (checked) cfg_bgColor = 0;
+                    Layout.row: 2
+                    Layout.column: 1
                 }
 
                 RadioButton {
@@ -150,6 +157,8 @@ Item {
                     exclusiveGroup: bgColorTypeGroup
                     text: i18n("Crystal")
                     onCheckedChanged: if (checked) cfg_bgColor = 1;
+                    Layout.row: 3
+                    Layout.column: 1
                 }
 
                 RadioButton {
@@ -157,28 +166,36 @@ Item {
                     exclusiveGroup: bgColorTypeGroup
                     text: i18n("Translucent")
                     onCheckedChanged: if (checked) cfg_bgColor = 2;
+                    Layout.row: 4
+                    Layout.column: 1
                 }
 
                 Label {
                     text: i18n("Show:")
                     Layout.alignment: Qt.AlignRight
-                    Layout.rowSpan: 3
-                    anchors.verticalCenter: showGpuTempCheckBox.verticalCenter
+                    Layout.row: 5
+                    Layout.column: 0
                 }
 
                 CheckBox {
                     id: showGpuTempCheckBox
                     text: i18n("GPU Temperature")
+                    Layout.row: 5
+                    Layout.column: 1
                 }
 
                 CheckBox {
                     id: showSwapCheckBox
                     text: i18n("Swap")
+                    Layout.row: 6
+                    Layout.column: 1
                 }
 
                 CheckBox {
                     id: showUptimeCheckBox
                     text: i18n("Uptime")
+                    Layout.row: 7
+                    Layout.column: 1
                 }
             }
         }
@@ -188,11 +205,13 @@ Item {
             Layout.fillWidth: true
 
             GridLayout {
-                columns: 2
+                columns: 3
                 rowSpacing: 2
 
                 Label {
-                    Layout.columnSpan: 2
+                    Layout.row: 0
+                    Layout.column: 0
+                    Layout.columnSpan: 3
                     text: i18n("<i>(You can use the <strong>sensors</strong> command to place the appropriate values ​​for this section.)</i>")
                     color: theme.highlightColor
                     wrapMode: Text.WordWrap
@@ -201,8 +220,8 @@ Item {
                 Label {
                     text: i18n("Temperature units:")
                     Layout.alignment: Qt.AlignRight
-                    Layout.rowSpan: 2
-                    anchors.verticalCenter: celsiusTemp.verticalCenter
+                    Layout.row: 1
+                    Layout.column: 0
                 }
 
                 RadioButton {
@@ -210,6 +229,8 @@ Item {
                     exclusiveGroup: tempUnitTypeGroup
                     text: i18n("Celsius °C")
                     onCheckedChanged: if (checked) cfg_tempUnit = 0;
+                    Layout.row: 1
+                    Layout.column: 1
                 }
 
                 RadioButton {
@@ -217,27 +238,35 @@ Item {
                     exclusiveGroup: tempUnitTypeGroup
                     text: i18n("Fahrenheit °F")
                     onCheckedChanged: if (checked) cfg_tempUnit = 1;
+                    Layout.row: 2
+                    Layout.column: 1
                 }
 
                 Label {
                     text: i18n("CPU High Temperature:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: cpuHighTempSpinBox.verticalCenter
+                    Layout.row: 3
+                    Layout.column: 0
                 }
 
                 SpinBox {
                     id: cpuHighTempSpinBox
+                    Layout.row: 3
+                    Layout.column: 1
                 }
 
                 Label {
                     text: i18n("CPU Critical Temperature:")
                     Layout.alignment: Qt.AlignRight
-                    anchors.verticalCenter: cpuCritTempSpinBox.verticalCenter
+                    Layout.row: 4
+                    Layout.column: 0
                 }
 
                 SpinBox {
                     id: cpuCritTempSpinBox
                     maximumValue: 150
+                    Layout.row: 4
+                    Layout.column: 1
                 }
             }
         }

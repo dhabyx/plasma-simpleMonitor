@@ -52,7 +52,6 @@ Item {
             Layout.fillWidth: true
 
             GridLayout {
-                rows: 3
                 columns: 2
 
                 Label {
