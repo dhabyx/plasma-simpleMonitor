@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Simple Monitor
+Name=Simple System Monitor
 Name[ru_RU]=Простой системный монитор
 Name[es]=Monitor de sistema simple
 Comment=Plasma Simple System Monitor
@@ -8,7 +8,7 @@ Comment[ru_RU]=Простой системный монитор-плазмоид
 Comment[es]=Monitor de Sistema simple para Plasma
 
 Type=Service
-Icon=../plasma/plasmoids/org.kde.simpleMonitor/contents/images/simpleMonitor_icon.svg
+Icon=simpleMonitor_icon
 
 X-KDE-ServiceTypes=Plasma/Applet
 
