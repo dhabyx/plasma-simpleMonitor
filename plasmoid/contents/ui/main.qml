@@ -151,10 +151,11 @@ Rectangle {
                 connectSource(source);
                 return;
             }
-            if (source.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+            if (source.match("^lmsensors/k\\d+temp-pci-.+/.+")) {
                 /* if atk is present then not connect */
-                if (!root.atkPresent)
+                if (!root.atkPresent) {
                     connectSource(source);
+                }
                 return;
             }
             /* Some AMD sensors works better with atk data*/
@@ -162,7 +163,7 @@ Rectangle {
                 /* Remove k# temp sensors previously connected*/
                 if (!root.atkPresent) {
                     for (i in connectedSources) {
-                        if (i.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")) {
+                        if (i.match("^lmsensors/k\\d+temp-pci-.+/.+")) {
                             disconnectSource(i);
                             coreTempModel.clear();
                         }
@@ -205,13 +206,16 @@ Rectangle {
 
             // cpu temp
             if (sourceName.match("^lmsensors/coretemp-isa-\\d+/Core_\\d+")
-                    || sourceName.match("^lmsensors/k\\d+temp-pci-.+/temp\\d+")
+                    || sourceName.match("^lmsensors/k\\d+temp-pci-.+/.+")
                     || sourceName.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
                 var dataName = "0";
-                if (root.atkPresent)
+                if (root.atkPresent) {
                     dataName=sourceName.replace(/^lmsensors\/atk\\d+-acpi-/i,"").replace(/\/CPU_Temperature/i,"");
-                else
+                } else if(sourceName.match("^lmsensors/k10temp-pci-.+/.+")) {
+                    dataName = Code.k10CoreIndex(sourceName.replace(/^lmsensors\/k10temp-pci-/i,""));
+                } else {
                     dataName=data.name.split(' ')[1];
+                }
 
                 if (coreTempModel.count <= dataName)
                     coreTempModel.append({'val':data.value, 'dataUnits':data.units});
