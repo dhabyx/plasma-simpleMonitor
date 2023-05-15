@@ -214,9 +214,9 @@ Rectangle {
                     dataName=data.name.split(' ')[1];
 
                 if (coreTempModel.count <= dataName)
-                    coreTempModel.append({'val':data.value, 'units':data.units});
+                    coreTempModel.append({'val':data.value, 'dataUnits':data.units});
                 else
-                    coreTempModel.set(dataName,{'val':data.value, 'units':data.units});
+                    coreTempModel.set(dataName,{'val':data.value, 'dataUnits':data.units});
 
                 return;
             }

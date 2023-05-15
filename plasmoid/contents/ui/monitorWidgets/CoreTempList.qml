@@ -26,8 +26,8 @@ ListView {
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    implicitHeight: count * 25
-    implicitWidth: 100
+    implicitHeight: count * 25 * units.devicePixelRatio
+    implicitWidth: 100 * units.devicePixelRatio
 
     interactive: false
 
@@ -40,7 +40,7 @@ ListView {
 
     delegate: Item {
         id: coreListTemp
-        implicitHeight: 25
+        implicitHeight: 25 * units.devicePixelRatio
         implicitWidth: coreLabel.implicitWidth + unitLabel.implicitWidth
         width: parent.width
         Text {
@@ -53,7 +53,7 @@ ListView {
         }
         Text {
             id: unitLabel
-            text: if (tempUnit === 0) Math.floor(val) + units
+            text: if (tempUnit === 0) Math.floor(val) + dataUnits
                   else Math.floor(val*9/5+32) + "°F"
             font.bold: true
             font.pointSize: 10
@@ -63,18 +63,18 @@ ListView {
 
         Rectangle {
             id: rectValue
-            height: 9
+            height: 11 * units.devicePixelRatio
             width: Math.floor(val/coreTempList.criticalTemp*parent.width)
             color: if (val >= coreTempList.criticalTemp) "red"
                    else if (val >= coreTempList.highTemp) "#ffac2a"
                    else "#85a9ff"
             anchors.top: coreLabel.bottom
             anchors.right: parent.right
-            anchors.topMargin: 1
+            anchors.topMargin: units.devicePixelRatio
         }
         ListView.onAdd: SequentialAnimation {
             PropertyAction { target: coreListTemp; property: "height"; value: 0 }
-            NumberAnimation { target: coreListTemp; property: "height"; to: 25; duration: 250; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: coreListTemp; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
         }
     }
 

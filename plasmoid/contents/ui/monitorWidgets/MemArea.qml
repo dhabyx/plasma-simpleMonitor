@@ -39,11 +39,11 @@ Item {
     ColumnLayout {
         id: memColumn
 
-        spacing: 2
+        spacing: 2 * units.devicePixelRatio
         anchors.fill: parent
 
         RowLayout {
-            spacing: 3
+            spacing: 3 * units.devicePixelRatio
             Text {
                 id: memType
                 text: i18n("Mem:")
@@ -59,7 +59,7 @@ Item {
 
         RowLayout {
             id: memoryInfoLabels
-            spacing: 3
+            spacing: 3 * units.devicePixelRatio
             property int fontSize : 8
             Text {
                 text: i18n("Used:")
@@ -87,7 +87,7 @@ Item {
 
         Rectangle {
             id: rectTotalMemory
-            height: 5
+            height: 7 * units.devicePixelRatio
             Layout.fillWidth: true
             color: "#7ec264"
             Rectangle {

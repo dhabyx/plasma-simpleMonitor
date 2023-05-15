@@ -22,7 +22,7 @@ import QtQuick 2.0
 Row {
     property int uptime: 0
 
-    spacing: 3
+    spacing: 3 * units.devicePixelRatio
 
     QtObject {
         id: d
