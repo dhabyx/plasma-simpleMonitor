@@ -158,13 +158,19 @@ BaseSkin {
                 Layout.preferredHeight: 3 * units.devicePixelRatio
             }
 
-            GridLayout {
-                id: tempLayout
-    
-                columns: 1
-                rows: 2
-                columnSpacing: 0
-                rowSpacing: 0
+
+            CoreTempList {
+                id: coreTempList
+
+                model: coreTempModel
+                highTemp: cpuHighTemp
+                criticalTemp: criticalTemp
+                tempUnit: root.tempUnit
+                direction: root.direction
+
+                Layout.leftMargin: 5 * units.devicePixelRatio
+                Layout.rightMargin: 5 * units.devicePixelRatio
+                Layout.topMargin: 5 * units.devicePixelRatio
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumWidth: implicitWidth

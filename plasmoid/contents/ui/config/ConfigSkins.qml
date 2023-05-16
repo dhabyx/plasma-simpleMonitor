@@ -68,6 +68,9 @@ Item {
                     case 1:
                         skinImage.source = "../../images/columnSkin-preview.png"
                         break
+                    case 2:
+                        skinImage.source = "../../images/minimalisticSkin-preview.png"
+                        break
                     }
                 }
             }

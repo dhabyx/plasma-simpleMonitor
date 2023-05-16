@@ -3,9 +3,11 @@ Encoding=UTF-8
 Name=Simple System Monitor
 Name[ru_RU]=Простой системный монитор
 Name[es]=Monitor de sistema simple
+Name[tr]=Sistem Görüntüleyici
 Comment=Plasma Simple System Monitor
 Comment[ru_RU]=Простой системный монитор-плазмоид
 Comment[es]=Monitor de Sistema simple para Plasma
+Comment[tr]=Sistem Durumu Görüntüleyici
 
 Type=Service
 Icon=simpleMonitor_icon

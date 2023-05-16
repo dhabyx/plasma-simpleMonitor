@@ -26,6 +26,8 @@ ListView {
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
+    property color progressColor: "#993de515"
+    
     implicitWidth: 100 * units.devicePixelRatio
     implicitHeight: childrenRect.height
 
@@ -51,6 +53,7 @@ ListView {
             height: (20 + indicatorHeight) * units.devicePixelRatio
             Row {
                 spacing: 0
+                spacing: 5 * units.devicePixelRatio
                 anchors.left: parent.left
                 Text {
                     id: cpuLabel
@@ -74,7 +77,7 @@ ListView {
             }
             Item {
                 id: progressBar
-                height: indicatorHeight * units.devicePixelRatio
+                height: 10 * units.devicePixelRatio
                 //clip: true
                 width: parent.width
                 Rectangle {
@@ -188,7 +191,7 @@ ListView {
 
         ListView.onAdd: SequentialAnimation {
             PropertyAction { target: cpuListItem; property: "height"; value: 0 }
-            NumberAnimation { target: cpuListItem; property: "height"; to: (20 + indicatorHeight) * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: cpuListItem; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
         }
     }
 

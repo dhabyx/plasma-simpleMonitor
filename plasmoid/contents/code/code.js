@@ -19,7 +19,21 @@
 
 .pragma library
 
-var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora"]
+var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian"]
+
+var k10Cores = new Set();
+
+function k10CoreIndex(k10Core) {
+    k10Cores.add(k10Core);
+    let i = 0;
+    for(let item of k10Cores.values()) {
+        if(item == k10Core) {
+            return i;
+        }
+        ++i;
+    }
+    return -1;
+}
 
 var k10Cores = new Set();
 
