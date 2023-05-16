@@ -70,7 +70,8 @@ BaseSkin {
                 Layout.minimumHeight: (implicitHeight < implicitWidth) ? 100*implicitHeight/implicitWidth : 100 * units.devicePixelRatio
                 Layout.preferredWidth: (Layout.fillWidth) ? Layout.minimumWidth : height * implicitWidth/implicitHeight
                 Layout.preferredHeight: (Layout.fillHeight) ? Layout.minimumHeight : width * implicitHeight/implicitWidth
-                Layout.fillWidth: (implicitWidth < implicitHeight) ? false: true
+//                Layout.fillWidth: (implicitWidth < implicitHeight) ? false: true
+                Layout.fillWidth: true
                 Layout.fillHeight: !Layout.fillWidth
                 Layout.alignment: Qt.AlignCenter
 
@@ -151,8 +152,8 @@ BaseSkin {
             Layout.leftMargin: 2 * units.devicePixelRatio
         }
 
-        CoreTempList {
-            id: coreTempList
+        GridLayout {
+            id: tempLayout
 
             model: coreTempModel
             highTemp: cpuHighTemp
@@ -169,6 +170,46 @@ BaseSkin {
             Layout.minimumHeight: implicitHeight
             Layout.preferredWidth: implicitWidth
             Layout.preferredHeight: implicitHeight
+
+            CoreTempList {
+                id: coreTempList
+
+                model: coreTempModel
+                highTemp: cpuHighTemp
+                criticalTemp: cpuCritTemp
+                tempUnit: root.tempUnit
+                direction: root.direction
+
+                Layout.leftMargin: 5 * units.devicePixelRatio
+                Layout.rightMargin: 5 * units.devicePixelRatio
+                Layout.topMargin: 5 * units.devicePixelRatio
+                Layout.fillWidth: true
+                Layout.fillHeight: false
+                Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: implicitHeight
+                Layout.preferredWidth: implicitWidth
+                Layout.preferredHeight: implicitHeight
+            }
+
+            GpuTempList {
+                id: gpuTempList
+
+                model: gpuTempModel
+                highTemp: cpuHighTemp
+                criticalTemp: cpuCritTemp
+                tempUnit: root.tempUnit
+                direction: root.direction
+
+                Layout.leftMargin: 5 * units.devicePixelRatio
+                Layout.rightMargin: 5 * units.devicePixelRatio
+                Layout.topMargin: 1 * units.devicePixelRatio
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: implicitHeight
+                Layout.preferredWidth: implicitWidth
+                Layout.preferredHeight: implicitHeight
+            }
         }
 
         Rectangle {

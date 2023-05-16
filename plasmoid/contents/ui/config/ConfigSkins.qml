@@ -55,7 +55,7 @@ Item {
 
             ComboBox {
                 id: skinComboBox
-                model: ["Default", "Column", "Minimalistic"]
+                model: [i18n("Default"), i18n("Column")]
 
                 onCurrentIndexChanged: {
                     switch (currentIndex)  {
@@ -77,7 +77,7 @@ Item {
         }
 
         Label {
-            text: i18n("preview:")
+            text: i18n("Preview:")
         }
 
         Image {

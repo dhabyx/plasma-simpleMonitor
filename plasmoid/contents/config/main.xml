@@ -24,7 +24,7 @@
                 <choice name="Crystal"/>
                 <choice name="Translucent"/>
             </choices>
-            <default>0</default>
+            <default>1</default>
         </entry>
 
         <!-- Logos Section -->
@@ -50,6 +50,10 @@
         </entry>
 
         <!-- Displays Section -->
+        <entry name="showGpuTemp" type="Bool">
+            <label>Show GPU Temperature</label>
+            <default>true</default>
+        </entry>
         <entry name="showSwap" type="Bool">
             <label>Show Swap</label>
             <default>true</default>
@@ -69,12 +73,32 @@
 
         <!-- System Section -->
         <entry name="cpuHighTemp" type="Int">
-            <label>CPU High Temp</label>
+            <label>CPU High Temperature</label>
             <default>60</default>
         </entry>
         <entry name="cpuCritTemp" type="Int">
-            <label>CPU Critical Temp</label>
+            <label>CPU Critical Temperature</label>
             <default>70</default>
+        </entry>
+
+        <!-- Style Section -->
+        <entry name="coloredCpuLoad" type="Bool">
+            <label>Colored CPU load indicators.</label>
+            <default>true</default>
+        </entry>
+        <entry name="flatCpuLoad" type="Bool">
+            <label>Flat CPU load indicators.</label>
+            <default>true</default>
+        </entry>
+        <entry name="indicatorHeight" type="Int">
+            <label>Height of CPU load indicators.</label>
+            <default>10</default>
+        </entry>
+
+        <!-- Performance Section -->
+        <entry name="updateInterval" type="Double">
+            <label>Update interval in seconds.</label>
+            <default>1.0</default>
         </entry>
     </group>
 </kcfg>

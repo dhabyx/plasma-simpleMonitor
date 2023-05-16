@@ -43,23 +43,31 @@ Rectangle {
 
     color: "black"
 
-    // control for atk sensor
+    // Control for atk sensor.
     property bool atkPresent: false
 
     Component.onCompleted: atkPresent = false
 
+    // Configuration properties.
+    property bool showGpuTemp:      plasmoid.configuration.showGpuTemp
+    property double updateInterval: plasmoid.configuration.updateInterval
+
     QtObject {
         id: confEngine
 
-        // cfg properties
-        property int skin:          plasmoid.configuration.skin
-        property int bgColor:       plasmoid.configuration.bgColor
-        property int logo:          plasmoid.configuration.logo
-        property bool showSwap:     plasmoid.configuration.showSwap
-        property bool showUptime:   plasmoid.configuration.showUptime
-        property int tempUnit:      plasmoid.configuration.tempUnit
-        property int cpuHighTemp:   plasmoid.configuration.cpuHighTemp
-        property int cpuCritTemp:   plasmoid.configuration.cpuCritTemp
+        // Configuration properties.
+        property int skin:              plasmoid.configuration.skin
+        property int bgColor:           plasmoid.configuration.bgColor
+        property int logo:              plasmoid.configuration.logo
+        property bool showGpuTemp:      plasmoid.configuration.showGpuTemp
+        property bool showSwap:         plasmoid.configuration.showSwap
+        property bool showUptime:       plasmoid.configuration.showUptime
+        property int tempUnit:          plasmoid.configuration.tempUnit
+        property int cpuHighTemp:       plasmoid.configuration.cpuHighTemp
+        property int cpuCritTemp:       plasmoid.configuration.cpuCritTemp
+        property bool coloredCpuLoad:   plasmoid.configuration.coloredCpuLoad
+        property bool flatCpuLoad:      plasmoid.configuration.flatCpuLoad
+        property int indicatorHeight:   plasmoid.configuration.indicatorHeight
 
         property string distroName: "tux"
         property string distroId: "tux"
@@ -152,10 +160,14 @@ Rectangle {
         }
     }
 
+    ListModel {
+        id: gpuTempModel
+    }
+
     PlasmaCore.DataSource {
         id: systemInfoDataSource
         engine: "systemmonitor"
-        interval: 1000
+        interval: updateInterval * 1000
 
         property alias delegate: loader.item
 
@@ -232,18 +244,20 @@ Rectangle {
                     || sourceName.match("^lmsensors/k\\d+temp-pci-.+/.+")
                     || sourceName.match("^lmsensors/atk\\d+-acpi-\\d/CPU_Temperature")) {
                 var dataName = "0";
+                var coreLabelStr = ""
                 if (root.atkPresent) {
                     dataName=sourceName.replace(/^lmsensors\/atk\\d+-acpi-/i,"").replace(/\/CPU_Temperature/i,"");
                 } else if(sourceName.match("^lmsensors/k10temp-pci-.+/.+")) {
                     dataName = Code.k10CoreIndex(sourceName.replace(/^lmsensors\/k10temp-pci-/i,""));
+                    coreLabelStr = sourceName.replace(/^lmsensors\/k10temp-pci-.+\//i,"")
                 } else {
                     dataName=data.name.split(' ')[1];
                 }
 
                 if (coreTempModel.count <= dataName)
-                    coreTempModel.append({'val':data.value, 'dataUnits':data.units});
+                    coreTempModel.append({'val':data.value, 'dataUnits':data.units, 'coreLabelStr':coreLabelStr});
                 else
-                    coreTempModel.set(dataName,{'val':data.value, 'dataUnits':data.units});
+                    coreTempModel.set(dataName,{'val':data.value, 'dataUnits':data.units, 'coreLabelStr':coreLabelStr});
 
                 return;
             }
@@ -291,6 +305,99 @@ Rectangle {
         Component.onDestruction: {
             for (var i = connectedSources.length; i > 0; --i)
                 disconnectSource(connectedSources[i - 1]);
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: nvidiaDataSource
+        engine: 'executable'
+        interval: if (showGpuTemp) updateInterval * 1000; else 0
+
+        connectedSources: [ 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader' ]
+
+        property bool gpuAppended: false
+
+        onNewData: {
+            var dataName = "NVIDIA";
+            var gpuLabelStr = "NVIDIA GPU"
+            var temperature = 0
+            if (data['exit code'] != 0 || data.stdout == '') {
+//                print('NVIDIA data error: ' + data.stderr)
+                return
+            } else {
+                temperature = parseFloat(data.stdout)
+                if (isNaN(temperature))
+                    return
+            }
+
+            if (gpuAppended == false) {
+                gpuTempModel.append({'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+                gpuAppended = true
+            } else {
+                gpuTempModel.set(dataName,{'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+            }
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: atiDataSource
+        engine: 'executable'
+        interval: if (showGpuTemp) updateInterval * 1000; else 0
+
+        connectedSources: [ 'aticonfig --od-gettemperature | tail -1 | cut -c 43-44' ]
+
+        property bool gpuAppended: false
+
+        onNewData: {
+            var dataName = "ATI";
+            var gpuLabelStr = "ATI GPU"
+            var temperature = 0
+            if (data['exit code'] != 0 || data.stdout == '') {
+//                print('ATI data error: ' + data.stderr)
+                return
+            } else {
+                temperature = parseFloat(data.stdout)
+                if (isNaN(temperature))
+                    return
+            }
+
+            if (gpuAppended == false) {
+                gpuTempModel.append({'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+                gpuAppended = true
+            } else {
+                gpuTempModel.set(dataName,{'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+            }
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: amdDataSource
+        engine: 'executable'
+        interval: if (showGpuTemp) updateInterval * 1000; else 0
+
+        connectedSources: [ 'amdconfig --od-gettemperature | tail -1 | cut -c 43-44' ]
+
+        property bool gpuAppended: false
+
+        onNewData: {
+            var dataName = "AMD";
+            var gpuLabelStr = "AMD GPU"
+            var temperature = 0
+            if (data['exit code'] != 0 || data.stdout == '') {
+//                print('AMD data error: ' + data.stderr)
+                return
+            } else {
+                temperature = parseFloat(data.stdout)
+                if (isNaN(temperature))
+                    return
+            }
+
+            if (gpuAppended == false) {
+                gpuTempModel.append({'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+                gpuAppended = true
+            } else {
+                gpuTempModel.set(dataName,{'val':temperature, 'dataUnits':'°C', 'gpuLabelStr':gpuLabelStr});
+            }
         }
     }
 
