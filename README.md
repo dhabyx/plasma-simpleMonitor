@@ -21,7 +21,7 @@ Installation
 
 ### CMake ###
 
-If you need localisation (i18n/l10n) support, please use `cmake` to install this widget to your system-wide directory. You also would need root permission.
+If you need localization (i18n/l10n) support, please use `cmake` to install this widget to your system-wide directory. You also would need root permission.
 
 ````Shell
 git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
@@ -29,11 +29,12 @@ cd plasma-simpleMonitor
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCMAKE_BUILD_TYPE=Release  -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ../
+make
 sudo make install
 ````
 ### Plasma PKG ###
 
-This way may be more convenient, but localisation support is not possible via `plasmapkg2`. This widget will be installed into your home directory.
+This way may be more convenient, but localization support is not possible via `plasmapkg2`. This widget will be installed into your home directory.
 
 Replace the version number as needed.
 
