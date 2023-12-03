@@ -42,8 +42,7 @@ ListView {
     delegate: Item {
         id: coreListTemp
         implicitHeight: 25 * units.devicePixelRatio
-        implicitWidth: coreLabel.implicitWidth + unitLabel.implicitWidth
-        width: parent.width
+        width: coreTempList.width
         height: (20 + indicatorHeight) * units.devicePixelRatio
         Text {
             id: coreLabel
