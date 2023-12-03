@@ -52,7 +52,6 @@ ListView {
             width: parent.width
             height: (20 + indicatorHeight) * units.devicePixelRatio
             Row {
-                spacing: 0
                 spacing: 5 * units.devicePixelRatio
                 anchors.left: parent.left
                 Text {

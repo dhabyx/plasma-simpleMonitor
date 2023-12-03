@@ -126,7 +126,7 @@ Rectangle {
             Code.getDistroInfo(function(info) {
                 distroName = info['name']
                 distroId = info['id']
-                distroVersion = info['version']
+                distroVersion = (info['version'] !== undefined)?info['version']:""
             }, this);
 
             Code.getKernelInfo(function(info){
@@ -226,7 +226,7 @@ Rectangle {
         onSourceAdded: tryAddSource(source)
 
         onNewData: {
-            if (data.value === undefined || delegate === undefined)
+            if (data.value === undefined || data.value == null || delegate === undefined || delegate == null)
                 return;
 
             // cpu load

@@ -152,14 +152,8 @@ BaseSkin {
             Layout.leftMargin: 2 * units.devicePixelRatio
         }
 
-        GridLayout {
+        ColumnLayout {
             id: tempLayout
-
-            model: coreTempModel
-            highTemp: cpuHighTemp
-            criticalTemp: criticalTemp
-            tempUnit: root.tempUnit
-            direction: root.direction
 
             Layout.leftMargin: 5 * units.devicePixelRatio
             Layout.rightMargin: 5 * units.devicePixelRatio
