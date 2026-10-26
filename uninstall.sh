@@ -3,7 +3,7 @@
 cd "${0%/*}"
 
 # Remove the Simple System Monitor plasmoid.
-plasmapkg2 -r ./plasmoid > /dev/null
+kpackagetool6 -t Plasma/Applet -r org.kde.simpleMonitor > /dev/null
 
 # Remove the Simple System Monitor icon.
 ICON_PATH=${HOME}/.local/share/icons/hicolor/scalable/apps/

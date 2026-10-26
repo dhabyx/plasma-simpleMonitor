@@ -1,9 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
+# Reinstalls the plasmoid in the user directory and opens it in a window.
 cd "${0%/*}"
-plasmapkg2 -r org.kde.simpleMonitor
-# rm -rf ~/.local/share/plasma/plasmoids/org.kde.simpleMonitor
-plasmapkg2 -t plasmoid -i ./plasmoid
-kbuildsycoca5 --noincremental
-# plasmawindowed org.kde.simpleMonitor
-plasmoidviewer -a org.kde.simpleMonitor
+kpackagetool6 -t Plasma/Applet -u ./plasmoid || kpackagetool6 -t Plasma/Applet -i ./plasmoid
+plasmawindowed org.kde.simpleMonitor
