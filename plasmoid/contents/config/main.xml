@@ -63,6 +63,18 @@
             <label>Show Uptime</label>
             <default>true</default>
         </entry>
+        <entry name="showNetwork" type="Bool">
+            <label>Show Network</label>
+            <default>true</default>
+        </entry>
+        <entry name="netUnit" type="Enum">
+            <label>Network speed unit</label>
+            <choices>
+                <choice name="Bytes per second"/>
+                <choice name="Bits per second"/>
+            </choices>
+            <default>0</default>
+        </entry>
         <entry name="tempUnit" type="Enum">
             <label>Temperature Units</label>
             <choices>

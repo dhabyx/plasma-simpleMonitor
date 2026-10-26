@@ -30,6 +30,8 @@ Item {
     readonly property bool showGpuTemp:      engine.showGpuTemp
     readonly property bool showSwap:         engine.showSwap
     readonly property bool showUptime:       engine.showUptime
+    readonly property bool showNetwork:      engine.showNetwork
+    readonly property int netUnit:           engine.netUnit
     readonly property int tempUnit:          engine.tempUnit
     readonly property int cpuHighTemp:       engine.cpuHighTemp
     readonly property int cpuCritTemp:       engine.cpuCritTemp
@@ -51,6 +53,10 @@ Item {
     readonly property double swapFree:       engine.swapFree
     readonly property double swapTotal:      engine.swapTotal
     readonly property double swapUsed:       engine.swapUsed
+
+    readonly property double netDown:        engine.netDown
+    readonly property double netUp:          engine.netUp
+    readonly property double netScale:       engine.netScale
 
     readonly property double uptime:         engine.uptime
 

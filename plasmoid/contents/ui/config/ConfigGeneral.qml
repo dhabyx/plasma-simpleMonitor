@@ -34,6 +34,8 @@ KCM.SimpleKCM {
     property alias cfg_showGpuTemp: showGpuTempCheckBox.checked
     property alias cfg_showSwap: showSwapCheckBox.checked
     property alias cfg_showUptime: showUptimeCheckBox.checked
+    property alias cfg_showNetwork: showNetworkCheckBox.checked
+    property int cfg_netUnit
     property int cfg_tempUnit
     property alias cfg_cpuHighTemp: cpuHighTempSpinBox.value
     property alias cfg_cpuCritTemp: cpuCritTempSpinBox.value
@@ -45,6 +47,8 @@ KCM.SimpleKCM {
     property bool cfg_showGpuTempDefault
     property bool cfg_showSwapDefault
     property bool cfg_showUptimeDefault
+    property bool cfg_showNetworkDefault
+    property int cfg_netUnitDefault
     property int cfg_cpuHighTempDefault
     property int cfg_cpuCritTempDefault
 
@@ -113,6 +117,18 @@ KCM.SimpleKCM {
         QQC2.CheckBox {
             id: showUptimeCheckBox
             text: i18n("Uptime")
+        }
+        QQC2.CheckBox {
+            id: showNetworkCheckBox
+            text: i18n("Network")
+        }
+
+        QQC2.ComboBox {
+            Kirigami.FormData.label: i18n("Network speed unit:")
+            enabled: showNetworkCheckBox.checked
+            model: [i18n("Bytes per second"), i18n("Bits per second")]
+            currentIndex: root.cfg_netUnit
+            onActivated: root.cfg_netUnit = currentIndex
         }
 
         Item {

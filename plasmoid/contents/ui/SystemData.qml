@@ -36,6 +36,8 @@ QtObject {
     readonly property bool showGpuTemp:     Plasmoid.configuration.showGpuTemp
     readonly property bool showSwap:        Plasmoid.configuration.showSwap
     readonly property bool showUptime:      Plasmoid.configuration.showUptime
+    readonly property bool showNetwork:     Plasmoid.configuration.showNetwork
+    readonly property int netUnit:          Plasmoid.configuration.netUnit
     readonly property int tempUnit:         Plasmoid.configuration.tempUnit
     readonly property int cpuHighTemp:      Plasmoid.configuration.cpuHighTemp
     readonly property int cpuCritTemp:      Plasmoid.configuration.cpuCritTemp
@@ -62,6 +64,12 @@ QtObject {
     property double swapTotal: 0
     readonly property double swapFree: Math.max(0, swapTotal - swapUsed)
     property double swapUsed: 0
+
+    // Network rates, in bytes per second, and the scale of the bars: the recent
+    // peak (slowly decaying), never below 1 MiB/s.
+    property double netDown: 0
+    property double netUp: 0
+    property double netScale: 1048576
 
     // Uptime, in seconds.
     property double uptime: 0
@@ -184,6 +192,29 @@ QtObject {
         updateRateLimit: root.intervalMs
         onValueChanged: if (root.isNumber(value)) root.swapUsed = value / root._bytesPerGiB
     }
+    function updateNetScale() {
+        netScale = Math.max(1048576, netDown, netUp, netScale * 0.98)
+    }
+
+    property Sensors.Sensor netDownSensor: Sensors.Sensor {
+        sensorId: "network/all/download"
+        enabled: root.showNetwork
+        updateRateLimit: root.intervalMs
+        onValueChanged: if (root.isNumber(value)) {
+            root.netDown = value
+            root.updateNetScale()
+        }
+    }
+    property Sensors.Sensor netUpSensor: Sensors.Sensor {
+        sensorId: "network/all/upload"
+        enabled: root.showNetwork
+        updateRateLimit: root.intervalMs
+        onValueChanged: if (root.isNumber(value)) {
+            root.netUp = value
+            root.updateNetScale()
+        }
+    }
+
     property Sensors.Sensor uptimeSensor: Sensors.Sensor {
         sensorId: "os/system/uptime"
         enabled: root.showUptime

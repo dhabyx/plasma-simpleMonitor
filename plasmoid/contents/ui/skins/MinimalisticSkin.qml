@@ -137,6 +137,35 @@ BaseSkin {
                 Layout.preferredWidth: implicitWidth
                 Layout.maximumHeight: implicitHeight
             }
+
+            Rectangle {
+                visible: root.showNetwork
+                color: "white"
+
+                Layout.fillWidth: true
+                Layout.minimumHeight: 3
+                Layout.maximumHeight: 3
+                Layout.preferredHeight: 3
+                Layout.topMargin: 5
+                Layout.rightMargin: 5
+            }
+
+            NetArea {
+                visible: root.showNetwork
+                down: root.netDown
+                up: root.netUp
+                scale: root.netScale
+                unit: root.netUnit
+
+                Layout.topMargin: 2
+                Layout.leftMargin: 10
+                Layout.rightMargin: 5
+                Layout.fillWidth: true
+                Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: implicitHeight
+                Layout.preferredWidth: implicitWidth
+                Layout.maximumHeight: implicitHeight
+            }
         }
     }
 }

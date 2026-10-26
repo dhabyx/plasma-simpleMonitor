@@ -134,7 +134,7 @@ BaseSkin {
         Rectangle {
             color: "white"
 
-            Layout.rowSpan: 5
+            Layout.rowSpan: 7
             Layout.minimumWidth: 3
             Layout.maximumWidth: 3
             Layout.preferredWidth: 3
@@ -149,7 +149,7 @@ BaseSkin {
             indicatorHeight: root.indicatorHeight
             direction: root.direction
 
-            Layout.rowSpan: 5
+            Layout.rowSpan: 7
             Layout.leftMargin: 5
             Layout.topMargin: 5
             Layout.fillWidth: true
@@ -207,6 +207,37 @@ BaseSkin {
             memFree: root.swapFree
             memTotal: root.swapTotal
             memUsed: root.swapUsed
+
+            Layout.columnSpan: 2
+            Layout.topMargin: 2
+            Layout.leftMargin: 10
+            Layout.rightMargin: 5
+            Layout.fillWidth: true
+            Layout.minimumWidth: implicitWidth
+            Layout.minimumHeight: implicitHeight
+            Layout.preferredWidth: implicitWidth
+            Layout.maximumHeight: implicitHeight
+        }
+
+        Rectangle {
+            visible: root.showNetwork
+            color: "white"
+
+            Layout.columnSpan: 2
+            Layout.fillWidth: true
+            Layout.minimumHeight: 3
+            Layout.maximumHeight: 3
+            Layout.preferredHeight: 3
+            Layout.topMargin: 5
+            Layout.rightMargin: 5
+        }
+
+        NetArea {
+            visible: root.showNetwork
+            down: root.netDown
+            up: root.netUp
+            scale: root.netScale
+            unit: root.netUnit
 
             Layout.columnSpan: 2
             Layout.topMargin: 2
