@@ -61,7 +61,8 @@ KCM.SimpleKCM {
             id: logoComboBox
             Kirigami.FormData.label: i18n("Logo:")
             model: [i18n("Default"), i18n("Tux"), i18n("Slackware"), i18n("Ubuntu"), i18n("Kubuntu"),
-                    i18n("OpenSUSE"), i18n("Manjaro"), i18n("Arch"), i18n("Fedora"), i18n("Debian")]
+                    i18n("OpenSUSE"), i18n("Manjaro"), i18n("Arch"), i18n("Fedora"), i18n("Debian"),
+                    i18n("Linux Mint"), i18n("EndeavourOS"), i18n("Pop!_OS"), i18n("Zorin OS"), i18n("elementary OS"), i18n("NixOS"), i18n("Gentoo"), i18n("Alpine"), i18n("Void"), i18n("Rocky"), i18n("AlmaLinux"), i18n("Red Hat"), i18n("CentOS"), i18n("Kali")]
             currentIndex: root.cfg_logo
             onActivated: root.cfg_logo = currentIndex
         }

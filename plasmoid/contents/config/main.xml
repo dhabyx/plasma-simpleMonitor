@@ -42,6 +42,20 @@
                 <choice name="Arch"/>
                 <choice name="Fedora"/>
                 <choice name="Debian"/>
+                <choice name="Linux Mint"/>
+                <choice name="EndeavourOS"/>
+                <choice name="Pop!_OS"/>
+                <choice name="Zorin OS"/>
+                <choice name="elementary OS"/>
+                <choice name="NixOS"/>
+                <choice name="Gentoo"/>
+                <choice name="Alpine"/>
+                <choice name="Void"/>
+                <choice name="Rocky"/>
+                <choice name="AlmaLinux"/>
+                <choice name="Red Hat"/>
+                <choice name="CentOS"/>
+                <choice name="Kali"/>
             </choices>
             <default>0</default>
         </entry>

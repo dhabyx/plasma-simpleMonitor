@@ -20,13 +20,12 @@
 .pragma library
 
 // Order matters: the logo selector in the configuration uses index + 1.
-var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian"]
+var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian",
+            "linuxmint", "endeavouros", "pop", "zorin", "elementary", "nixos", "gentoo",
+            "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali"]
 
 // Distributions without their own logo that are based on one that has it.
 var logoAliases = {
-    "endeavouros": "arch",
-    "linuxmint": "ubuntu",
-    "pop": "ubuntu",
     "cachyos": "arch",
     "garuda": "arch",
     "arcolinux": "arch",
