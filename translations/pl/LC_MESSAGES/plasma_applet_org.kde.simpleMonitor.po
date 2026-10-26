@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 11:06-0300\n"
+"POT-Creation-Date: 2026-10-26 11:30-0300\n"
 "PO-Revision-Date: 2017-03-31 23:18+0100\n"
 "Last-Translator: Tomasz Bojczuk <seelook@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -28,162 +28,179 @@ msgstr ""
 msgid "Swap:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:62
+#: ../plasmoid/contents/ui/SystemData.qml:173
+msgid "GPU:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/SystemData.qml:173
+#: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
+msgid "GPU %1:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/SystemData.qml:216
+msgid "CPU avg:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/SystemData.qml:223
+msgid "CPU max:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:66
 msgid "Logo:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:63
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:67
 #: ../plasmoid/contents/ui/config/ConfigSkins.qml:42
 msgid "Default"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:63
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:67
 msgid "Tux"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:63
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:67
 msgid "Slackware"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:63
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:67
 msgid "Ubuntu"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:63
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:67
 msgid "Kubuntu"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:64
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:68
 msgid "OpenSUSE"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:64
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:68
 msgid "Manjaro"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:64
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:68
 msgid "Arch"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:64
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:68
 msgid "Fedora"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:64
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:68
 msgid "Debian"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Linux Mint"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "EndeavourOS"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Pop!_OS"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Zorin OS"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "elementary OS"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "NixOS"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Gentoo"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Alpine"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Void"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Rocky"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "AlmaLinux"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Red Hat"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "CentOS"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:65
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:69
 msgid "Kali"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:86
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:90
 msgid "Background color:"
 msgstr "Kolor tła:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:88
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:92
 msgid "Standard"
 msgstr "Standardowy"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:98
 msgid "Crystal"
 msgstr "Kryształowy"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:100
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:104
 msgid "Translucent"
 msgstr "Przeźroczysty"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:111
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:115
 msgid "Show:"
 msgstr "Wyświetl:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:112
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:116
 #, fuzzy
 msgid "GPU Temperature"
 msgstr "Najwyższa temperatura procesora:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:116
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:120
 msgid "Swap"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:120
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:124
 msgid "Uptime"
 msgstr "Czas pracy"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:124
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:128
 msgid "Network"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:128
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:132
 msgid "Network speed unit:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:130
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
 msgid "Bytes per second"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:130
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
 msgid "Bits per second"
 msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:137
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:141
 #, fuzzy
 msgid "Temperature settings:"
 msgstr "Ustawienia temperatury:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:142
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:146
 #, fuzzy
 msgid ""
 "You can use the <b>sensors</b> command to find the appropriate values for "
@@ -192,23 +209,40 @@ msgstr ""
 "<i>(Aby wtawić odpowiednie wartości w tej sekcji, można wykorzystać "
 "polecenie <strong>sensors</strong>.)</i>"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:153
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:157
 msgid "Temperature units:"
 msgstr "Jednostka temperatury:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:155
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:159
 msgid "Celsius °C"
 msgstr "Stopnie Celsiusza °C"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:161
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:165
 msgid "Fahrenheit °F"
 msgstr "Stopnie Fahrenheita °F"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:168
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:171
+#, fuzzy
+msgid "CPU temperature:"
+msgstr "Najwyższa temperatura procesora:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:172
+msgid "Per core"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:172
+msgid "Average"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:172
+msgid "Maximum"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:179
 msgid "CPU High Temperature:"
 msgstr "Najwyższa temperatura procesora:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:175
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:186
 msgid "CPU Critical Temperature:"
 msgstr "Krytyczna temperatura procesora:"
 
@@ -323,10 +357,6 @@ msgstr ""
 msgid "Up:"
 msgstr "Czas pracy:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
-msgid "GPU %1:"
-msgstr ""
-
 #: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:47
 msgid "Mem:"
 msgstr "Pamięć:"
@@ -353,11 +383,11 @@ msgstr "Czas pracy:"
 msgid "%1d %2:%3"
 msgstr ""
 
-#: ../plasmoid/contents/ui/components/LogoImage.qml:98
+#: ../plasmoid/contents/ui/main.qml:50
 msgid "Lock image scaling"
 msgstr "Zablokuj skalowanie obrazków"
 
-#: ../plasmoid/contents/ui/components/LogoImage.qml:98
+#: ../plasmoid/contents/ui/main.qml:50
 msgid "Unlock image scaling"
 msgstr "Odblokuj skalowanie obrazków"
 
