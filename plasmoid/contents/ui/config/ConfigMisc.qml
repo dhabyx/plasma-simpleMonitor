@@ -17,107 +17,68 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
-import "../../code/code.js" as Code
-
-Item {
+KCM.SimpleKCM {
     id: root
-
-    Layout.fillHeight: true
-    Layout.fillWidth: true
-
-    implicitHeight: settingsLayout.implicitHeight
-    implicitWidth: settingsLayout.implicitWidth
-
-    Layout.minimumWidth: implicitWidth
-    Layout.minimumHeight: implicitHeight
-    Layout.preferredWidth: implicitWidth
-    Layout.preferredHeight: implicitHeight
 
     property alias cfg_coloredCpuLoad: coloredCpuLoadCheckBox.checked
     property alias cfg_flatCpuLoad: flatCpuLoadCheckBox.checked
     property alias cfg_indicatorHeight: indicatorHeightSpinBox.value
-    property alias cfg_updateInterval: updateIntervalSpinBox.value
+    property double cfg_updateInterval
 
-    ColumnLayout {
-        id: settingsLayout
-        anchors.fill: parent
+    property bool cfg_coloredCpuLoadDefault
+    property bool cfg_flatCpuLoadDefault
+    property int cfg_indicatorHeightDefault
+    property double cfg_updateIntervalDefault
 
-        GroupBox {
-            title: i18n("Style settings:")
-            Layout.fillWidth: true
-
-            GridLayout {
-                columns: 2
-
-                Label {
-                    text: i18n("CPU load indicator style:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 0
-                    Layout.column: 0
-                }
-
-                CheckBox {
-                    id: coloredCpuLoadCheckBox
-                    text: i18n("Colored")
-                    Layout.row: 0
-                    Layout.column: 1
-                }
-
-                CheckBox {
-                    id: flatCpuLoadCheckBox
-                    text: i18n("Flat")
-                    Layout.row: 1
-                    Layout.column: 1
-                }
-
-                SpinBox {
-                    id: indicatorHeightSpinBox
-                    minimumValue: 1
-                    maximumValue: 99
-                    Layout.row: 2
-                    Layout.column: 1
-                }
-
-                Label {
-                    text: i18n("CPU load indicator height:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 2
-                    Layout.column: 0
-                }
-            }
+    Kirigami.FormLayout {
+        Item {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Style settings:")
         }
 
-        GroupBox {
-            title: i18n("Performance settings:")
-            Layout.fillWidth: true
-
-            GridLayout {
-                columns: 2
-
-                Label {
-                    text: i18n('Update interval:')
-                    Layout.alignment: Qt.AlignRight
-                }
-
-                SpinBox {
-                    id: updateIntervalSpinBox
-                    decimals: 1
-                    stepSize: 0.1
-                    minimumValue: 0.1
-                    maximumValue: 10.0
-                    suffix: i18nc('Abbreviation for seconds', 's')
-                }
-            }
+        QQC2.CheckBox {
+            id: coloredCpuLoadCheckBox
+            Kirigami.FormData.label: i18n("CPU load indicator style:")
+            text: i18n("Colored")
+        }
+        QQC2.CheckBox {
+            id: flatCpuLoadCheckBox
+            text: i18n("Flat")
         }
 
-        Rectangle {
-            Layout.fillHeight: true
-            color: "transparent"
+        QQC2.SpinBox {
+            id: indicatorHeightSpinBox
+            Kirigami.FormData.label: i18n("CPU load indicator height:")
+            from: 1
+            to: 99
+            editable: true
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Performance settings:")
+        }
+
+        // The interval is stored in seconds; the spin box works in tenths of a second.
+        QQC2.SpinBox {
+            id: updateIntervalSpinBox
+            Kirigami.FormData.label: i18n("Update interval:")
+            from: 1
+            to: 100
+            stepSize: 1
+            editable: true
+            value: Math.round(root.cfg_updateInterval * 10)
+            onValueModified: root.cfg_updateInterval = value / 10
+
+            textFromValue: (value, locale) => Number(value / 10).toLocaleString(locale, 'f', 1)
+                                              + i18nc("Abbreviation for seconds", "s")
+            valueFromText: (text, locale) => Math.round(Number.fromLocaleString(locale, text.replace(/[^\d.,]/g, "")) * 10)
         }
     }
 }

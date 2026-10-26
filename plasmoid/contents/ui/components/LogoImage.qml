@@ -17,12 +17,15 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
+import QtQuick.Controls as QQC2
 
 Item {
     id: root
+
     property real fillScale: 1.0
     property bool editMode: false
+    property alias image: image
 
     onFillScaleChanged: {
         if (fillScale && fillScale <= 1.0)
@@ -39,74 +42,61 @@ Item {
     implicitWidth: image.implicitWidth
     implicitHeight: image.implicitHeight
 
-    property Image image: Image {
-        parent: root
+    Image {
+        id: image
         anchors.centerIn: parent
         width: parent.width * d.scale
         height: parent.height * d.scale
         fillMode: Image.PreserveAspectFit
     }
 
-    property Item border: Rectangle {
-        parent: root.image
-        anchors.fill: parent
-        visible: editMode
-        border { width: 1; color: "black" }
+    // Frame and handle shown while the scale of the logo can be changed.
+    Rectangle {
+        anchors.fill: image
+        visible: root.editMode
         color: "transparent"
+        border { width: 1; color: "black" }
+
         Rectangle {
             anchors.fill: parent
             anchors.margins: 1
-            border { width: 1; color: "white" }
             color: "transparent"
+            border { width: 1; color: "white" }
         }
 
         Image {
-            anchors {
-                right: parent.right
-                top: parent.top
-            }
+            anchors { right: parent.right; top: parent.top }
             source: "../../images/resize.svg"
-            sourceSize: Qt.size(10,10)
+            sourceSize: Qt.size(10, 10)
 
             MouseArea {
                 id: resizeArea
                 anchors.fill: parent
+                cursorShape: pressed ? Qt.SizeBDiagCursor : Qt.ArrowCursor
 
-                property bool resizeEvent: false
-
-                state: "NORMAL"
-                states: [
-                    State {
-                        name: "NORMAL"
-                        PropertyChanges {
-                            target: resizeArea
-                            cursorShape: Qt.ArrowCursor
-                        }
-                    },
-                    State {
-                        name: "RESIZE"
-                        PropertyChanges {
-                            target: resizeArea
-                            cursorShape: Qt.SizeBDiagCursor
-                        }
+                onPositionChanged: mouse => {
+                    if (pressed) {
+                        var p = mapToItem(root, mouse.x, mouse.y)
+                        root.fillScale = Math.min(Math.max(0.3, Math.max(2 * p.x / root.width - 1.0,
+                                                                         1.0 - 2 * p.y / root.height)), 1.0)
                     }
-                ]
-
-                onPressed: {
-                    resizeEvent = true
-                }
-
-                onPositionChanged: {
-                    if (resizeEvent) {
-                        var mousePoint = mapToItem(root, mouse.x, mouse.y);
-                        root.fillScale = Math.min(Math.max(0.3, Math.max(2*mousePoint.x/root.width - 1.0, 1.0 - 2*mousePoint.y/root.height)), 1.0)
-                    }
-                }
-
-                onReleased: {
-                    resizeEvent = false
                 }
             }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+        onClicked: logoMenu.popup()
+    }
+
+    QQC2.Menu {
+        id: logoMenu
+
+        QQC2.MenuItem {
+            text: root.editMode ? i18n("Lock image scaling") : i18n("Unlock image scaling")
+            onTriggered: root.editMode = !root.editMode
         }
     }
 }

@@ -17,8 +17,8 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 ColumnLayout {
     id: datePicker
@@ -34,22 +34,19 @@ ColumnLayout {
         source: "../../fonts/Play/Play-Bold.ttf"
     }
 
+    property date now: new Date()
+
+    // The date only changes once a day, no need to tick every second.
     Timer {
-        interval: 1000
+        interval: 30000
         repeat: true
         running: true
-        triggeredOnStart: true
-        onTriggered: {
-            var dateTime = new Date()
-            dayName.text = Qt.formatDateTime(dateTime,'ddd')
-            dayNumber.text = Qt.formatDateTime(dateTime,'dd')
-            monthName.text = Qt.formatDateTime(dateTime,'MMM')
-        }
+        onTriggered: datePicker.now = new Date()
     }
     
     Text {
         id: dayName
-        text: i18n("mie")
+        text: Qt.formatDateTime(datePicker.now, "ddd")
         font.pointSize: 14
         color: "white"
         font.capitalization: Font.AllLowercase
@@ -61,8 +58,7 @@ ColumnLayout {
 
         Text {
             id: dayNumber
-//            height: 65
-            text: "25"
+            text: Qt.formatDateTime(datePicker.now, "dd")
             font {
                 family: michroma.name
                 pointSize: 40
@@ -72,7 +68,7 @@ ColumnLayout {
         Text {
             id: monthName
             anchors.bottom: parent.bottom
-            text: i18n("dic")
+            text: Qt.formatDateTime(datePicker.now, "MMM")
             font {
                 family: playBold.name
                 capitalization: Font.AllUppercase

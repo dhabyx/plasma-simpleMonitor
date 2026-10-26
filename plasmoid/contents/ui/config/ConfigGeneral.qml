@@ -17,29 +17,20 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
+import "../components"
 import "../../code/code.js" as Code
 
-Item {
+KCM.SimpleKCM {
     id: root
 
-    Layout.fillHeight: true
-    Layout.fillWidth: true
-
-    implicitHeight: settingsLayout.implicitHeight
-    implicitWidth: settingsLayout.implicitWidth
-
-    Layout.minimumWidth: implicitWidth
-    Layout.minimumHeight: implicitHeight
-    Layout.preferredWidth: implicitWidth
-    Layout.preferredHeight: implicitHeight
-
+    property int cfg_logo
     property int cfg_bgColor
-    property alias cfg_logo: logoComboBox.currentIndex
     property alias cfg_showGpuTemp: showGpuTempCheckBox.checked
     property alias cfg_showSwap: showSwapCheckBox.checked
     property alias cfg_showUptime: showUptimeCheckBox.checked
@@ -47,233 +38,127 @@ Item {
     property alias cfg_cpuHighTemp: cpuHighTempSpinBox.value
     property alias cfg_cpuCritTemp: cpuCritTempSpinBox.value
 
-    QtObject {
-        id: d
+    // Defaults, required so "Restore defaults" works with the non-aliased values.
+    property int cfg_logoDefault
+    property int cfg_bgColorDefault
+    property int cfg_tempUnitDefault
+    property bool cfg_showGpuTempDefault
+    property bool cfg_showSwapDefault
+    property bool cfg_showUptimeDefault
+    property int cfg_cpuHighTempDefault
+    property int cfg_cpuCritTempDefault
 
-        property string osId: "tux"
-
-        Component.onCompleted: {
-            Code.getDistroInfo(function(arrayResult) {
-                osId = arrayResult["id"];
-            }, this)
-        }
+    SystemInfo {
+        id: systemInfo
     }
 
-    onCfg_bgColorChanged: {
-        switch (cfg_bgColor) {
-            default: case 0: bgColorTypeGroup.current = standardBgColor; break;
-            case 1: bgColorTypeGroup.current = crystalBgColor; break;
-            case 2: bgColorTypeGroup.current = translucentBgColor; break;
-        }
-    }
-
-    onCfg_tempUnitChanged: {
-        switch (cfg_tempUnit) {
-            default: case 0: tempUnitTypeGroup.current = celsiusTemp; break;
-            case 1: tempUnitTypeGroup.current = fahrenheitTemp; break;
-        }
-    }
-
-    Component.onCompleted: {
-        cfg_bgColorChanged();
-        cfg_tempUnitChanged();
-    }
-
-    ExclusiveGroup {
-        id: bgColorTypeGroup
-    }
-
-    ExclusiveGroup {
-        id: tempUnitTypeGroup
-    }
-
-    ColumnLayout {
-        id: settingsLayout
-        anchors.fill: parent
-
-        GroupBox {
-            title: i18n("Display settings:")
-            Layout.fillWidth: true
-
-            GridLayout {
-                columns: 2
-
-                Label {
-                    text: i18n("Logo:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 0
-                    Layout.column: 0
-                }
-
-                ComboBox {
-                    id: logoComboBox
-                    model: [i18n("Default"), i18n("Tux"), i18n("Slackware"), i18n("Ubuntu"), i18n("Kubuntu"), i18n("OpenSUSE"), i18n("Manjaro"), i18n("Arch"), i18n("Fedora")]
-                    Layout.row: 0
-                    Layout.column: 1
-                }
-
-                Rectangle {
-
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    Layout.row: 1
-                    Layout.column: 1
-
-                    implicitHeight: logoImage.height + 10
-                    implicitWidth:  logoComboBox.width + 10
-
-                    color: "transparent"
-                    border { width: 1; color: theme.buttonTextColor }
-                    radius: 2
-
-                    Image {
-                        id: logoImage
-
-                        anchors.centerIn: parent
-
-                        source: "../" + Code.getStandardLogo(logoComboBox.currentIndex, d.osId)
-                        sourceSize.height: 100
-                    }
-                }
-
-                Label {
-                    text: i18n("Background color:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 2
-                    Layout.column: 0
-                }
-
-                RadioButton {
-                    id: standardBgColor
-                    exclusiveGroup: bgColorTypeGroup
-                    text: i18n("Standard")
-                    onCheckedChanged: if (checked) cfg_bgColor = 0;
-                    Layout.row: 2
-                    Layout.column: 1
-                }
-
-                RadioButton {
-                    id: crystalBgColor
-                    exclusiveGroup: bgColorTypeGroup
-                    text: i18n("Crystal")
-                    onCheckedChanged: if (checked) cfg_bgColor = 1;
-                    Layout.row: 3
-                    Layout.column: 1
-                }
-
-                RadioButton {
-                    id: translucentBgColor
-                    exclusiveGroup: bgColorTypeGroup
-                    text: i18n("Translucent")
-                    onCheckedChanged: if (checked) cfg_bgColor = 2;
-                    Layout.row: 4
-                    Layout.column: 1
-                }
-
-                Label {
-                    text: i18n("Show:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 5
-                    Layout.column: 0
-                }
-
-                CheckBox {
-                    id: showGpuTempCheckBox
-                    text: i18n("GPU Temperature")
-                    Layout.row: 5
-                    Layout.column: 1
-                }
-
-                CheckBox {
-                    id: showSwapCheckBox
-                    text: i18n("Swap")
-                    Layout.row: 6
-                    Layout.column: 1
-                }
-
-                CheckBox {
-                    id: showUptimeCheckBox
-                    text: i18n("Uptime")
-                    Layout.row: 7
-                    Layout.column: 1
-                }
-            }
+    Kirigami.FormLayout {
+        QQC2.ComboBox {
+            id: logoComboBox
+            Kirigami.FormData.label: i18n("Logo:")
+            model: [i18n("Default"), i18n("Tux"), i18n("Slackware"), i18n("Ubuntu"), i18n("Kubuntu"),
+                    i18n("OpenSUSE"), i18n("Manjaro"), i18n("Arch"), i18n("Fedora"), i18n("Debian")]
+            currentIndex: root.cfg_logo
+            onActivated: root.cfg_logo = currentIndex
         }
 
-        GroupBox {
-            title: i18n("Temperature settings:")
-            Layout.fillWidth: true
-
-            GridLayout {
-                columns: 3
-                rowSpacing: 2
-
-                Label {
-                    Layout.row: 0
-                    Layout.column: 0
-                    Layout.columnSpan: 3
-                    text: i18n("<i>(You can use the <strong>sensors</strong> command to place the appropriate values ​​for this section.)</i>")
-                    color: theme.highlightColor
-                    wrapMode: Text.WordWrap
-                }
-
-                Label {
-                    text: i18n("Temperature units:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 1
-                    Layout.column: 0
-                }
-
-                RadioButton {
-                    id: celsiusTemp
-                    exclusiveGroup: tempUnitTypeGroup
-                    text: i18n("Celsius °C")
-                    onCheckedChanged: if (checked) cfg_tempUnit = 0;
-                    Layout.row: 1
-                    Layout.column: 1
-                }
-
-                RadioButton {
-                    id: fahrenheitTemp
-                    exclusiveGroup: tempUnitTypeGroup
-                    text: i18n("Fahrenheit °F")
-                    onCheckedChanged: if (checked) cfg_tempUnit = 1;
-                    Layout.row: 2
-                    Layout.column: 1
-                }
-
-                Label {
-                    text: i18n("CPU High Temperature:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 3
-                    Layout.column: 0
-                }
-
-                SpinBox {
-                    id: cpuHighTempSpinBox
-                    Layout.row: 3
-                    Layout.column: 1
-                }
-
-                Label {
-                    text: i18n("CPU Critical Temperature:")
-                    Layout.alignment: Qt.AlignRight
-                    Layout.row: 4
-                    Layout.column: 0
-                }
-
-                SpinBox {
-                    id: cpuCritTempSpinBox
-                    maximumValue: 150
-                    Layout.row: 4
-                    Layout.column: 1
-                }
-            }
+        Image {
+            Kirigami.FormData.label: ""
+            source: Qt.resolvedUrl("../../images/" + Code.getStandardLogo(root.cfg_logo, systemInfo.distroId))
+            sourceSize.height: 100
+            fillMode: Image.PreserveAspectFit
         }
 
-        Rectangle {
-            Layout.fillHeight: true
-            color: "transparent"
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        QQC2.ButtonGroup {
+            id: bgColorGroup
+        }
+
+        QQC2.RadioButton {
+            Kirigami.FormData.label: i18n("Background color:")
+            QQC2.ButtonGroup.group: bgColorGroup
+            text: i18n("Standard")
+            checked: root.cfg_bgColor === 0
+            onToggled: root.cfg_bgColor = 0
+        }
+        QQC2.RadioButton {
+            QQC2.ButtonGroup.group: bgColorGroup
+            text: i18n("Crystal")
+            checked: root.cfg_bgColor === 1
+            onToggled: root.cfg_bgColor = 1
+        }
+        QQC2.RadioButton {
+            QQC2.ButtonGroup.group: bgColorGroup
+            text: i18n("Translucent")
+            checked: root.cfg_bgColor === 2
+            onToggled: root.cfg_bgColor = 2
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        QQC2.CheckBox {
+            id: showGpuTempCheckBox
+            Kirigami.FormData.label: i18n("Show:")
+            text: i18n("GPU Temperature")
+        }
+        QQC2.CheckBox {
+            id: showSwapCheckBox
+            text: i18n("Swap")
+        }
+        QQC2.CheckBox {
+            id: showUptimeCheckBox
+            text: i18n("Uptime")
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Temperature settings:")
+        }
+
+        QQC2.Label {
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 20
+            text: i18n("You can use the <b>sensors</b> command to find the appropriate values for this section.")
+            textFormat: Text.StyledText
+            wrapMode: Text.WordWrap
+            font.italic: true
+        }
+
+        QQC2.ButtonGroup {
+            id: tempUnitGroup
+        }
+
+        QQC2.RadioButton {
+            Kirigami.FormData.label: i18n("Temperature units:")
+            QQC2.ButtonGroup.group: tempUnitGroup
+            text: i18n("Celsius °C")
+            checked: root.cfg_tempUnit === 0
+            onToggled: root.cfg_tempUnit = 0
+        }
+        QQC2.RadioButton {
+            QQC2.ButtonGroup.group: tempUnitGroup
+            text: i18n("Fahrenheit °F")
+            checked: root.cfg_tempUnit === 1
+            onToggled: root.cfg_tempUnit = 1
+        }
+
+        QQC2.SpinBox {
+            id: cpuHighTempSpinBox
+            Kirigami.FormData.label: i18n("CPU High Temperature:")
+            from: 0
+            to: 150
+            editable: true
+        }
+        QQC2.SpinBox {
+            id: cpuCritTempSpinBox
+            Kirigami.FormData.label: i18n("CPU Critical Temperature:")
+            from: 0
+            to: 150
+            editable: true
         }
     }
 }

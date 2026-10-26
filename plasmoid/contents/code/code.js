@@ -19,131 +19,137 @@
 
 .pragma library
 
+// Order matters: the logo selector in the configuration uses index + 1.
 var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian"]
 
-var k10Cores = new Set();
-
-function k10CoreIndex(k10Core) {
-    k10Cores.add(k10Core);
-    let i = 0;
-    for(let item of k10Cores.values()) {
-        if(item == k10Core) {
-            return i;
-        }
-        ++i;
-    }
-    return -1;
+// Distributions without their own logo that are based on one that has it.
+var logoAliases = {
+    "endeavouros": "arch",
+    "linuxmint": "ubuntu",
+    "pop": "ubuntu",
+    "cachyos": "arch",
+    "garuda": "arch",
+    "arcolinux": "arch",
+    "artix": "arch",
+    "neon": "kubuntu",
+    "opensuse-tumbleweed": "opensuse",
+    "opensuse-leap": "opensuse",
+    "opensuse-slowroll": "opensuse",
+    "sles": "opensuse"
 }
 
-var k10Cores = new Set();
-
-function k10CoreIndex(k10Core) {
-    k10Cores.add(k10Core);
-    let i = 0;
-    for(let item of k10Cores.values()) {
-        if(item == k10Core) {
-            return i;
-        }
-        ++i;
-    }
-    return -1;
-}
-
+/**
+ * Returns the file name (inside contents/images) of the distribution logo.
+ * logoId: 0 = detect from distroName, n > 0 = logos[n - 1].
+ */
 function getStandardLogo(logoId, distroName) {
-    if (typeof distroName === 'undefined')
-        distroName = "tux"
-    // logoId = 0 - default logo
-    // distroId - id of default distr logo
-    distroName = distroName.toLowerCase()
-    if (logoId < 0)
-        logoId = 0
+    var name = (distroName || "tux").toLowerCase()
+    var index
 
-    if (logoId === 0) {
-        logoId = logos.indexOf(distroName);
-        if (logoId === -1)
-            logoId = 0
+    if (!logoId || logoId < 0) {
+        name = logoAliases[name] || name
+        index = logos.indexOf(name)
+        if (index === -1)
+            index = 0
     } else {
-        if (logos.length > logoId - 1)
-            logoId -= 1
-        else
-            logoId = 0
+        index = (logoId - 1 < logos.length) ? logoId - 1 : 0
     }
 
-    return "../images/distro-" + logos[logoId] + ".svg"
+    return "distro-" + logos[index] + ".svg"
 }
 
 function removeQuotes(value) {
-    return String(value).replace(/["']/g,'');
+    return String(value).replace(/["']/g, '')
 }
 
-function parseOsRelease(text){
-    var arrayResult = []
-    var textLineSplit = text.split('\n')
-    for (var i in textLineSplit)
-    {
-        switch (textLineSplit[i].split('=')[0]) {
-        case "NAME" :
-            arrayResult["name"]=removeQuotes(textLineSplit[i].split('=')[1])
+/**
+ * Parses the content of /etc/os-release.
+ * Returns {name, id, idLike, version}.
+ */
+function parseOsRelease(text) {
+    var result = { name: "", id: "tux", idLike: "", version: "" }
+    var lines = String(text).split('\n')
+
+    for (var i = 0; i < lines.length; ++i) {
+        var pos = lines[i].indexOf('=')
+        if (pos < 0)
+            continue
+        var key = lines[i].substring(0, pos)
+        var value = removeQuotes(lines[i].substring(pos + 1))
+        switch (key) {
+        case "NAME":
+            result.name = value
             break
-        case "ID" :
-            arrayResult["id"]=removeQuotes(textLineSplit[i].split('=')[1])
+        case "ID":
+            result.id = value
             break
-        case "VERSION" :
-            arrayResult["version"]=removeQuotes(textLineSplit[i].split('=')[1])
+        case "ID_LIKE":
+            result.idLike = value
+            break
+        case "VERSION":
+            result.version = value
             break
         }
     }
 
-    return arrayResult
+    return result
 }
 
-function getDistroInfo(callback, thisArg) {
-    var T
-    if (this === null)
-          throw new TypeError(' this is null or not defined');
-    if (typeof callback !== 'function')
-            throw new TypeError(callback + ' is not a function');
-    if (arguments.length > 1)
-          T = thisArg;
+/**
+ * Parses the output of `uname -sr` ("Linux 6.8.0-45-generic").
+ * Returns {name, version}.
+ */
+function parseKernelRelease(text) {
+    var parts = String(text).trim().split(' ')
+    var version = parts.length > 1 ? parts[1] : ""
+    var dash = version.indexOf('-')
 
-    var xhr = new XMLHttpRequest;
-    xhr.open("GET", "/etc/os-release");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            var arrayResult = parseOsRelease(xhr.responseText)
-            callback.call(T, arrayResult)
-        }
+    return {
+        name: parts[0] || "",
+        version: dash >= 0 ? version.substring(0, dash) : version
     }
-    xhr.send();
 }
 
-function parseKernelRelease(text){
-    var arrayResult = []
-    var textLineSplit =text.split(' ')
-    arrayResult["name"]=textLineSplit[0]
-    if (textLineSplit[2].indexOf('-')>=0)
-        textLineSplit[2]=textLineSplit[2].split('-')[0]
-    arrayResult["version"]=textLineSplit[2]
-
-    return arrayResult
+/**
+ * Parses the "cpu cores" line of /proc/cpuinfo. Returns 0 when unknown.
+ */
+function parseCpuCores(text) {
+    var match = /cpu cores\s*:\s*(\d+)/.exec(String(text))
+    return match ? parseInt(match[1]) : 0
 }
 
-function getKernelInfo(callback, thisArg) {
-    var T
-    if (this === null)
-          throw new TypeError(' this is null or not defined');
-    if (typeof callback !== 'function')
-            throw new TypeError(callback + ' is not a function');
-    if (arguments.length > 1)
-          T = thisArg;
+/**
+ * Shell command used to collect static system information.
+ * The three outputs are separated by a line with the separator below.
+ */
+var systemInfoSeparator = "@@simpleMonitor@@"
+var systemInfoCommand = "cat /etc/os-release; echo '" + systemInfoSeparator + "'; "
+                      + "uname -sr; echo '" + systemInfoSeparator + "'; "
+                      + "grep -m1 'cpu cores' /proc/cpuinfo"
 
-    var xhr = new XMLHttpRequest;
-    xhr.open("GET", "/proc/version");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            var arrayResult = parseKernelRelease(xhr.responseText)
-            callback.call(T, arrayResult)
-        }
+function parseSystemInfo(text) {
+    var sections = String(text).split(systemInfoSeparator)
+    return {
+        os: parseOsRelease(sections[0] || ""),
+        kernel: parseKernelRelease(sections[1] || ""),
+        cpuCores: parseCpuCores(sections[2] || "")
     }
-    xhr.send();
+}
+
+/**
+ * Picks the distribution id used to choose the logo: the os-release ID when
+ * there is a logo (or alias) for it, otherwise the first matching ID_LIKE.
+ */
+function resolveLogoId(os) {
+    var candidates = [os.id].concat(String(os.idLike).split(' '))
+    for (var i = 0; i < candidates.length; ++i) {
+        var id = candidates[i].toLowerCase()
+        if (logos.indexOf(id) >= 0 || logoAliases[id])
+            return id
+    }
+    return os.id
+}
+
+function toFahrenheit(celsius) {
+    return celsius * 9 / 5 + 32
 }
