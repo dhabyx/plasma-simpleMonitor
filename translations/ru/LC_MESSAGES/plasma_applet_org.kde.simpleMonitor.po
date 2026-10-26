@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 11:30-0300\n"
+"POT-Creation-Date: 2026-10-26 14:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,22 +23,22 @@ msgstr ""
 msgid "Swap:"
 msgstr "Подкачка:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:173
+#: ../plasmoid/contents/ui/SystemData.qml:175
 msgid "GPU:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/SystemData.qml:173
+#: ../plasmoid/contents/ui/SystemData.qml:175
 #: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
 #, fuzzy
 msgid "GPU %1:"
 msgstr "ЦПУ %1:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:216
+#: ../plasmoid/contents/ui/SystemData.qml:223
 #, fuzzy
 msgid "CPU avg:"
 msgstr "ЦПУ %1:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:223
+#: ../plasmoid/contents/ui/SystemData.qml:230
 #, fuzzy
 msgid "CPU max:"
 msgstr "ЦПУ %1:"
@@ -310,49 +310,53 @@ msgstr ""
 msgid "%1%"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:40
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:43
 #, fuzzy
 msgid "%1 Gbit/s"
 msgstr "%1 ГиБ"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:41
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:44
 msgid "%1 Mbit/s"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:42
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:45
 msgid "%1 kbit/s"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:43
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:46
 msgid "%1 bit/s"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:45
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:48
 #, fuzzy
 msgid "%1 GiB/s"
 msgstr "%1 ГиБ"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:46
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:49
 msgid "%1 MiB/s"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:47
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:50
 msgid "%1 KiB/s"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:48
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:51
 msgid "%1 B/s"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:63
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:68
 msgid "Net:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:71
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:73
+msgid "offline"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:84
 msgid "Down:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:83
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:96
 #, fuzzy
 msgid "Up:"
 msgstr "Время работы:"

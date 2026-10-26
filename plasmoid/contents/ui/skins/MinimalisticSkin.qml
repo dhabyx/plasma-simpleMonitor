@@ -153,6 +153,8 @@ BaseSkin {
             NetArea {
                 visible: root.showNetwork
                 down: root.netDown
+                iface: root.netIface
+                ip: root.netIp
                 up: root.netUp
                 scale: root.netScale
                 unit: root.netUnit

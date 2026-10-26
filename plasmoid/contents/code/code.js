@@ -111,6 +111,20 @@ function parseCpuCores(text) {
     return match ? parseInt(match[1]) : 0
 }
 
+// Route lookup for a public address: gives the interface and the local IP of
+// the connection in use, without sending any packet.
+var netRouteCommand = "ip -o route get 1.1.1.1"
+
+/**
+ * Parses the output of netRouteCommand. Returns {iface, ip}, both empty when
+ * there is no route.
+ */
+function parseNetRoute(text) {
+    var dev = /\bdev\s+(\S+)/.exec(String(text))
+    var src = /\bsrc\s+(\S+)/.exec(String(text))
+    return { iface: dev ? dev[1] : "", ip: src ? src[1] : "" }
+}
+
 function toFahrenheit(celsius) {
     return celsius * 9 / 5 + 32
 }

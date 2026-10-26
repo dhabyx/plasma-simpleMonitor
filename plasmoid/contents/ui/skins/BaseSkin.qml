@@ -56,6 +56,8 @@ Item {
     readonly property double netDown:        engine.netDown
     readonly property double netUp:          engine.netUp
     readonly property double netScale:       engine.netScale
+    readonly property string netIface:       engine.netIface
+    readonly property string netIp:          engine.netIp
 
     readonly property double uptime:         engine.uptime
 

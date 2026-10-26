@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 11:30-0300\n"
+"POT-Creation-Date: 2026-10-26 14:34-0300\n"
 "PO-Revision-Date: 2026-10-26 12:00-0300\n"
 "Last-Translator: Saulo Campos\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -23,20 +23,20 @@ msgstr ""
 msgid "Swap:"
 msgstr "Swap:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:173
+#: ../plasmoid/contents/ui/SystemData.qml:175
 msgid "GPU:"
 msgstr "GPU:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:173
+#: ../plasmoid/contents/ui/SystemData.qml:175
 #: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
 msgid "GPU %1:"
 msgstr "GPU %1:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:216
+#: ../plasmoid/contents/ui/SystemData.qml:223
 msgid "CPU avg:"
 msgstr "CPU média:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:223
+#: ../plasmoid/contents/ui/SystemData.qml:230
 msgid "CPU max:"
 msgstr "CPU máx.:"
 
@@ -300,47 +300,51 @@ msgstr "CPU:"
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:40
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:43
 msgid "%1 Gbit/s"
 msgstr "%1 Gbit/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:41
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:44
 msgid "%1 Mbit/s"
 msgstr "%1 Mbit/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:42
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:45
 msgid "%1 kbit/s"
 msgstr "%1 kbit/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:43
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:46
 msgid "%1 bit/s"
 msgstr "%1 bit/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:45
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:48
 msgid "%1 GiB/s"
 msgstr "%1 GiB/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:46
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:49
 msgid "%1 MiB/s"
 msgstr "%1 MiB/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:47
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:50
 msgid "%1 KiB/s"
 msgstr "%1 KiB/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:48
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:51
 msgid "%1 B/s"
 msgstr "%1 B/s"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:63
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:68
 msgid "Net:"
 msgstr "Rede:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:71
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:73
+msgid "offline"
+msgstr "offline"
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:84
 msgid "Down:"
 msgstr "Baixa:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:83
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:96
 msgid "Up:"
 msgstr "Sobe:"
 

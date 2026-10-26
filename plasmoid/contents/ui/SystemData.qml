@@ -79,6 +79,8 @@ QtObject {
     property double netDown: 0
     property double netUp: 0
     property double netScale: 1048576
+    readonly property string netIface: netInfo.iface
+    readonly property string netIp: netInfo.ip
 
     // Uptime, in seconds.
     property double uptime: 0
@@ -180,6 +182,11 @@ QtObject {
     property CpuInfo cpuInfo: CpuInfo {
         id: cpuInfo
         enabled: root.cpuTempMode === 0
+    }
+
+    property NetInfo netInfo: NetInfo {
+        id: netInfo
+        enabled: root.showNetwork
     }
 
     property Sensors.Sensor coreCountSensor: Sensors.Sensor {

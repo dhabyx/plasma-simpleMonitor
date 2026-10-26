@@ -30,6 +30,9 @@ Item {
     property double scale: 1048576
     // 0 = bytes per second, 1 = bits per second.
     property int unit: 0
+    // Interface in use and its IPv4 address; empty when offline.
+    property string iface: ""
+    property string ip: ""
 
     implicitWidth: netColumn.implicitWidth
     implicitHeight: netColumn.implicitHeight
@@ -59,10 +62,20 @@ Item {
         spacing: 2
         anchors.fill: parent
 
-        Text {
-            text: i18n("Net:")
-            font { family: doppioOneRegular.name; pointSize: 12 }
-            color: "#ffdd55"
+        RowLayout {
+            spacing: 6
+            Text {
+                text: i18n("Net:")
+                font { family: doppioOneRegular.name; pointSize: 12 }
+                color: "#ffdd55"
+            }
+            Text {
+                text: root.iface === "" ? i18n("offline") : root.iface + "  " + root.ip
+                color: "#aaffffff"
+                font.pointSize: 8
+                elide: Text.ElideRight
+                Layout.fillWidth: true
+            }
         }
 
         RowLayout {
