@@ -125,6 +125,26 @@ function parseNetRoute(text) {
     return { iface: dev ? dev[1] : "", ip: src ? src[1] : "" }
 }
 
+/**
+ * Command that pings host once. Returns "" when host is not a plain host
+ * name or address, because the command goes through a shell.
+ */
+function pingCommand(host) {
+    host = String(host).trim()
+    if (!/^[A-Za-z0-9][A-Za-z0-9.:-]*$/.test(host))
+        return ""
+    return "LC_ALL=C ping -n -c 1 -W 2 " + host
+}
+
+/**
+ * Round-trip time in milliseconds from the output of ping, or -1 when there
+ * was no reply.
+ */
+function parsePing(text) {
+    var match = /[=<]\s*([\d.]+)\s*ms/.exec(String(text))
+    return match ? parseFloat(match[1]) : -1
+}
+
 function toFahrenheit(celsius) {
     return celsius * 9 / 5 + 32
 }

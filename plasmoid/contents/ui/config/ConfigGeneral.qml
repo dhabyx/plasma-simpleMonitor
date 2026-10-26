@@ -35,6 +35,8 @@ KCM.SimpleKCM {
     property alias cfg_showSwap: showSwapCheckBox.checked
     property alias cfg_showUptime: showUptimeCheckBox.checked
     property alias cfg_showNetwork: showNetworkCheckBox.checked
+    property alias cfg_showPing: showPingCheckBox.checked
+    property alias cfg_pingHost: pingHostField.text
     property int cfg_netUnit
     property int cfg_tempUnit
     property int cfg_cpuTempMode
@@ -50,6 +52,8 @@ KCM.SimpleKCM {
     property bool cfg_showSwapDefault
     property bool cfg_showUptimeDefault
     property bool cfg_showNetworkDefault
+    property bool cfg_showPingDefault
+    property string cfg_pingHostDefault
     property int cfg_netUnitDefault
     property int cfg_cpuHighTempDefault
     property int cfg_cpuCritTempDefault
@@ -134,6 +138,19 @@ KCM.SimpleKCM {
             model: [i18n("Bytes per second"), i18n("Bits per second")]
             currentIndex: root.cfg_netUnit
             onActivated: root.cfg_netUnit = currentIndex
+        }
+
+        QQC2.CheckBox {
+            id: showPingCheckBox
+            enabled: showNetworkCheckBox.checked
+            text: i18n("Ping")
+        }
+
+        QQC2.TextField {
+            id: pingHostField
+            Kirigami.FormData.label: i18n("Host to ping:")
+            enabled: showNetworkCheckBox.checked && showPingCheckBox.checked
+            placeholderText: "1.1.1.1"
         }
 
         Item {

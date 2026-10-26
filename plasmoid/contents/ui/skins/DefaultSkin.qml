@@ -237,6 +237,8 @@ BaseSkin {
             down: root.netDown
             iface: root.netIface
             ip: root.netIp
+            showPing: root.showPing
+            pingMs: root.pingMs
             up: root.netUp
             scale: root.netScale
             unit: root.netUnit

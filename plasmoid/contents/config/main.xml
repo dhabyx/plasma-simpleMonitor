@@ -81,6 +81,14 @@
             <label>Show Network</label>
             <default>true</default>
         </entry>
+        <entry name="showPing" type="Bool">
+            <label>Show the ping to a host</label>
+            <default>false</default>
+        </entry>
+        <entry name="pingHost" type="String">
+            <label>Host to ping</label>
+            <default>1.1.1.1</default>
+        </entry>
         <entry name="netUnit" type="Enum">
             <label>Network speed unit</label>
             <choices>

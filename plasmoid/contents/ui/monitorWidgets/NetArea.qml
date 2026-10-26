@@ -33,6 +33,9 @@ Item {
     // Interface in use and its IPv4 address; empty when offline.
     property string iface: ""
     property string ip: ""
+    // Round-trip time in milliseconds, -1 without a reply.
+    property bool showPing: false
+    property double pingMs: -1
 
     implicitWidth: netColumn.implicitWidth
     implicitHeight: netColumn.implicitHeight
@@ -75,6 +78,18 @@ Item {
                 font.pointSize: 8
                 elide: Text.ElideRight
                 Layout.fillWidth: true
+            }
+            Text {
+                visible: root.showPing
+                text: i18n("Ping:")
+                font { family: doppioOneRegular.name; pointSize: 12 }
+                color: "#ffdd55"
+            }
+            Text {
+                visible: root.showPing
+                text: root.pingMs < 0 ? i18n("no reply") : i18n("%1 ms", Math.round(root.pingMs))
+                color: root.pingMs < 0 ? "#ff6655" : "white"
+                font.pointSize: 8
             }
         }
 

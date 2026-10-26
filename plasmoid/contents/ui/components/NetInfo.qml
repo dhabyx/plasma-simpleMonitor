@@ -22,7 +22,8 @@ import org.kde.plasma.plasma5support as Plasma5Support
 
 import "../../code/code.js" as Code
 
-// Name and IPv4 address of the interface that carries the default route.
+// Name and IPv4 address of the interface that carries the default route and,
+// optionally, the round-trip time to a host.
 QtObject {
     id: root
 
@@ -30,6 +31,12 @@ QtObject {
     property bool enabled: true
     property string iface: ""
     property string ip: ""
+
+    property bool pingEnabled: false
+    property string pingHost: ""
+    // Round-trip time in milliseconds, -1 without a reply.
+    property double pingMs: -1
+    readonly property string pingCommand: Code.pingCommand(pingHost)
 
     property Plasma5Support.DataSource source: Plasma5Support.DataSource {
         engine: "executable"
@@ -40,6 +47,16 @@ QtObject {
             var route = Code.parseNetRoute(data["stdout"] || "")
             root.iface = route.iface
             root.ip = route.ip
+        }
+    }
+
+    property Plasma5Support.DataSource pingSource: Plasma5Support.DataSource {
+        engine: "executable"
+        interval: 10000
+        connectedSources: root.pingEnabled && root.pingCommand !== "" ? [root.pingCommand] : []
+
+        onNewData: (sourceName, data) => {
+            root.pingMs = Code.parsePing(data["stdout"] || "")
         }
     }
 }

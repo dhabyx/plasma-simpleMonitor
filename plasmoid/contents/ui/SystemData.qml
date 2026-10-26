@@ -39,6 +39,8 @@ QtObject {
     readonly property bool showUptime:      Plasmoid.configuration.showUptime
     readonly property bool showNetwork:     Plasmoid.configuration.showNetwork
     readonly property int netUnit:          Plasmoid.configuration.netUnit
+    readonly property bool showPing:        Plasmoid.configuration.showPing
+    readonly property string pingHost:      Plasmoid.configuration.pingHost
     readonly property int tempUnit:         Plasmoid.configuration.tempUnit
     readonly property int cpuTempMode:      Plasmoid.configuration.cpuTempMode
     readonly property int cpuHighTemp:      Plasmoid.configuration.cpuHighTemp
@@ -81,6 +83,7 @@ QtObject {
     property double netScale: 1048576
     readonly property string netIface: netInfo.iface
     readonly property string netIp: netInfo.ip
+    readonly property double pingMs: netInfo.pingMs
 
     // Uptime, in seconds.
     property double uptime: 0
@@ -187,6 +190,8 @@ QtObject {
     property NetInfo netInfo: NetInfo {
         id: netInfo
         enabled: root.showNetwork
+        pingEnabled: root.showNetwork && root.showPing
+        pingHost: root.pingHost
     }
 
     property Sensors.Sensor coreCountSensor: Sensors.Sensor {

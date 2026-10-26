@@ -58,6 +58,8 @@ Item {
     readonly property double netScale:       engine.netScale
     readonly property string netIface:       engine.netIface
     readonly property string netIp:          engine.netIp
+    readonly property bool showPing:         engine.showPing
+    readonly property double pingMs:         engine.pingMs
 
     readonly property double uptime:         engine.uptime
 
