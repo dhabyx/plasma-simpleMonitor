@@ -24,90 +24,84 @@ var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "ar
             "linuxmint", "endeavouros", "pop", "zorin", "elementary", "nixos", "gentoo",
             "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali"]
 
-// Distributions without their own logo that are based on one that has it.
-var logoAliases = {
-    "cachyos": "arch",
-    "garuda": "arch",
-    "arcolinux": "arch",
-    "artix": "arch",
-    "neon": "kubuntu",
-    "opensuse-tumbleweed": "opensuse",
-    "opensuse-leap": "opensuse",
-    "opensuse-slowroll": "opensuse",
-    "sles": "opensuse"
+// Names (as found in the OS name, pretty name or LOGO icon of the system)
+// mapped to the bundled logos. Derivatives without their own logo use the
+// logo of the distribution they are based on.
+var aliases = {
+    "arch": "arch", "archlinux": "arch", "cachyos": "arch", "garuda": "arch",
+    "arcolinux": "arch", "artix": "arch", "endeavouros": "endeavouros",
+    "manjaro": "manjaro", "debian": "debian", "ubuntu": "ubuntu",
+    "kubuntu": "kubuntu", "neon": "kubuntu", "fedora": "fedora",
+    "opensuse": "opensuse", "suse": "opensuse", "sles": "opensuse",
+    "slackware": "slackware", "linuxmint": "linuxmint", "mint": "linuxmint",
+    "pop": "pop", "zorin": "zorin", "elementary": "elementary",
+    "nixos": "nixos", "gentoo": "gentoo", "alpine": "alpine", "void": "void",
+    "rocky": "rocky", "almalinux": "almalinux", "alma": "almalinux",
+    "redhat": "rhel", "rhel": "rhel", "centos": "centos", "kali": "kali"
 }
 
 /**
- * Returns the file name (inside contents/images) of the distribution logo.
- * logoId: 0 = detect from distroName, n > 0 = logos[n - 1].
+ * Tries to find a bundled logo for the running distribution.
+ * candidates: strings such as the OS name ("Ubuntu"), the pretty name or
+ * the LOGO icon name from os-release ("distributor-logo-fedora").
+ * Returns the logo key (e.g. "ubuntu") or "" if nothing matched.
  */
-function getStandardLogo(logoId, distroName) {
-    var name = (distroName || "tux").toLowerCase()
-    var index
-
-    if (!logoId || logoId < 0) {
-        name = logoAliases[name] || name
-        index = logos.indexOf(name)
-        if (index === -1)
-            index = 0
-    } else {
-        index = (logoId - 1 < logos.length) ? logoId - 1 : 0
-    }
-
-    return "distro-" + logos[index] + ".svg"
-}
-
-function removeQuotes(value) {
-    return String(value).replace(/["']/g, '')
-}
-
-/**
- * Parses the content of /etc/os-release.
- * Returns {name, id, idLike, version}.
- */
-function parseOsRelease(text) {
-    var result = { name: "", id: "tux", idLike: "", version: "" }
-    var lines = String(text).split('\n')
-
-    for (var i = 0; i < lines.length; ++i) {
-        var pos = lines[i].indexOf('=')
-        if (pos < 0)
+function detectDistro(candidates) {
+    for (var i = 0; i < candidates.length; ++i) {
+        var c = String(candidates[i] || "").toLowerCase().trim()
+        if (c === "")
             continue
-        var key = lines[i].substring(0, pos)
-        var value = removeQuotes(lines[i].substring(pos + 1))
-        switch (key) {
-        case "NAME":
-            result.name = value
-            break
-        case "ID":
-            result.id = value
-            break
-        case "ID_LIKE":
-            result.idLike = value
-            break
-        case "VERSION":
-            result.version = value
-            break
+        // "Arch Linux", "distributor-logo-fedora", "Pop!_OS 24.04", "Red Hat Enterprise Linux"
+        var tokens = c.split(/[^a-z0-9]+/)
+        var compact = c.replace(/[^a-z0-9]/g, "")
+        tokens.push(compact)
+        for (var t = 0; t < tokens.length; ++t) {
+            if (aliases.hasOwnProperty(tokens[t]))
+                return aliases[tokens[t]]
+        }
+        for (var key in aliases) {
+            if (key.length >= 5 && compact.indexOf(key) === 0)
+                return aliases[key]
         }
     }
-
-    return result
+    return ""
 }
 
 /**
- * Parses the output of `uname -sr` ("Linux 6.8.0-45-generic").
- * Returns {name, version}.
+ * Returns the file name (inside contents/images) of the bundled logo to use,
+ * or "" if none fits. logoId: 0 = automatic, n > 0 = logos[n - 1].
  */
-function parseKernelRelease(text) {
-    var parts = String(text).trim().split(' ')
-    var version = parts.length > 1 ? parts[1] : ""
-    var dash = version.indexOf('-')
-
-    return {
-        name: parts[0] || "",
-        version: dash >= 0 ? version.substring(0, dash) : version
-    }
+function logoFile(logoId, distroKey) {
+    if (logoId > 0 && logoId <= logos.length)
+        return "distro-" + logos[logoId - 1] + ".svg"
+    if (distroKey && logos.indexOf(distroKey) !== -1)
+        return "distro-" + distroKey + ".svg"
+    return ""
 }
+
+/** Same as logoFile() but falls back to Tux. */
+function getStandardLogo(logoId, distroKey) {
+    return logoFile(logoId, distroKey) || "distro-tux.svg"
+}
+
+/** Shortens "7.0.0-38-generic" to "7.0.0". */
+function shortKernelVersion(version) {
+    var v = String(version || "")
+    var dash = v.indexOf('-')
+    return dash > 0 ? v.substring(0, dash) : v
+}
+
+/** Number() that maps undefined/NaN to a fallback. */
+function num(value, fallback) {
+    var n = Number(value)
+    return (value === undefined || value === null || isNaN(n)) ? fallback : n
+}
+
+/**
+ * Shell command used to find the number of physical CPU cores (the sensors
+ * only know about logical CPUs).
+ */
+var cpuCoresCommand = "grep -m1 'cpu cores' /proc/cpuinfo"
 
 /**
  * Parses the "cpu cores" line of /proc/cpuinfo. Returns 0 when unknown.
@@ -115,38 +109,6 @@ function parseKernelRelease(text) {
 function parseCpuCores(text) {
     var match = /cpu cores\s*:\s*(\d+)/.exec(String(text))
     return match ? parseInt(match[1]) : 0
-}
-
-/**
- * Shell command used to collect static system information.
- * The three outputs are separated by a line with the separator below.
- */
-var systemInfoSeparator = "@@simpleMonitor@@"
-var systemInfoCommand = "cat /etc/os-release; echo '" + systemInfoSeparator + "'; "
-                      + "uname -sr; echo '" + systemInfoSeparator + "'; "
-                      + "grep -m1 'cpu cores' /proc/cpuinfo"
-
-function parseSystemInfo(text) {
-    var sections = String(text).split(systemInfoSeparator)
-    return {
-        os: parseOsRelease(sections[0] || ""),
-        kernel: parseKernelRelease(sections[1] || ""),
-        cpuCores: parseCpuCores(sections[2] || "")
-    }
-}
-
-/**
- * Picks the distribution id used to choose the logo: the os-release ID when
- * there is a logo (or alias) for it, otherwise the first matching ID_LIKE.
- */
-function resolveLogoId(os) {
-    var candidates = [os.id].concat(String(os.idLike).split(' '))
-    for (var i = 0; i < candidates.length; ++i) {
-        var id = candidates[i].toLowerCase()
-        if (logos.indexOf(id) >= 0 || logoAliases[id])
-            return id
-    }
-    return os.id
 }
 
 function toFahrenheit(celsius) {

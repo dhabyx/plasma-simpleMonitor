@@ -41,7 +41,6 @@ Item {
     readonly property double updateInterval: engine.updateInterval
 
     readonly property string distroName:     engine.distroName
-    readonly property string distroId:       engine.distroId
     readonly property string distroVersion:  engine.distroVersion
     readonly property string kernelName:     engine.kernelName
     readonly property string kernelVersion:  engine.kernelVersion

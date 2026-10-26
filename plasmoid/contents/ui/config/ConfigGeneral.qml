@@ -22,8 +22,8 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
+import org.kde.ksysguard.sensors as Sensors
 
-import "../components"
 import "../../code/code.js" as Code
 
 KCM.SimpleKCM {
@@ -37,6 +37,7 @@ KCM.SimpleKCM {
     property alias cfg_showNetwork: showNetworkCheckBox.checked
     property int cfg_netUnit
     property int cfg_tempUnit
+    property int cfg_cpuTempMode
     property alias cfg_cpuHighTemp: cpuHighTempSpinBox.value
     property alias cfg_cpuCritTemp: cpuCritTempSpinBox.value
 
@@ -44,6 +45,7 @@ KCM.SimpleKCM {
     property int cfg_logoDefault
     property int cfg_bgColorDefault
     property int cfg_tempUnitDefault
+    property int cfg_cpuTempModeDefault
     property bool cfg_showGpuTempDefault
     property bool cfg_showSwapDefault
     property bool cfg_showUptimeDefault
@@ -52,9 +54,11 @@ KCM.SimpleKCM {
     property int cfg_cpuHighTempDefault
     property int cfg_cpuCritTempDefault
 
-    SystemInfo {
-        id: systemInfo
-    }
+    // Used to preview the logo of the "Default" choice.
+    Sensors.Sensor { id: osNameSensor; sensorId: "os/system/name" }
+    Sensors.Sensor { id: osPrettyNameSensor; sensorId: "os/system/prettyName" }
+    Sensors.Sensor { id: osLogoSensor; sensorId: "os/system/logo" }
+    readonly property string distroKey: Code.detectDistro([osLogoSensor.value, osNameSensor.value, osPrettyNameSensor.value])
 
     Kirigami.FormLayout {
         QQC2.ComboBox {
@@ -69,7 +73,7 @@ KCM.SimpleKCM {
 
         Image {
             Kirigami.FormData.label: ""
-            source: Qt.resolvedUrl("../../images/" + Code.getStandardLogo(root.cfg_logo, systemInfo.distroId))
+            source: Qt.resolvedUrl("../../images/" + Code.getStandardLogo(root.cfg_logo, root.distroKey))
             sourceSize.height: 100
             fillMode: Image.PreserveAspectFit
         }
@@ -161,6 +165,13 @@ KCM.SimpleKCM {
             text: i18n("Fahrenheit °F")
             checked: root.cfg_tempUnit === 1
             onToggled: root.cfg_tempUnit = 1
+        }
+
+        QQC2.ComboBox {
+            Kirigami.FormData.label: i18n("CPU temperature:")
+            model: [i18n("Per core"), i18n("Average"), i18n("Maximum")]
+            currentIndex: root.cfg_cpuTempMode
+            onActivated: root.cfg_cpuTempMode = currentIndex
         }
 
         QQC2.SpinBox {

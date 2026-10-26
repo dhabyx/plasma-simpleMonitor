@@ -45,6 +45,14 @@ PlasmoidItem {
         id: sys
     }
 
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: sys.logoEditMode ? i18n("Lock image scaling") : i18n("Unlock image scaling")
+            icon.name: sys.logoEditMode ? "object-locked" : "transform-scale"
+            onTriggered: sys.logoEditMode = !sys.logoEditMode
+        }
+    ]
+
     fullRepresentation: Rectangle {
         id: background
 

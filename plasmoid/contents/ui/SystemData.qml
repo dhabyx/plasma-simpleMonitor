@@ -23,6 +23,7 @@ import org.kde.plasma.plasmoid
 import org.kde.ksysguard.sensors as Sensors
 
 import "components"
+import "../code/code.js" as Code
 
 // Collects every value shown by the skins and exposes it through simple
 // properties and list models, so the skins don't depend on the sensors API.
@@ -39,6 +40,7 @@ QtObject {
     readonly property bool showNetwork:     Plasmoid.configuration.showNetwork
     readonly property int netUnit:          Plasmoid.configuration.netUnit
     readonly property int tempUnit:         Plasmoid.configuration.tempUnit
+    readonly property int cpuTempMode:      Plasmoid.configuration.cpuTempMode
     readonly property int cpuHighTemp:      Plasmoid.configuration.cpuHighTemp
     readonly property int cpuCritTemp:      Plasmoid.configuration.cpuCritTemp
     readonly property bool coloredCpuLoad:  Plasmoid.configuration.coloredCpuLoad
@@ -50,12 +52,19 @@ QtObject {
     onLogoScaleChanged: if (logoScale !== Plasmoid.configuration.logoScale)
                             Plasmoid.configuration.logoScale = logoScale
 
-    // Static system information.
-    readonly property string distroName:    sysInfo.distroName
-    readonly property string distroId:      sysInfo.distroId
-    readonly property string distroVersion: sysInfo.distroVersion
-    readonly property string kernelName:    sysInfo.kernelName
-    readonly property string kernelVersion: sysInfo.kernelVersion
+    // Toggled from the context menu of the widget: shows the resize handle on the logo.
+    property bool logoEditMode: false
+
+    // Operating system and kernel, from the sensors.
+    readonly property string distroName:    String(osNameSensor.value || "")
+    readonly property string distroVersion: String(osVersionSensor.value || "")
+    readonly property string distroPrettyName: String(osPrettyNameSensor.value || "")
+    // Icon name of the logo shipped by the distribution (LOGO= in os-release).
+    readonly property string osLogoIcon:    String(osLogoSensor.value || "")
+    readonly property string kernelName:    String(kernelNameSensor.value || "Linux")
+    readonly property string kernelVersion: Code.shortKernelVersion(kernelVersionSensor.value)
+    // Key of the bundled logo matching the distribution, "" if there is none.
+    readonly property string distroKey: Code.detectDistro([osLogoIcon, distroName, distroPrettyName])
 
     // Memory, in GiB.
     property double memTotal: 0
@@ -90,10 +99,11 @@ QtObject {
     readonly property int cpuCount: Math.max(0, Math.round(coreCountSensor.value || 0))
     // Logical CPUs expose one temperature each; hyper-threading siblings
     // repeat the value of their core, so only show one entry per physical core.
-    readonly property int tempCount: sysInfo.cpuCores > 0 ? Math.min(sysInfo.cpuCores, cpuCount) : cpuCount
+    readonly property int tempCount: cpuInfo.cpuCores > 0 ? Math.min(cpuInfo.cpuCores, cpuCount) : cpuCount
 
-    // Maximum number of GPUs probed.
-    readonly property int gpuProbeCount: 4
+    // Highest GPU index probed (gpu/gpu0 ... gpu/gpuN). ksystemstats numbers
+    // the GPUs after their DRM card, so the indices can have gaps.
+    readonly property int gpuProbeCount: 8
 
     readonly property int intervalMs: Math.max(100, Math.round(updateInterval * 1000))
 
@@ -118,21 +128,59 @@ QtObject {
         avgTemp = _tempSum / coreTempModel.count
     }
 
-    function setGpuTemp(index, value) {
+    // Average/maximum modes show a single row that is fed by one sensor.
+    function setSingleTemp(label, value) {
+        ensureRows(coreTempModel, 1, { val: 0, dataUnits: "°C", coreLabelStr: "" })
+        coreTempModel.setProperty(0, "val", value)
+        coreTempModel.setProperty(0, "coreLabelStr", label)
+        avgTemp = value
+    }
+
+    onCpuTempModeChanged: {
+        coreTempModel.clear()
+        _tempSum = 0
+        avgTemp = 0
+    }
+
+    function gpuRow(index) {
         for (var i = 0; i < gpuTempModel.count; ++i) {
-            if (gpuTempModel.get(i).gpuIndex === index) {
-                gpuTempModel.setProperty(i, "val", value)
-                return
-            }
+            if (gpuTempModel.get(i).gpuIndex === index)
+                return i
         }
-        gpuTempModel.append({ gpuIndex: index, val: value, dataUnits: "°C", gpuLabelStr: "" })
+        return -1
+    }
+
+    // Sets or removes (value is not a valid temperature) the row of a GPU.
+    function setGpuTemp(index, value) {
+        var row = gpuRow(index)
+        var available = isNumber(value) && value > 0
+        if (available && row >= 0) {
+            gpuTempModel.setProperty(row, "val", value)
+            return
+        }
+        if (available)
+            gpuTempModel.append({ gpuIndex: index, val: value, dataUnits: "°C", gpuLabelStr: "" })
+        else if (row >= 0)
+            gpuTempModel.remove(row)
+        else
+            return
+        updateGpuLabels()
+    }
+
+    function updateGpuLabels() {
+        var single = gpuTempModel.count === 1
+        for (var i = 0; i < gpuTempModel.count; ++i)
+            gpuTempModel.setProperty(i, "gpuLabelStr", single ? i18n("GPU:") : i18n("GPU %1:", i))
     }
 
     function isNumber(value) {
         return typeof value === "number" && isFinite(value)
     }
 
-    property SystemInfo sysInfo: SystemInfo { id: sysInfo }
+    property CpuInfo cpuInfo: CpuInfo {
+        id: cpuInfo
+        enabled: root.cpuTempMode === 0
+    }
 
     property Sensors.Sensor coreCountSensor: Sensors.Sensor {
         sensorId: "cpu/all/coreCount"
@@ -151,13 +199,28 @@ QtObject {
 
     // CPU temperatures.
     property Instantiator cpuTempSensors: Instantiator {
-        model: root.tempCount
+        model: root.cpuTempMode === 0 ? root.tempCount : 0
         delegate: Sensors.Sensor {
             required property int index
             sensorId: "cpu/cpu" + index + "/temperature"
             updateRateLimit: root.intervalMs
             onValueChanged: if (root.isNumber(value) && value > 0) root.setCoreTemp(index, value)
         }
+    }
+
+    property Sensors.Sensor cpuAvgTempSensor: Sensors.Sensor {
+        sensorId: "cpu/all/averageTemperature"
+        enabled: root.cpuTempMode === 1
+        updateRateLimit: root.intervalMs
+        onValueChanged: if (root.cpuTempMode === 1 && root.isNumber(value) && value > 0)
+                            root.setSingleTemp(i18n("CPU avg:"), value)
+    }
+    property Sensors.Sensor cpuMaxTempSensor: Sensors.Sensor {
+        sensorId: "cpu/all/maximumTemperature"
+        enabled: root.cpuTempMode === 2
+        updateRateLimit: root.intervalMs
+        onValueChanged: if (root.cpuTempMode === 2 && root.isNumber(value) && value > 0)
+                            root.setSingleTemp(i18n("CPU max:"), value)
     }
 
     // GPU temperatures.
@@ -167,9 +230,18 @@ QtObject {
             required property int index
             sensorId: "gpu/gpu" + index + "/temperature"
             updateRateLimit: root.intervalMs
-            onValueChanged: if (root.isNumber(value) && value > 0) root.setGpuTemp(index, value)
+            onValueChanged: root.setGpuTemp(index, value)
+            Component.onDestruction: root.setGpuTemp(index, NaN)
         }
     }
+
+    // Operating system and kernel. They don't change while running.
+    property Sensors.Sensor osNameSensor: Sensors.Sensor { sensorId: "os/system/name" }
+    property Sensors.Sensor osVersionSensor: Sensors.Sensor { sensorId: "os/system/version" }
+    property Sensors.Sensor osPrettyNameSensor: Sensors.Sensor { sensorId: "os/system/prettyName" }
+    property Sensors.Sensor osLogoSensor: Sensors.Sensor { sensorId: "os/system/logo" }
+    property Sensors.Sensor kernelNameSensor: Sensors.Sensor { sensorId: "os/kernel/name" }
+    property Sensors.Sensor kernelVersionSensor: Sensors.Sensor { sensorId: "os/kernel/version" }
 
     property Sensors.Sensor memTotalSensor: Sensors.Sensor {
         sensorId: "memory/physical/total"

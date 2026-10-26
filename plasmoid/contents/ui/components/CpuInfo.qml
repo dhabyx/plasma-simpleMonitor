@@ -22,31 +22,22 @@ import org.kde.plasma.plasma5support as Plasma5Support
 
 import "../../code/code.js" as Code
 
-// Static information about the system (distribution, kernel, CPU cores).
+// Number of physical CPU cores. The sensors only report logical CPUs, so
+// hyper-threading siblings can't be told apart without /proc/cpuinfo.
 QtObject {
     id: root
 
-    property string distroName: "tux"
-    property string distroId: "tux"
-    property string distroVersion: ""
-    property string kernelName: ""
-    property string kernelVersion: ""
+    // Nothing is run while disabled.
+    property bool enabled: true
     property int cpuCores: 0
 
     property Plasma5Support.DataSource source: Plasma5Support.DataSource {
         engine: "executable"
-        connectedSources: [Code.systemInfoCommand]
+        connectedSources: root.enabled ? [Code.cpuCoresCommand] : []
 
         onNewData: (sourceName, data) => {
-            if (data["exit code"] !== undefined && data["stdout"]) {
-                var info = Code.parseSystemInfo(data["stdout"])
-                root.distroName = info.os.name || "tux"
-                root.distroId = Code.resolveLogoId(info.os)
-                root.distroVersion = info.os.version
-                root.kernelName = info.kernel.name
-                root.kernelVersion = info.kernel.version
-                root.cpuCores = info.cpuCores
-            }
+            if (data["stdout"])
+                root.cpuCores = Code.parseCpuCores(data["stdout"])
             disconnectSource(sourceName)
         }
     }

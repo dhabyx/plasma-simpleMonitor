@@ -49,7 +49,11 @@ ColumnLayout {
         Layout.fillHeight: false
         Layout.alignment: Qt.AlignCenter
 
-        image.source: Qt.resolvedUrl("../../images/" + Code.getStandardLogo(root.engine.logo, root.engine.distroId))
+        // Bundled logo; without one, the logo icon of the distribution, then Tux.
+        readonly property string file: Code.logoFile(root.engine.logo, root.engine.distroKey)
+        iconName: file === "" ? root.engine.osLogoIcon : ""
+        image.source: Qt.resolvedUrl("../../images/" + (file || "distro-tux.svg"))
+        editMode: root.engine.logoEditMode
 
         fillScale: root.engine.logoScale
         onFillScaleChanged: if (fillScale !== root.engine.logoScale) root.engine.logoScale = fillScale
@@ -57,7 +61,6 @@ ColumnLayout {
 
     OsInfoItem {
         distroName: root.engine.distroName
-        distroId: root.engine.distroId
         distroVersion: root.engine.distroVersion
         kernelName: root.engine.kernelName
         kernelVersion: root.engine.kernelVersion

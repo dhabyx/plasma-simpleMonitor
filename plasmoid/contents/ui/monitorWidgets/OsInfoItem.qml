@@ -23,8 +23,7 @@ import QtQuick.Layouts
 
 Item {
     id: root
-    property string distroName: "tux"
-    property string distroId: "tux"
+    property string distroName: ""
     property string distroVersion: ""
 
     property string kernelName: ""

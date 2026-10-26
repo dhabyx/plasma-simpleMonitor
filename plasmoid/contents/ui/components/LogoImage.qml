@@ -18,12 +18,14 @@
  **/
 
 import QtQuick
-import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root
 
     property real fillScale: 1.0
+    // Name of a theme icon shown instead of the image (when not empty).
+    property string iconName: ""
     property bool editMode: false
     property alias image: image
 
@@ -39,15 +41,24 @@ Item {
         property real scale: 1.0
     }
 
-    implicitWidth: image.implicitWidth
-    implicitHeight: image.implicitHeight
+    implicitWidth: iconName !== "" ? 128 : image.implicitWidth
+    implicitHeight: iconName !== "" ? 128 : image.implicitHeight
 
     Image {
         id: image
+        visible: root.iconName === ""
         anchors.centerIn: parent
         width: parent.width * d.scale
         height: parent.height * d.scale
         fillMode: Image.PreserveAspectFit
+    }
+
+    Kirigami.Icon {
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height) * d.scale
+        height: width
+        visible: root.iconName !== ""
+        source: root.iconName
     }
 
     // Frame and handle shown while the scale of the logo can be changed.
@@ -82,21 +93,6 @@ Item {
                     }
                 }
             }
-        }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.RightButton
-        onClicked: logoMenu.popup()
-    }
-
-    QQC2.Menu {
-        id: logoMenu
-
-        QQC2.MenuItem {
-            text: root.editMode ? i18n("Lock image scaling") : i18n("Unlock image scaling")
-            onTriggered: root.editMode = !root.editMode
         }
     }
 }
