@@ -106,7 +106,7 @@ ListView {
                                        : Math.floor(itemElement.val / 100 * (parent.width - 5)))
 
                     Rectangle {
-                        // Load colour gradient (yellow to red) spanning the whole bar; rectValue crops it.
+                        // Load colour gradient (green to red) spanning the whole bar; rectValue crops it.
                         // Gradient stops don't follow LayoutMirroring, so mirror them by hand.
                         id: bgGradient
                         readonly property bool mirrored: LayoutMirroring.enabled
@@ -115,8 +115,8 @@ ListView {
                         width: progressBar.width
                         gradient: Gradient {
                             orientation: Gradient.Horizontal
-                            GradientStop { position: bgGradient.mirrored ? 1.00 : 0.00; color: cpuListView.coloredCpuLoad ? "#ffdd55" : "#993de515" }
-                            GradientStop { position: 0.50; color: cpuListView.coloredCpuLoad ? "#ff9a2e" : "#4dffffff" }
+                            GradientStop { position: bgGradient.mirrored ? 1.00 : 0.00; color: cpuListView.coloredCpuLoad ? "#7ec264" : "#993de515" }
+                            GradientStop { position: 0.50; color: cpuListView.coloredCpuLoad ? "#ffdd55" : "#4dffffff" }
                             GradientStop { position: bgGradient.mirrored ? 0.00 : 1.00; color: cpuListView.coloredCpuLoad ? "red" : "#4dffffff" }
                         }
                     }
