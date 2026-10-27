@@ -76,14 +76,30 @@ ListView {
         }
 
         Rectangle {
+            // Cropped view of the temperature gradient; grows from the start edge.
+            id: tempBar
             anchors.top: coreLabel.bottom
             anchors.topMargin: 1
-            anchors.right: parent.right
+            anchors.left: parent.left
             height: 11
             width: Math.max(0, Math.min(parent.width, Math.floor(coreListTemp.val / coreTempList.criticalTemp * parent.width)))
-            color: coreListTemp.val >= coreTempList.criticalTemp ? "red"
-                 : coreListTemp.val >= coreTempList.highTemp ? "#ffac2a"
-                 : "#85a9ff"
+            color: "transparent"
+            clip: true
+
+            Rectangle {
+                // Blue to red gradient spanning the whole bar; tempBar crops it.
+                // Gradient stops don't follow LayoutMirroring, so mirror them by hand.
+                id: tempGradient
+                readonly property bool mirrored: LayoutMirroring.enabled
+                anchors.left: parent.left
+                height: tempBar.height
+                width: coreListTemp.width
+                gradient: Gradient {
+                    orientation: Gradient.Horizontal
+                    GradientStop { position: tempGradient.mirrored ? 1.00 : 0.00; color: "#85a9ff" }
+                    GradientStop { position: tempGradient.mirrored ? 0.00 : 1.00; color: "red" }
+                }
+            }
         }
     }
 }
