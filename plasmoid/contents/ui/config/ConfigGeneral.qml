@@ -100,6 +100,9 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: ""
             implicitWidth: 100
             implicitHeight: 100
+            // The widget is normally viewed on a dark background. Keep white
+            // or pale logos legible in the configuration preview as well.
+            Rectangle { anchors.fill: parent; z: -1; color: "#30343a"; radius: 4 }
             readonly property bool custom: root.cfg_logo === Code.logos.length + 1
             readonly property string file: Code.logoFile(custom ? 0 : root.cfg_logo, root.distroKey)
             iconName: root.cfg_logo === 0 ? String(osLogoSensor.value || "") : ""

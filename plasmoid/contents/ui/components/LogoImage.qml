@@ -52,6 +52,10 @@ Item {
         anchors.centerIn: parent
         width: parent.width * d.scale
         height: parent.height * d.scale
+        // SVGs can have a 24 px intrinsic size. Rasterize at a fixed high
+        // resolution so the widget and configuration preview stay sharp.
+        sourceSize.width: 256
+        sourceSize.height: 256
         fillMode: Image.PreserveAspectFit
     }
 
@@ -60,6 +64,10 @@ Item {
         anchors.centerIn: parent
         width: parent.width * d.scale
         height: parent.height * d.scale
+        // SVGs can have a 24 px intrinsic size. Rasterize at a fixed high
+        // resolution so the widget and configuration preview stay sharp.
+        sourceSize.width: 256
+        sourceSize.height: 256
         fillMode: Image.PreserveAspectFit
         source: root.fallbackSource
         visible: !root.useIcon && image.status !== Image.Ready

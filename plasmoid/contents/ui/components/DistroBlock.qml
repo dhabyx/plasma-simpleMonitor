@@ -41,8 +41,11 @@ ColumnLayout {
     LogoImage {
         id: distroLogo
 
-        Layout.minimumWidth: (implicitWidth < implicitHeight) ? 100 * implicitWidth / implicitHeight : 100
-        Layout.minimumHeight: (implicitHeight < implicitWidth) ? 100 * implicitHeight / implicitWidth : 100
+        // Fit landscape logos into a 160x100 area without enlarging the skin.
+        // Square logos remain 100x100; preserve aspect ratio for all shapes.
+        readonly property real aspect: implicitHeight > 0 ? implicitWidth / implicitHeight : 1
+        Layout.minimumWidth: Math.min(160, 100 * aspect)
+        Layout.minimumHeight: Math.min(100, 160 / aspect)
         Layout.preferredWidth: Layout.minimumWidth
         Layout.preferredHeight: Layout.minimumHeight
         Layout.fillWidth: true

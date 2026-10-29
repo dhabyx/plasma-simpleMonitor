@@ -67,7 +67,9 @@ Automatic mode prefers the distribution icon installed in the current icon
 theme, then a bundled logo, then Tux. Explicit choices keep their saved indices.
 Choose Custom in the widget settings and select a local SVG or PNG; if the file
 is missing or cannot be loaded, the matching bundled logo or Tux is shown. The
-file remains in its original location, so keep it there. No network download
+file remains in its original location, so keep it there. SVGs are rendered at
+higher resolution for a sharp preview and widget; wide logos can use up to
+160 × 100 pixels while preserving their proportions. No network download
 is performed. Source and trademark information for bundled artwork is recorded
 in [LOGO-SOURCES.md](LOGO-SOURCES.md).
 
