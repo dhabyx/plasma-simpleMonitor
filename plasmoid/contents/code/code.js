@@ -19,131 +19,132 @@
 
 .pragma library
 
-var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian"]
+// Order matters: the logo selector in the configuration uses index + 1.
+var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian",
+            "linuxmint", "endeavouros", "pop", "zorin", "elementary", "nixos", "gentoo",
+            "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali"]
 
-var k10Cores = new Set();
+// Names (as found in the OS name, pretty name or LOGO icon of the system)
+// mapped to the bundled logos. Derivatives without their own logo use the
+// logo of the distribution they are based on.
+var aliases = {
+    "arch": "arch", "archlinux": "arch", "cachyos": "arch", "garuda": "arch",
+    "arcolinux": "arch", "artix": "arch", "endeavouros": "endeavouros",
+    "manjaro": "manjaro", "debian": "debian", "ubuntu": "ubuntu",
+    "kubuntu": "kubuntu", "neon": "kubuntu", "fedora": "fedora",
+    "opensuse": "opensuse", "suse": "opensuse", "sles": "opensuse",
+    "slackware": "slackware", "linuxmint": "linuxmint", "mint": "linuxmint",
+    "pop": "pop", "zorin": "zorin", "elementary": "elementary",
+    "nixos": "nixos", "gentoo": "gentoo", "alpine": "alpine", "void": "void",
+    "rocky": "rocky", "almalinux": "almalinux", "alma": "almalinux",
+    "redhat": "rhel", "rhel": "rhel", "centos": "centos", "kali": "kali"
+}
 
-function k10CoreIndex(k10Core) {
-    k10Cores.add(k10Core);
-    let i = 0;
-    for(let item of k10Cores.values()) {
-        if(item == k10Core) {
-            return i;
+/**
+ * Tries to find a bundled logo for the running distribution.
+ * candidates: strings such as the OS name ("Ubuntu"), the pretty name or
+ * the LOGO icon name from os-release ("distributor-logo-fedora").
+ * Returns the logo key (e.g. "ubuntu") or "" if nothing matched.
+ */
+function detectDistro(candidates) {
+    for (var i = 0; i < candidates.length; ++i) {
+        var c = String(candidates[i] || "").toLowerCase().trim()
+        if (c === "")
+            continue
+        // "Arch Linux", "distributor-logo-fedora", "Pop!_OS 24.04", "Red Hat Enterprise Linux"
+        var tokens = c.split(/[^a-z0-9]+/)
+        var compact = c.replace(/[^a-z0-9]/g, "")
+        tokens.push(compact)
+        for (var t = 0; t < tokens.length; ++t) {
+            if (aliases.hasOwnProperty(tokens[t]))
+                return aliases[tokens[t]]
         }
-        ++i;
-    }
-    return -1;
-}
-
-var k10Cores = new Set();
-
-function k10CoreIndex(k10Core) {
-    k10Cores.add(k10Core);
-    let i = 0;
-    for(let item of k10Cores.values()) {
-        if(item == k10Core) {
-            return i;
-        }
-        ++i;
-    }
-    return -1;
-}
-
-function getStandardLogo(logoId, distroName) {
-    if (typeof distroName === 'undefined')
-        distroName = "tux"
-    // logoId = 0 - default logo
-    // distroId - id of default distr logo
-    distroName = distroName.toLowerCase()
-    if (logoId < 0)
-        logoId = 0
-
-    if (logoId === 0) {
-        logoId = logos.indexOf(distroName);
-        if (logoId === -1)
-            logoId = 0
-    } else {
-        if (logos.length > logoId - 1)
-            logoId -= 1
-        else
-            logoId = 0
-    }
-
-    return "../images/distro-" + logos[logoId] + ".svg"
-}
-
-function removeQuotes(value) {
-    return String(value).replace(/["']/g,'');
-}
-
-function parseOsRelease(text){
-    var arrayResult = []
-    var textLineSplit = text.split('\n')
-    for (var i in textLineSplit)
-    {
-        switch (textLineSplit[i].split('=')[0]) {
-        case "NAME" :
-            arrayResult["name"]=removeQuotes(textLineSplit[i].split('=')[1])
-            break
-        case "ID" :
-            arrayResult["id"]=removeQuotes(textLineSplit[i].split('=')[1])
-            break
-        case "VERSION" :
-            arrayResult["version"]=removeQuotes(textLineSplit[i].split('=')[1])
-            break
+        for (var key in aliases) {
+            if (key.length >= 5 && compact.indexOf(key) === 0)
+                return aliases[key]
         }
     }
-
-    return arrayResult
+    return ""
 }
 
-function getDistroInfo(callback, thisArg) {
-    var T
-    if (this === null)
-          throw new TypeError(' this is null or not defined');
-    if (typeof callback !== 'function')
-            throw new TypeError(callback + ' is not a function');
-    if (arguments.length > 1)
-          T = thisArg;
-
-    var xhr = new XMLHttpRequest;
-    xhr.open("GET", "/etc/os-release");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            var arrayResult = parseOsRelease(xhr.responseText)
-            callback.call(T, arrayResult)
-        }
-    }
-    xhr.send();
+/**
+ * Returns the file name (inside contents/images) of the bundled logo to use,
+ * or "" if none fits. logoId: 0 = automatic, n > 0 = logos[n - 1].
+ */
+function logoFile(logoId, distroKey) {
+    if (logoId > 0 && logoId <= logos.length)
+        return "distro-" + logos[logoId - 1] + ".svg"
+    if (distroKey && logos.indexOf(distroKey) !== -1)
+        return "distro-" + distroKey + ".svg"
+    return ""
 }
 
-function parseKernelRelease(text){
-    var arrayResult = []
-    var textLineSplit =text.split(' ')
-    arrayResult["name"]=textLineSplit[0]
-    if (textLineSplit[2].indexOf('-')>=0)
-        textLineSplit[2]=textLineSplit[2].split('-')[0]
-    arrayResult["version"]=textLineSplit[2]
-
-    return arrayResult
+/** Same as logoFile() but falls back to Tux. */
+function getStandardLogo(logoId, distroKey) {
+    return logoFile(logoId, distroKey) || "distro-tux.svg"
 }
 
-function getKernelInfo(callback, thisArg) {
-    var T
-    if (this === null)
-          throw new TypeError(' this is null or not defined');
-    if (typeof callback !== 'function')
-            throw new TypeError(callback + ' is not a function');
-    if (arguments.length > 1)
-          T = thisArg;
+/** Shortens "7.0.0-38-generic" to "7.0.0". */
+function shortKernelVersion(version) {
+    var v = String(version || "")
+    var dash = v.indexOf('-')
+    return dash > 0 ? v.substring(0, dash) : v
+}
 
-    var xhr = new XMLHttpRequest;
-    xhr.open("GET", "/proc/version");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            var arrayResult = parseKernelRelease(xhr.responseText)
-            callback.call(T, arrayResult)
-        }
-    }
-    xhr.send();
+/** Number() that maps undefined/NaN to a fallback. */
+function num(value, fallback) {
+    var n = Number(value)
+    return (value === undefined || value === null || isNaN(n)) ? fallback : n
+}
+
+/**
+ * Shell command used to find the number of physical CPU cores (the sensors
+ * only know about logical CPUs).
+ */
+var cpuCoresCommand = "grep -m1 'cpu cores' /proc/cpuinfo"
+
+/**
+ * Parses the "cpu cores" line of /proc/cpuinfo. Returns 0 when unknown.
+ */
+function parseCpuCores(text) {
+    var match = /cpu cores\s*:\s*(\d+)/.exec(String(text))
+    return match ? parseInt(match[1]) : 0
+}
+
+// Route lookup for a public address: gives the interface and the local IP of
+// the connection in use, without sending any packet.
+var netRouteCommand = "ip -o route get 1.1.1.1"
+
+/**
+ * Parses the output of netRouteCommand. Returns {iface, ip}, both empty when
+ * there is no route.
+ */
+function parseNetRoute(text) {
+    var dev = /\bdev\s+(\S+)/.exec(String(text))
+    var src = /\bsrc\s+(\S+)/.exec(String(text))
+    return { iface: dev ? dev[1] : "", ip: src ? src[1] : "" }
+}
+
+/**
+ * Command that pings host once. Returns "" when host is not a plain host
+ * name or address, because the command goes through a shell.
+ */
+function pingCommand(host) {
+    host = String(host).trim()
+    if (!/^[A-Za-z0-9][A-Za-z0-9.:-]*$/.test(host))
+        return ""
+    return "LC_ALL=C ping -n -c 1 -W 2 " + host
+}
+
+/**
+ * Round-trip time in milliseconds from the output of ping, or -1 when there
+ * was no reply.
+ */
+function parsePing(text) {
+    var match = /[=<]\s*([\d.]+)\s*ms/.exec(String(text))
+    return match ? parseFloat(match[1]) : -1
+}
+
+function toFahrenheit(celsius) {
+    return celsius * 9 / 5 + 32
 }

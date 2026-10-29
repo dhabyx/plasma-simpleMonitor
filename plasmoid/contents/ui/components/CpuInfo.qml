@@ -17,12 +17,28 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
+import org.kde.plasma.plasma5support as Plasma5Support
 
-Rectangle {
-    visible: false
-    color: "#22ffffff"
-    border.color: "#99ffffff"
-    radius: 3
-    Behavior on y { PropertyAnimation {} }
+import "../../code/code.js" as Code
+
+// Number of physical CPU cores. The sensors only report logical CPUs, so
+// hyper-threading siblings can't be told apart without /proc/cpuinfo.
+QtObject {
+    id: root
+
+    // Nothing is run while disabled.
+    property bool enabled: true
+    property int cpuCores: 0
+
+    property Plasma5Support.DataSource source: Plasma5Support.DataSource {
+        engine: "executable"
+        connectedSources: root.enabled ? [Code.cpuCoresCommand] : []
+
+        onNewData: (sourceName, data) => {
+            if (data["stdout"])
+                root.cpuCores = Code.parseCpuCores(data["stdout"])
+            disconnectSource(sourceName)
+        }
+    }
 }

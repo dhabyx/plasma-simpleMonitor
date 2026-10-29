@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-06 02:39+0700\n"
+"POT-Creation-Date: 2026-10-26 14:42-0300\n"
 "PO-Revision-Date: 2017-03-31 23:18+0100\n"
 "Last-Translator: Burak Kıymaz <iletisim@burakkiymaz.com>\n"
 "Language-Team: LL <LL@li.org>\n"
@@ -22,121 +22,383 @@ msgstr ""
 "X-Language: tr_TR\n"
 "X-Source-Language: C\n"
 
-#: ../plasmoid/contents/config/config.qml:25
-msgid "General"
-msgstr "Genel"
+#: ../plasmoid/contents/ui/skins/MinimalisticSkin.qml:126
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:206
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:204
+msgid "Swap:"
+msgstr "Değişim:"
 
-#: ../plasmoid/contents/config/config.qml:30
-msgid "Skins"
-msgstr "Arayüzler"
+#: ../plasmoid/contents/ui/SystemData.qml:178
+msgid "GPU:"
+msgstr ""
 
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:52
-msgid "Skin:"
-msgstr "Arayüz:"
+#: ../plasmoid/contents/ui/SystemData.qml:178
+#: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
+#, fuzzy
+msgid "GPU %1:"
+msgstr "İşlemci %1"
 
-#: ../plasmoid/contents/ui/config/ConfigSkins.qml:77
-msgid "preview:"
-msgstr "Önizleme:"
+#: ../plasmoid/contents/ui/SystemData.qml:228
+#, fuzzy
+msgid "CPU avg:"
+msgstr "İşlemci %1"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
-msgid "Parts settings:"
-msgstr "Ayarlar:"
+#: ../plasmoid/contents/ui/SystemData.qml:235
+#, fuzzy
+msgid "CPU max:"
+msgstr "İşlemci %1"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:101
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:70
 msgid "Logo:"
 msgstr "Sembol"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:134
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:71
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:42
+msgid "Default"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:71
+msgid "Tux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:71
+msgid "Slackware"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:71
+msgid "Ubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:71
+msgid "Kubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:72
+msgid "OpenSUSE"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:72
+msgid "Manjaro"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:72
+msgid "Arch"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:72
+msgid "Fedora"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:72
+msgid "Debian"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Linux Mint"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "EndeavourOS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Pop!_OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Zorin OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "elementary OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "NixOS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Gentoo"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Alpine"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Void"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Rocky"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "AlmaLinux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Red Hat"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "CentOS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:73
+msgid "Kali"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:94
 msgid "Background color:"
 msgstr "Arkaplan rengi:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:143
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:96
 msgid "Standard"
 msgstr "Standart"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:150
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:102
 msgid "Crystal"
 msgstr "Kristal"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:157
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:108
 msgid "Translucent"
 msgstr "Yarı saydam"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:162
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:119
 msgid "Show:"
 msgstr "Göster:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:170
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:120
+#, fuzzy
+msgid "GPU Temperature"
+msgstr "İşlemci Yüksek Sıcaklık:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:124
 msgid "Swap"
 msgstr "Değiştir"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:175
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:128
 msgid "Uptime"
 msgstr "Açık Kalma Süresi"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:181
-msgid "Temp settings:"
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:132
+msgid "Network"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:136
+msgid "Network speed unit:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:138
+msgid "Bytes per second"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:138
+msgid "Bits per second"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:146
+msgid "Ping"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:151
+msgid "Host to ping:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:158
+#, fuzzy
+msgid "Temperature settings:"
 msgstr "Sıcaklık Ayarları:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:190
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:163
+#, fuzzy
 msgid ""
-"<i>(You can use the <strong>sensors</strong> command to place the "
-"appropriate values ​​for this section.)</i>"
+"You can use the <b>sensors</b> command to find the appropriate values for "
+"this section."
 msgstr ""
-"<i>(Bu Bölüme uygun değerleri yerleştirmek için <strong>sensörler"
-"</strong> komutunu kullanabilirsiniz.)</i>"
+"<i>(Bu Bölüme uygun değerleri yerleştirmek için <strong>sensörler</strong> "
+"komutunu kullanabilirsiniz.)</i>"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:196
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:174
 msgid "Temperature units:"
 msgstr "Sıcaklık birimleri:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:205
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:176
 msgid "Celsius °C"
 msgstr "°C"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:212
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:182
 msgid "Fahrenheit °F"
 msgstr "°F"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:217
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:188
+#, fuzzy
+msgid "CPU temperature:"
+msgstr "İşlemci Yüksek Sıcaklık:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:189
+msgid "Per core"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:189
+msgid "Average"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:189
+msgid "Maximum"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:196
 msgid "CPU High Temperature:"
 msgstr "İşlemci Yüksek Sıcaklık:"
 
-#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:227
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:203
 msgid "CPU Critical Temperature:"
 msgstr "İşlemci Kritik Sıcaklık:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:49
-msgid "Core %1:"
-msgstr "Çekirdek %1:"
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:41
+msgid "Skin:"
+msgstr "Arayüz:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:58
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:42
+msgid "Column"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:42
+msgid "Minimalistic"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:48
+#, fuzzy
+msgid "Preview:"
+msgstr "Önizleme:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:42
+#, fuzzy
+msgid "Style settings:"
+msgstr "Sıcaklık Ayarları:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:47
+msgid "CPU load indicator style:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:48
+msgid "Colored"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:52
+msgid "Flat"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:57
+msgid "CPU load indicator height:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:65
+#, fuzzy
+msgid "Performance settings:"
+msgstr "Sıcaklık Ayarları:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:71
+msgid "Update interval:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:80
+msgctxt "Abbreviation for seconds"
+msgid "s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:62
+#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:64
 msgid "CPU %1:"
 msgstr "İşlemci %1"
 
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:52
-msgid "mie"
-msgstr "benim"
-
-#: ../plasmoid/contents/ui/monitorWidgets/DatePicker.qml:75
-msgid "dic"
+#: ../plasmoid/contents/ui/monitorWidgets/AverageCPU.qml:52
+msgid "CPU:"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:49
+#: ../plasmoid/contents/ui/monitorWidgets/AverageCPU.qml:57
+#, javascript-format
+msgid "%1%"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:46
+msgid "%1 Gbit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:47
+msgid "%1 Mbit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:48
+msgid "%1 kbit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:49
+msgid "%1 bit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:51
+msgid "%1 GiB/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:52
+msgid "%1 MiB/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:53
+msgid "%1 KiB/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:54
+msgid "%1 B/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:71
+msgid "Net:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:76
+msgid "offline"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:84
+msgid "Ping:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:90
+msgid "no reply"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:90
+msgid "%1 ms"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:99
+msgid "Down:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:111
+#, fuzzy
+msgid "Up:"
+msgstr "Czas pracy:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:47
 msgid "Mem:"
 msgstr "Hafıza:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:54
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:71
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:82
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:52
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:69
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:80
 msgid "%1 GiB"
 msgstr ""
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:65
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:63
 msgid "Used:"
 msgstr "Kullanılan:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:76
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:74
 msgid "Free:"
 msgstr "Boşta:"
 
@@ -148,17 +410,31 @@ msgstr "Czas pracy:"
 msgid "%1d %2:%3"
 msgstr ""
 
-#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
-#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+#: ../plasmoid/contents/ui/main.qml:50
 msgid "Lock image scaling"
 msgstr "Resim boyutlandırmasını kilitle"
 
-#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:113
-#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:92
+#: ../plasmoid/contents/ui/main.qml:50
 msgid "Unlock image scaling"
 msgstr "Resim boyutlandırmasını aç"
 
-#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:251
-#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:250
-msgid "Swap:"
-msgstr "Değişim:"
+#: ../plasmoid/contents/config/config.qml:25
+msgid "General"
+msgstr "Genel"
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Skins"
+msgstr "Arayüzler"
+
+#: ../plasmoid/contents/config/config.qml:35
+msgid "Miscellaneous"
+msgstr ""
+
+#~ msgid "Parts settings:"
+#~ msgstr "Ayarlar:"
+
+#~ msgid "Core %1:"
+#~ msgstr "Çekirdek %1:"
+
+#~ msgid "mie"
+#~ msgstr "benim"

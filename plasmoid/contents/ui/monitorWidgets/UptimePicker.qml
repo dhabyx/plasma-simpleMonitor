@@ -17,12 +17,12 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
 
 Row {
     property int uptime: 0
 
-    spacing: 3 * units.devicePixelRatio
+    spacing: 3
 
     QtObject {
         id: d

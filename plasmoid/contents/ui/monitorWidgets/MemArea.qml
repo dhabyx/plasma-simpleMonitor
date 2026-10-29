@@ -17,15 +17,13 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 Item {
     property double memFree: 0.0
     property double memTotal: 0.0
-    property double memCached: 0.0
     property double memUsed: 0.0
-    property double memBuffers: 0.0
     property alias memTypeLabel : memType.text
 
     implicitWidth: memColumn.implicitWidth
@@ -39,11 +37,11 @@ Item {
     ColumnLayout {
         id: memColumn
 
-        spacing: 2 * units.devicePixelRatio
+        spacing: 2
         anchors.fill: parent
 
         RowLayout {
-            spacing: 3 * units.devicePixelRatio
+            spacing: 3
             Text {
                 id: memType
                 text: i18n("Mem:")
@@ -59,7 +57,7 @@ Item {
 
         RowLayout {
             id: memoryInfoLabels
-            spacing: 3 * units.devicePixelRatio
+            spacing: 3
             property int fontSize : 8
             Text {
                 text: i18n("Used:")
@@ -68,7 +66,7 @@ Item {
             }
             Text {
                 id: memUsedText
-                text: i18n("%1 GiB", (memUsed-(memBuffers+memCached)).toFixed(2))
+                text: i18n("%1 GiB", memUsed.toFixed(2))
                 color: "white"
                 font.pointSize: memoryInfoLabels.fontSize
             }
@@ -79,7 +77,7 @@ Item {
             }
             Text {
                 id: memFreeText
-                text: i18n("%1 GiB", (memFree+(memBuffers+memCached)).toFixed(2))
+                text: i18n("%1 GiB", memFree.toFixed(2))
                 color: "white"
                 font.pointSize: memoryInfoLabels.fontSize
             }
@@ -87,14 +85,14 @@ Item {
 
         Rectangle {
             id: rectTotalMemory
-            height: 7 * units.devicePixelRatio
+            height: 7
             Layout.fillWidth: true
             color: "#7ec264"
             Rectangle {
                 id: rectUsedMemory
                 anchors.left: parent.left
                 height: parent.height
-                width: (memUsed-(memBuffers+memCached))/memTotal*parent.width
+                width: memTotal > 0 ? Math.min(memUsed / memTotal, 1) * parent.width : 0
                 color: "red"
             }
         }

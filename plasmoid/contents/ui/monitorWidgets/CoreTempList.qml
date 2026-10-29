@@ -17,7 +17,7 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
 
 ListView {
     id: coreTempList
@@ -26,62 +26,80 @@ ListView {
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    implicitHeight: count * 25 * units.devicePixelRatio
-    implicitWidth: 100 * units.devicePixelRatio
-
-    interactive: false
-
     property int highTemp: 80
-    property int criticalTemp : 95
-    property int maxTemp : 100
+    property int criticalTemp: 95
+    property int indicatorHeight: 10
     /* tempUnit
         used for change how to show temperature unit
         0=Celsius 1=Fahrenheit */
     property int tempUnit: 0
 
+    implicitHeight: contentHeight
+    implicitWidth: 100
+
+    interactive: false
+
+    FontLoader {
+        id: doppioOneRegular
+        source: "../../fonts/Doppio_One/DoppioOne-Regular.ttf"
+    }
+
     delegate: Item {
         id: coreListTemp
-        implicitHeight: 25 * units.devicePixelRatio
+
+        required property int index
+        required property real val
+        required property string dataUnits
+        required property string coreLabelStr
+
         implicitWidth: coreLabel.implicitWidth + unitLabel.implicitWidth
-        width: parent.width
-        height: (20 + indicatorHeight) * units.devicePixelRatio
+        width: ListView.view.width
+        height: 20 + coreTempList.indicatorHeight
+
         Text {
             id: coreLabel
             anchors.left: parent.left
-            text: if (coreLabelStr == "") i18n('CPU %1:', model.index); else i18n(coreLabelStr)
+            text: coreListTemp.coreLabelStr === "" ? i18n("CPU %1:", coreListTemp.index)
+                                                    : coreListTemp.coreLabelStr
             font.bold: true
             font { family: doppioOneRegular.name; pointSize: 10 }
             color: "#ffdd55"
         }
         Text {
             id: unitLabel
-            text: if (tempUnit === 0) Math.floor(val) + dataUnits
-                  else Math.floor(val*9/5+32) + "°F"
+            anchors.right: parent.right
+            text: coreTempList.tempUnit === 0 ? Math.floor(coreListTemp.val) + coreListTemp.dataUnits
+                                               : Math.floor(coreListTemp.val * 9 / 5 + 32) + "°F"
             font.bold: true
             font.pointSize: 10
             color: "white"
-            anchors.right: parent.right
         }
 
         Rectangle {
-            id: rectValue
-            height: 11 * units.devicePixelRatio
-            width: Math.floor(val/coreTempList.criticalTemp*parent.width)
-            color: if (val >= coreTempList.criticalTemp) "red"
-                   else if (val >= coreTempList.highTemp) "#ffac2a"
-                   else "#85a9ff"
+            // Cropped view of the temperature gradient; grows from the start edge.
+            id: tempBar
             anchors.top: coreLabel.bottom
-            anchors.right: parent.right
-            anchors.topMargin: units.devicePixelRatio
-        }
-        ListView.onAdd: SequentialAnimation {
-            PropertyAction { target: coreListTemp; property: "height"; value: 0 }
-            NumberAnimation { target: coreListTemp; property: "height"; to: 30 * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
-        }
-    }
+            anchors.topMargin: 1
+            anchors.left: parent.left
+            height: 11
+            width: Math.max(0, Math.min(parent.width, Math.floor(coreListTemp.val / coreTempList.criticalTemp * parent.width)))
+            color: "transparent"
+            clip: true
 
-    FontLoader {
-        id: doppioOneRegular
-        source: "../../fonts/Doppio_One/DoppioOne-Regular.ttf"
+            Rectangle {
+                // Blue to red gradient spanning the whole bar; tempBar crops it.
+                // Gradient stops don't follow LayoutMirroring, so mirror them by hand.
+                id: tempGradient
+                readonly property bool mirrored: LayoutMirroring.enabled
+                anchors.left: parent.left
+                height: tempBar.height
+                width: coreListTemp.width
+                gradient: Gradient {
+                    orientation: Gradient.Horizontal
+                    GradientStop { position: tempGradient.mirrored ? 1.00 : 0.00; color: "#85a9ff" }
+                    GradientStop { position: tempGradient.mirrored ? 0.00 : 1.00; color: "red" }
+                }
+            }
+        }
     }
 }

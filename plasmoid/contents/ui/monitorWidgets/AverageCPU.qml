@@ -17,28 +17,23 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 Item {
+    id: root
 
-    property double avgLoad: cpuModel.count > 0 ? (cpuModel
-                .getAll()
-                .map(it => parseInt(it.val))
-                .reduce((sum, curr) => sum + curr, 0) / cpuModel.count)
-                .toFixed(0) : 0
-
-    property double avgTemp: coreTempModel.count > 0 ? (coreTempModel
-            .getAll()
-            .map(it => parseInt(it.val))
-            .reduce((sum, curr) => sum + curr, 0) / coreTempModel.count)
-            .toFixed(0) : 0
-
+    property real avgLoad: 0
+    property real avgTemp: 0
+    property int tempUnit: 0
     property int highTemp: 87
-    property int criticalTemp : 105
+    property int criticalTemp: 105
 
-    implicitWidth: memColumn.implicitWidth
-    implicitHeight: memColumn.implicitHeight
+    readonly property int load: Math.round(avgLoad)
+    readonly property int temp: Math.round(avgTemp)
+
+    implicitWidth: cpuColumn.implicitWidth
+    implicitHeight: cpuColumn.implicitHeight
 
     FontLoader {
         id: doppioOneRegular
@@ -46,7 +41,7 @@ Item {
     }
 
     ColumnLayout {
-        id: memColumn
+        id: cpuColumn
 
         spacing: 2
         anchors.fill: parent
@@ -59,27 +54,28 @@ Item {
                 color: "#ffdd55"
             }
             Text {
-                text: i18n("%1%", avgLoad)
+                text: i18n("%1%", root.load)
                 font { family: doppioOneRegular.name; pointSize: 12 }
-                color: avgLoad < 80 ? "white" : "red"
+                color: root.load < 80 ? "white" : "red"
             }
             Text {
-                text:  (tempUnit ? Math.floor((avgTemp * 9/5)+32) : avgTemp) + (tempUnit ? "ºF" : "ºC")
+                visible: root.temp > 0
+                text: root.tempUnit ? Math.floor(root.temp * 9 / 5 + 32) + "°F" : root.temp + "°C"
                 font { family: doppioOneRegular.name; pointSize: 12 }
-                color: avgTemp >= highTemp ? "red" : avgTemp >= criticalTemp ? "#ffcc00" : "white"
+                color: root.temp >= root.criticalTemp ? "red"
+                     : root.temp >= root.highTemp ? "#ffcc00"
+                     : "white"
             }
         }
 
         Rectangle {
-            id: rectTotalCPU
             height: 5
             Layout.fillWidth: true
             color: "#7ec264"
             Rectangle {
-                id: rectUsedCPU
                 anchors.left: parent.left
                 height: parent.height
-                width: (avgLoad)/100*parent.width
+                width: Math.min(root.load, 100) / 100 * parent.width
                 color: "red"
             }
         }

@@ -17,41 +17,57 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
 
+// Base of every skin. `engine` is the SystemData object created by main.qml.
 Item {
-    property int bgColor:           confEngine.bgColor
-    property int logo:              confEngine.logo
-    property bool showGpuTemp:      confEngine.showGpuTemp
-    property bool showSwap:         confEngine.showSwap
-    property bool showUptime:       confEngine.showUptime
-    property int tempUnit:          confEngine.tempUnit
-    property int cpuHighTemp:       confEngine.cpuHighTemp
-    property int cpuCritTemp:       confEngine.cpuCritTemp
-    property bool coloredCpuLoad:   confEngine.coloredCpuLoad
-    property bool flatCpuLoad:      confEngine.flatCpuLoad
-    property int indicatorHeight:   confEngine.indicatorHeight
-    property double updateInterval: confEngine.updateInterval
+    id: base
 
-    property string distroName:     confEngine.distroName
-    property string distroId:       confEngine.distroId
-    property string distroVersion:  confEngine.distroVersion
-    property string kernelName:     confEngine.kernelName
-    property string kernelVersion:  confEngine.kernelVersion
+    property QtObject engine
 
-    property double memFree
-    property double memTotal
-    property double memUsed
-    property double memBuffers
-    property double memCached
+    readonly property int bgColor:           engine.bgColor
+    readonly property int logo:              engine.logo
+    readonly property bool showGpuTemp:      engine.showGpuTemp
+    readonly property bool showSwap:         engine.showSwap
+    readonly property bool showUptime:       engine.showUptime
+    readonly property bool showNetwork:      engine.showNetwork
+    readonly property int netUnit:           engine.netUnit
+    readonly property int tempUnit:          engine.tempUnit
+    readonly property int cpuHighTemp:       engine.cpuHighTemp
+    readonly property int cpuCritTemp:       engine.cpuCritTemp
+    readonly property bool coloredCpuLoad:   engine.coloredCpuLoad
+    readonly property bool flatCpuLoad:      engine.flatCpuLoad
+    readonly property int indicatorHeight:   engine.indicatorHeight
+    readonly property double updateInterval: engine.updateInterval
 
-    property double swapFree
-    property double swapTotal
-    property double swapUsed
+    readonly property string distroName:     engine.distroName
+    readonly property string distroVersion:  engine.distroVersion
+    readonly property string kernelName:     engine.kernelName
+    readonly property string kernelVersion:  engine.kernelVersion
 
-    property int uptime
+    readonly property double memFree:        engine.memFree
+    readonly property double memTotal:       engine.memTotal
+    readonly property double memUsed:        engine.memUsed
 
-    property int direction: confEngine.direction
+    readonly property double swapFree:       engine.swapFree
+    readonly property double swapTotal:      engine.swapTotal
+    readonly property double swapUsed:       engine.swapUsed
+
+    readonly property double netDown:        engine.netDown
+    readonly property double netUp:          engine.netUp
+    readonly property double netScale:       engine.netScale
+    readonly property string netIface:       engine.netIface
+    readonly property string netIp:          engine.netIp
+    readonly property bool showPing:         engine.showPing
+    readonly property double pingMs:         engine.pingMs
+
+    readonly property double uptime:         engine.uptime
+
+    readonly property ListModel cpuModel:      engine.cpuModel
+    readonly property ListModel coreTempModel: engine.coreTempModel
+    readonly property ListModel gpuTempModel:  engine.gpuTempModel
+
+    property int direction: Qt.LeftToRight
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 }

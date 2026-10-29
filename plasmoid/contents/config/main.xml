@@ -12,13 +12,14 @@
             <choices>
                 <choice name="Standard"/>
                 <choice name="Column"/>
+                <choice name="Minimalistic"/>
             </choices>
             <default>0</default>
         </entry>
 
         <!-- Background Section -->
         <entry name="bgColor" type="Enum">
-            <label>Backgroung color</label>
+            <label>Background color</label>
             <choices>
                 <choice name="Standard"/>
                 <choice name="Crystal"/>
@@ -41,6 +42,20 @@
                 <choice name="Arch"/>
                 <choice name="Fedora"/>
                 <choice name="Debian"/>
+                <choice name="Linux Mint"/>
+                <choice name="EndeavourOS"/>
+                <choice name="Pop!_OS"/>
+                <choice name="Zorin OS"/>
+                <choice name="elementary OS"/>
+                <choice name="NixOS"/>
+                <choice name="Gentoo"/>
+                <choice name="Alpine"/>
+                <choice name="Void"/>
+                <choice name="Rocky"/>
+                <choice name="AlmaLinux"/>
+                <choice name="Red Hat"/>
+                <choice name="CentOS"/>
+                <choice name="Kali"/>
             </choices>
             <default>0</default>
         </entry>
@@ -62,6 +77,26 @@
             <label>Show Uptime</label>
             <default>true</default>
         </entry>
+        <entry name="showNetwork" type="Bool">
+            <label>Show Network</label>
+            <default>true</default>
+        </entry>
+        <entry name="showPing" type="Bool">
+            <label>Show the ping to a host</label>
+            <default>false</default>
+        </entry>
+        <entry name="pingHost" type="String">
+            <label>Host to ping</label>
+            <default>1.1.1.1</default>
+        </entry>
+        <entry name="netUnit" type="Enum">
+            <label>Network speed unit</label>
+            <choices>
+                <choice name="Bytes per second"/>
+                <choice name="Bits per second"/>
+            </choices>
+            <default>0</default>
+        </entry>
         <entry name="tempUnit" type="Enum">
             <label>Temperature Units</label>
             <choices>
@@ -72,6 +107,15 @@
         </entry>
 
         <!-- System Section -->
+        <entry name="cpuTempMode" type="Enum">
+            <label>CPU temperature display</label>
+            <choices>
+                <choice name="Per core"/>
+                <choice name="Average"/>
+                <choice name="Maximum"/>
+            </choices>
+            <default>0</default>
+        </entry>
         <entry name="cpuHighTemp" type="Int">
             <label>CPU High Temperature</label>
             <default>60</default>

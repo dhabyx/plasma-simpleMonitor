@@ -17,7 +17,7 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
 
 ListView {
     id: gpuTempList
@@ -26,63 +26,67 @@ ListView {
     LayoutMirroring.enabled: direction === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    implicitHeight: count * 25 * units.devicePixelRatio
-    implicitWidth: 100 * units.devicePixelRatio
-
-    interactive: false
-
     property int highTemp: 80
-    property int criticalTemp : 95
-    property int maxTemp : 100
+    property int criticalTemp: 95
+    property int maxTemp: 100
+    property int indicatorHeight: 10
+    property bool showGpuTemp: true
     /* tempUnit
         used for change how to show temperature unit
         0=Celsius 1=Fahrenheit */
     property int tempUnit: 0
 
+    implicitHeight: showGpuTemp ? contentHeight : 0
+    implicitWidth: 100
+    visible: showGpuTemp
+
+    interactive: false
+
+    FontLoader {
+        id: doppioOneRegular
+        source: "../../fonts/Doppio_One/DoppioOne-Regular.ttf"
+    }
+
     delegate: Item {
         id: gpuListTemp
-        implicitHeight: 25 * units.devicePixelRatio
+
+        required property int index
+        required property real val
+        required property string dataUnits
+        required property string gpuLabelStr
+
         implicitWidth: gpuLabel.implicitWidth + unitLabel.implicitWidth
-        width: parent.width
-        height: (20 + indicatorHeight) * units.devicePixelRatio
-        visible: showGpuTemp
+        width: ListView.view.width
+        height: 20 + gpuTempList.indicatorHeight
+
         Text {
             id: gpuLabel
             anchors.left: parent.left
-            text: if (gpuLabelStr == "") i18n('GPU %1:', model.index); else i18n(gpuLabelStr)
+            text: gpuListTemp.gpuLabelStr === "" ? i18n("GPU %1:", gpuListTemp.index)
+                                                  : gpuListTemp.gpuLabelStr
             font.bold: true
             font { family: doppioOneRegular.name; pointSize: 10 }
             color: "#ffdd55"
         }
         Text {
             id: unitLabel
-            text: if (tempUnit === 0) Math.round(val) + dataUnits
-                  else Math.round(val*9/5+32) + "°F"
+            anchors.right: parent.right
+            text: gpuTempList.tempUnit === 0 ? Math.round(gpuListTemp.val) + gpuListTemp.dataUnits
+                                              : Math.round(gpuListTemp.val * 9 / 5 + 32) + "°F"
             font.bold: true
             font.pointSize: 10
             color: "white"
-            anchors.right: parent.right
         }
 
         Rectangle {
-            id: rectValue
-            height: indicatorHeight * units.devicePixelRatio
-            width: Math.round(val/gpuTempList.maxTemp*parent.width)
-            color: if (Math.round(val) >= coreTempList.criticalTemp) "red"
-                   else if (Math.round(val) >= gpuTempList.highTemp) "#ffac2a"
-                   else "#85a9ff"
             anchors.top: gpuLabel.bottom
+            anchors.topMargin: 1
             anchors.right: parent.right
-            anchors.topMargin: units.devicePixelRatio
+            height: gpuTempList.indicatorHeight
+            width: Math.max(0, Math.min(parent.width, Math.round(gpuListTemp.val / gpuTempList.maxTemp * parent.width)))
+            color: Math.round(gpuListTemp.val) >= gpuTempList.criticalTemp ? "red"
+                 : Math.round(gpuListTemp.val) >= gpuTempList.highTemp ? "#ffac2a"
+                 : "#85a9ff"
         }
-        ListView.onAdd: SequentialAnimation {
-            PropertyAction { target: gpuListTemp; property: "height"; value: 0 }
-            NumberAnimation { target: gpuListTemp; property: "height"; to: (20 + indicatorHeight) * units.devicePixelRatio; duration: 250; easing.type: Easing.InOutQuad }
-        }
-    }
-
-    FontLoader {
-        id: doppioOneRegular
-        source: "../../fonts/Doppio_One/DoppioOne-Regular.ttf"
     }
 }

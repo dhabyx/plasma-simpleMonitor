@@ -17,71 +17,37 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
-import "../../code/code.js" as Code
-
-Item {
+KCM.SimpleKCM {
     id: root
 
-    Layout.fillHeight: true
-    Layout.fillWidth: true
+    property int cfg_skin
+    property int cfg_skinDefault
 
-    implicitHeight: settingsLayout.implicitHeight
-    implicitWidth: settingsLayout.implicitWidth
+    readonly property var previews: [
+        "../../images/defaultSkin-preview.png",
+        "../../images/columnSkin-preview.png",
+        "../../images/minimalisticSkin-preview.png"
+    ]
 
-    Layout.minimumWidth: implicitWidth
-    Layout.minimumHeight: implicitHeight
-    Layout.preferredWidth: implicitWidth
-    Layout.preferredHeight: implicitHeight
-
-    property alias cfg_skin: skinComboBox.currentIndex
-
-    ColumnLayout {
-        id: settingsLayout
-
-        spacing: 2
-
-        Row {
-            spacing: 3
-
-            Label {
-                text: i18n("Skin:")
-                anchors.verticalCenter: skinComboBox.verticalCenter
-            }
-
-            ComboBox {
-                id: skinComboBox
-                model: [i18n("Default"), i18n("Column")]
-
-                onCurrentIndexChanged: {
-                    switch (currentIndex)  {
-                    default:
-                        print("unknown skinComboBox.currentIndex")
-                        // fall through
-                    case 0:
-                        skinImage.source = "../../images/defaultSkin-preview.png"
-                        break
-                    case 1:
-                        skinImage.source = "../../images/columnSkin-preview.png"
-                        break
-                    case 2:
-                        skinImage.source = "../../images/minimalisticSkin-preview.png"
-                        break
-                    }
-                }
-            }
-        }
-
-        Label {
-            text: i18n("Preview:")
+    Kirigami.FormLayout {
+        QQC2.ComboBox {
+            id: skinComboBox
+            Kirigami.FormData.label: i18n("Skin:")
+            model: [i18n("Default"), i18n("Column"), i18n("Minimalistic")]
+            currentIndex: root.cfg_skin
+            onActivated: root.cfg_skin = currentIndex
         }
 
         Image {
-            id: skinImage
+            Kirigami.FormData.label: i18n("Preview:")
+            source: root.previews[root.cfg_skin] || root.previews[0]
+            fillMode: Image.PreserveAspectFit
         }
     }
 }

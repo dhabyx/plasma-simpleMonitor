@@ -17,14 +17,13 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 
 Item {
     id: root
-    property string distroName: "tux"
-    property string distroId: "tux"
+    property string distroName: ""
     property string distroVersion: ""
 
     property string kernelName: ""

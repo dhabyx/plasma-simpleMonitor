@@ -17,7 +17,7 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
 
 Item {
     id: timePicker
@@ -26,32 +26,28 @@ Item {
     LayoutMirroring.childrenInherit: true
 
     implicitWidth: secs.x + secs.width
-    implicitHeight: hour.implicitHeight - 11 * units.devicePixelRatio
+    implicitHeight: hour.implicitHeight - 11
 
     FontLoader {
         id: playRegular
         source: "../../fonts/Play/Play-Regular.ttf"
     }
 
+    property date now: new Date()
+
     Timer {
         interval: 1000
         repeat: true
         running: true
-        triggeredOnStart: true
-        onTriggered: {
-            var dateTime = new Date()
-            hour.text = Qt.formatDateTime(dateTime,'hh')+':'
-            mins.text = Qt.formatDateTime(dateTime,'mm')+':'
-            secs.text = Qt.formatDateTime(dateTime,'ss')
-        }
+        onTriggered: timePicker.now = new Date()
     }
 
     Text {
         id: hour
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        height: 44 * units.devicePixelRatio
-        text: "00:"
+        height: 44
+        text: Qt.formatDateTime(timePicker.now, "hh") + ":"
         font {
             family: playRegular.name
             pointSize: 30
@@ -62,8 +58,8 @@ Item {
         id: mins
         anchors.left: hour.right
         anchors.bottom: parent.bottom
-        height: 29 * units.devicePixelRatio
-        text: "00:"
+        height: 29
+        text: Qt.formatDateTime(timePicker.now, "mm") + ":"
         font {
             family: playRegular.name
             pointSize: 20
@@ -74,8 +70,8 @@ Item {
         id: secs
         anchors.left: mins.right
         anchors.bottom: parent.bottom
-        height: 21 * units.devicePixelRatio
-        text: "00"
+        height: 21
+        text: Qt.formatDateTime(timePicker.now, "ss")
         font {
             family: playRegular.name
             pointSize: 15

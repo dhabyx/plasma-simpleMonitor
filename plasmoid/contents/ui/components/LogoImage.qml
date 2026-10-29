@@ -17,12 +17,17 @@
  * along with plasma-simpleMonitor.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-import QtQuick 2.0
+import QtQuick
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root
+
     property real fillScale: 1.0
+    // Name of a theme icon shown instead of the image (when not empty).
+    property string iconName: ""
     property bool editMode: false
+    property alias image: image
 
     onFillScaleChanged: {
         if (fillScale && fillScale <= 1.0)
@@ -36,75 +41,56 @@ Item {
         property real scale: 1.0
     }
 
-    implicitWidth: image.implicitWidth
-    implicitHeight: image.implicitHeight
+    implicitWidth: iconName !== "" ? 128 : image.implicitWidth
+    implicitHeight: iconName !== "" ? 128 : image.implicitHeight
 
-    property Image image: Image {
-        parent: root
+    Image {
+        id: image
+        visible: root.iconName === ""
         anchors.centerIn: parent
         width: parent.width * d.scale
         height: parent.height * d.scale
         fillMode: Image.PreserveAspectFit
     }
 
-    property Item border: Rectangle {
-        parent: root.image
-        anchors.fill: parent
-        visible: editMode
-        border { width: 1; color: "black" }
+    Kirigami.Icon {
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height) * d.scale
+        height: width
+        visible: root.iconName !== ""
+        source: root.iconName
+    }
+
+    // Frame and handle shown while the scale of the logo can be changed.
+    Rectangle {
+        anchors.fill: image
+        visible: root.editMode
         color: "transparent"
+        border { width: 1; color: "black" }
+
         Rectangle {
             anchors.fill: parent
             anchors.margins: 1
-            border { width: 1; color: "white" }
             color: "transparent"
+            border { width: 1; color: "white" }
         }
 
         Image {
-            anchors {
-                right: parent.right
-                top: parent.top
-            }
+            anchors { right: parent.right; top: parent.top }
             source: "../../images/resize.svg"
-            sourceSize: Qt.size(10,10)
+            sourceSize: Qt.size(10, 10)
 
             MouseArea {
                 id: resizeArea
                 anchors.fill: parent
+                cursorShape: pressed ? Qt.SizeBDiagCursor : Qt.ArrowCursor
 
-                property bool resizeEvent: false
-
-                state: "NORMAL"
-                states: [
-                    State {
-                        name: "NORMAL"
-                        PropertyChanges {
-                            target: resizeArea
-                            cursorShape: Qt.ArrowCursor
-                        }
-                    },
-                    State {
-                        name: "RESIZE"
-                        PropertyChanges {
-                            target: resizeArea
-                            cursorShape: Qt.SizeBDiagCursor
-                        }
+                onPositionChanged: mouse => {
+                    if (pressed) {
+                        var p = mapToItem(root, mouse.x, mouse.y)
+                        root.fillScale = Math.min(Math.max(0.3, Math.max(2 * p.x / root.width - 1.0,
+                                                                         1.0 - 2 * p.y / root.height)), 1.0)
                     }
-                ]
-
-                onPressed: {
-                    resizeEvent = true
-                }
-
-                onPositionChanged: {
-                    if (resizeEvent) {
-                        var mousePoint = mapToItem(root, mouse.x, mouse.y);
-                        root.fillScale = Math.min(Math.max(0.3, Math.max(2*mousePoint.x/root.width - 1.0, 1.0 - 2*mousePoint.y/root.height)), 1.0)
-                    }
-                }
-
-                onReleased: {
-                    resizeEvent = false
                 }
             }
         }
