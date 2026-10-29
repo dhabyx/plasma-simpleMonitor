@@ -41,13 +41,13 @@ and rights holders are not identified by this repository.
 | `almalinux` | Color SVG added by Saulo Campos in [1c72cb0](https://github.com/dhabyx/plasma-simpleMonitor/commit/1c72cb0644b59a21c51ed364922598a5c2c01e77), described there as official artwork; exact source and license **unverified**. See [AlmaLinux trademark policy](https://almalinux.org/p/the-almalinux-os-trademark-usage-policy/). |
 | `rhel` | Simple Icons `redhat.svg`; source [Red Hat branding](https://www.redhat.com/en/about/brand/new-brand/details); individual license **unverified**. |
 | `centos` | Color SVG added by Saulo Campos in [1c72cb0](https://github.com/dhabyx/plasma-simpleMonitor/commit/1c72cb0644b59a21c51ed364922598a5c2c01e77), described there as official artwork; exact source and license **unverified**. See [CentOS branding](https://wiki.centos.org/ArtWork/Brand/Logo). |
-| `kali` | Simple Icons `kalilinux.svg`; source [Kali trademark policy](https://www.kali.org/docs/policy/trademark/); individual license **unverified**. The existing mark is low contrast against a dark background. |
+| `kali` | Simple Icons `kalilinux.svg`; source [Kali trademark policy](https://www.kali.org/docs/policy/trademark/); individual license **unverified**. The existing mark is low contrast against a dark background. An [official press pack](https://gitlab.com/kalilinux/documentation/press-pack/-/tree/360c018b5cf65179ad3883d393b8ccbdfa674bc7/Kali/Logomark) supplies a white SVG variant; copyright and trademark terms require review before replacement. |
 | `blackpanther` | [Charles K Barcza's PR #16](https://github.com/dhabyx/plasma-simpleMonitor/pull/16) supplies the SVG; author and rights for that exact artwork **unverified**. |
 | `neon` | Unmodified SVG from [KDE's distribution logo directory](https://kde.org/content/distributions/logos/neon.svg), SHA-256 `b894cfd2ce1223c602bd6af8566e7f7cc2891fb3478fe6f79869148dfbabaf44`; exact artwork author and license **unverified**. YamiYukiSenpai proposed neon support in PR #40; the KDE asset is visually equivalent at widget size. |
 
 All 25 SVGs parse as XML and contain no embedded raster `<image>` elements or
 external `href` references. Their intrinsic dimensions or viewBoxes are
 positive. A 100-pixel Qt SVG contact sheet was inspected on a dark background;
-this establishes rendering quality, not trademark permission. Several legacy
+this establishes rendering quality, not trademark permission. The existing Debian mark is also dark against the preview background. Several legacy
 files use intrinsic dimensions instead of a viewBox. Do not substitute
 unverified license assumptions for rights-holder confirmation.
