@@ -31,6 +31,7 @@ If you need localisation (i18n/l10n) support, please use `cmake` to install this
 git clone https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
 cd plasma-simpleMonitor
 cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 sudo cmake --install build
 ````
 
@@ -67,7 +68,8 @@ theme, then a bundled logo, then Tux. Explicit choices keep their saved indices.
 Choose Custom in the widget settings and select a local SVG or PNG; if the file
 is missing or cannot be loaded, the matching bundled logo or Tux is shown. The
 file remains in its original location, so keep it there. No network download
-is performed.
+is performed. Source and trademark information for bundled artwork is recorded
+in [LOGO-SOURCES.md](LOGO-SOURCES.md).
 
 Development
 ===========
