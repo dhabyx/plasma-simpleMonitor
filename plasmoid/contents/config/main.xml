@@ -56,8 +56,15 @@
                 <choice name="Red Hat"/>
                 <choice name="CentOS"/>
                 <choice name="Kali"/>
+                <choice name="blackPanther OS"/>
+                <choice name="KDE neon"/>
+                <choice name="Custom"/>
             </choices>
             <default>0</default>
+        </entry>
+        <entry name="customLogo" type="String">
+            <label>Custom logo file</label>
+            <default></default>
         </entry>
         <entry name="logoScale" type="Double">
             <label>Logo scaling</label>

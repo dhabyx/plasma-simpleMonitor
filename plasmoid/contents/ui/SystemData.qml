@@ -34,6 +34,7 @@ QtObject {
     readonly property int skin:             Plasmoid.configuration.skin
     readonly property int bgColor:          Plasmoid.configuration.bgColor
     readonly property int logo:             Plasmoid.configuration.logo
+    readonly property string customLogo:     Plasmoid.configuration.customLogo
     readonly property bool showGpuTemp:     Plasmoid.configuration.showGpuTemp
     readonly property bool showSwap:        Plasmoid.configuration.showSwap
     readonly property bool showUptime:      Plasmoid.configuration.showUptime

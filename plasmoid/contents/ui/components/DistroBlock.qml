@@ -49,10 +49,12 @@ ColumnLayout {
         Layout.fillHeight: false
         Layout.alignment: Qt.AlignCenter
 
-        // Bundled logo; without one, the logo icon of the distribution, then Tux.
-        readonly property string file: Code.logoFile(root.engine.logo, root.engine.distroKey)
-        iconName: file === "" ? root.engine.osLogoIcon : ""
-        image.source: Qt.resolvedUrl("../../images/" + (file || "distro-tux.svg"))
+        // An explicit choice wins; automatic prefers an installed theme icon.
+        readonly property bool custom: root.engine.logo === Code.logos.length + 1
+        readonly property string file: Code.logoFile(custom ? 0 : root.engine.logo, root.engine.distroKey)
+        iconName: root.engine.logo === 0 ? root.engine.osLogoIcon : ""
+        image.source: custom ? (root.engine.customLogo.indexOf("file://") === 0 ? root.engine.customLogo : "") : Qt.resolvedUrl("../../images/" + (file || "distro-tux.svg"))
+        fallbackSource: Qt.resolvedUrl("../../images/" + (file || "distro-tux.svg"))
         editMode: root.engine.logoEditMode
 
         fillScale: root.engine.logoScale

@@ -1,17 +1,18 @@
-## Contribute to translations ##
+# Contributing translations
 
-Please fork this repository and sync with master if you haven't done so.
+The source catalogs are `LOCALE/LC_MESSAGES/plasma_applet_org.kde.simpleMonitor.po`.
+Install GNU gettext for `xgettext`, `msgmerge`, `msginit`, and `msgfmt`.
 
-1. If you you're going to add support for a new language run `./Messages.sh lang_name` (e.g. `./Messages.sh fr` to add support for French)
-2. If you want to refine translation of already supported language run `./Messages.sh` before modifying `.po` files to ensure they have latest translatable strings.
-3. Open `.po` file in any text redactor or any Language Tool(e.g. Qt Linguist).
-4. Fill in `msgstr` with translated strings
-5. Check if there are any `fuzzy` translations that need your attention.
-6. Save
-7. Run `./Messages.sh` again to update .mo files
+1. Run `./translations/Messages.sh` from the repository root to extract the
+   current QML and JavaScript strings into the POT. It does not alter any PO.
+2. Run `./translations/translation.sh hu` (replace `hu` with your locale) to
+   create or update only that locale's PO from the POT. Review fuzzy entries.
+3. Edit the PO and validate it with `msgfmt --check -o /dev/null PATH_TO_PO`.
+4. Build with CMake (`cmake -S . -B build && cmake --build build`). CMake
+   compiles every PO into the build directory; installation places the MO files
+   under the appropriate `share/locale/LOCALE/LC_MESSAGES` directory. Source
+   catalogs are never modified by the build. Do not commit generated MO files.
 
-### Before commiting: ###
-1. Check that your translations works and looks fine(test it)
-2. Run git status and check that other translations not affected by your actions. 
-3. Exclude .pot file from commit(if it doesn't has any major changes other that creation date)
-4. In the end your commit should only contain `.po` and `.mo` files of your newly added/modified language. If so then add a git commit and send a pull request.
+Existing translations can be incomplete, especially for features introduced
+since Plasma 6; untranslated messages fall back to English. The metadata names
+and descriptions are in `plasmoid/metadata.json` and are translated separately.

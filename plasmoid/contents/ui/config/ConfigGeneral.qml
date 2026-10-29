@@ -20,6 +20,8 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Dialogs
+import "../components"
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.ksysguard.sensors as Sensors
@@ -30,6 +32,8 @@ KCM.SimpleKCM {
     id: root
 
     property int cfg_logo
+    property string cfg_customLogo
+    property string cfg_customLogoDefault
     property int cfg_bgColor
     property alias cfg_showGpuTemp: showGpuTempCheckBox.checked
     property alias cfg_showSwap: showSwapCheckBox.checked
@@ -70,16 +74,37 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18n("Logo:")
             model: [i18n("Default"), i18n("Tux"), i18n("Slackware"), i18n("Ubuntu"), i18n("Kubuntu"),
                     i18n("OpenSUSE"), i18n("Manjaro"), i18n("Arch"), i18n("Fedora"), i18n("Debian"),
-                    i18n("Linux Mint"), i18n("EndeavourOS"), i18n("Pop!_OS"), i18n("Zorin OS"), i18n("elementary OS"), i18n("NixOS"), i18n("Gentoo"), i18n("Alpine"), i18n("Void"), i18n("Rocky"), i18n("AlmaLinux"), i18n("Red Hat"), i18n("CentOS"), i18n("Kali")]
+                    i18n("Linux Mint"), i18n("EndeavourOS"), i18n("Pop!_OS"), i18n("Zorin OS"), i18n("elementary OS"), i18n("NixOS"), i18n("Gentoo"), i18n("Alpine"), i18n("Void"), i18n("Rocky"), i18n("AlmaLinux"), i18n("Red Hat"), i18n("CentOS"), i18n("Kali"), i18n("blackPanther OS"), i18n("KDE neon"), i18n("Custom")]
             currentIndex: root.cfg_logo
             onActivated: root.cfg_logo = currentIndex
         }
 
-        Image {
+        FileDialog {
+            id: logoDialog
+            title: i18n("Choose a custom logo")
+            nameFilters: [i18n("Images (*.svg *.png)")]
+            onAccepted: {
+                const url = selectedFile.toString()
+                if (url.indexOf("file://") === 0) root.cfg_customLogo = url
+            }
+        }
+
+        QQC2.Button {
+            Kirigami.FormData.label: i18n("Custom logo:")
+            visible: root.cfg_logo === Code.logos.length + 1
+            text: i18n("Choose image…")
+            onClicked: logoDialog.open()
+        }
+
+        LogoImage {
             Kirigami.FormData.label: ""
-            source: Qt.resolvedUrl("../../images/" + Code.getStandardLogo(root.cfg_logo, root.distroKey))
-            sourceSize.height: 100
-            fillMode: Image.PreserveAspectFit
+            implicitWidth: 100
+            implicitHeight: 100
+            readonly property bool custom: root.cfg_logo === Code.logos.length + 1
+            readonly property string file: Code.logoFile(custom ? 0 : root.cfg_logo, root.distroKey)
+            iconName: root.cfg_logo === 0 ? String(osLogoSensor.value || "") : ""
+            image.source: custom ? (root.cfg_customLogo.indexOf("file://") === 0 ? root.cfg_customLogo : "") : Qt.resolvedUrl("../../images/" + (file || "distro-tux.svg"))
+            fallbackSource: Qt.resolvedUrl("../../images/" + (file || "distro-tux.svg"))
         }
 
         Item {

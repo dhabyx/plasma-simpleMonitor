@@ -22,7 +22,7 @@
 // Order matters: the logo selector in the configuration uses index + 1.
 var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian",
             "linuxmint", "endeavouros", "pop", "zorin", "elementary", "nixos", "gentoo",
-            "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali"]
+            "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali", "blackpanther", "neon"]
 
 // Names (as found in the OS name, pretty name or LOGO icon of the system)
 // mapped to the bundled logos. Derivatives without their own logo use the
@@ -31,7 +31,7 @@ var aliases = {
     "arch": "arch", "archlinux": "arch", "cachyos": "arch", "garuda": "arch",
     "arcolinux": "arch", "artix": "arch", "endeavouros": "endeavouros",
     "manjaro": "manjaro", "debian": "debian", "ubuntu": "ubuntu",
-    "kubuntu": "kubuntu", "neon": "kubuntu", "fedora": "fedora",
+    "kubuntu": "kubuntu", "neon": "neon", "blackpanther": "blackpanther", "fedora": "fedora",
     "opensuse": "opensuse", "suse": "opensuse", "sles": "opensuse",
     "slackware": "slackware", "linuxmint": "linuxmint", "mint": "linuxmint",
     "pop": "pop", "zorin": "zorin", "elementary": "elementary",

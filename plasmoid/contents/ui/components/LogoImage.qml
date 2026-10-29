@@ -27,6 +27,8 @@ Item {
     // Name of a theme icon shown instead of the image (when not empty).
     property string iconName: ""
     property bool editMode: false
+    property url fallbackSource: ""
+    readonly property bool useIcon: iconName !== "" && themeIcon.status === Kirigami.Icon.Ready
     property alias image: image
 
     onFillScaleChanged: {
@@ -41,19 +43,31 @@ Item {
         property real scale: 1.0
     }
 
-    implicitWidth: iconName !== "" ? 128 : image.implicitWidth
-    implicitHeight: iconName !== "" ? 128 : image.implicitHeight
+    implicitWidth: useIcon ? 128 : (image.status === Image.Ready ? image.implicitWidth : fallback.implicitWidth)
+    implicitHeight: useIcon ? 128 : (image.status === Image.Ready ? image.implicitHeight : fallback.implicitHeight)
 
     Image {
         id: image
-        visible: root.iconName === ""
+        visible: !root.useIcon && status === Image.Ready
         anchors.centerIn: parent
         width: parent.width * d.scale
         height: parent.height * d.scale
         fillMode: Image.PreserveAspectFit
     }
 
+    Image {
+        id: fallback
+        anchors.centerIn: parent
+        width: parent.width * d.scale
+        height: parent.height * d.scale
+        fillMode: Image.PreserveAspectFit
+        source: root.fallbackSource
+        visible: !root.useIcon && image.status !== Image.Ready
+    }
+
     Kirigami.Icon {
+        id: themeIcon
+        fallback: ""
         anchors.centerIn: parent
         width: Math.min(parent.width, parent.height) * d.scale
         height: width

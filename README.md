@@ -18,6 +18,7 @@ Only needed if you use `cmake` to install this widget.
 - CMake >= 3.16
 - Extra CMake Modules (`extra-cmake-modules`)
 - Plasma Framework Development Package (`libplasma` headers/cmake files)
+- GNU gettext (`msgfmt`) to compile translations
 
 Installation
 ============
@@ -32,6 +33,9 @@ cd plasma-simpleMonitor
 cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 sudo cmake --install build
 ````
+
+CMake generates translations from PO files in the build directory. See
+[translations/README.md](translations/README.md) to update a language.
 
 ### kpackagetool6 ###
 
@@ -54,6 +58,16 @@ Simple way for make plasmoid package:
 cd plasma-simpleMonitor/plasmoid
 zip -r plasma-simpleMonitor.plasmoid contents metadata.json
 ````
+
+Distribution logos
+==================
+
+Automatic mode prefers the distribution icon installed in the current icon
+theme, then a bundled logo, then Tux. Explicit choices keep their saved indices.
+Choose Custom in the widget settings and select a local SVG or PNG; if the file
+is missing or cannot be loaded, the matching bundled logo or Tux is shown. The
+file remains in its original location, so keep it there. No network download
+is performed.
 
 Development
 ===========
