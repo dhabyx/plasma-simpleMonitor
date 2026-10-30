@@ -22,17 +22,17 @@ import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-        name: i18n("General")
+        name: i18n("Content")
         icon: "preferences-desktop-display"
         source: "config/ConfigGeneral.qml"
     }
     ConfigCategory {
-        name: i18n("Skins")
+        name: i18n("Appearance")
         icon: "preferences-desktop-theme"
         source: "config/ConfigSkins.qml"
     }
     ConfigCategory {
-        name: i18n("Miscellaneous")
+        name: i18n("Sensors")
         icon: "preferences-system-other"
         source: "config/ConfigMisc.qml"
     }

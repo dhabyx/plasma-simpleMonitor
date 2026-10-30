@@ -32,12 +32,14 @@ BaseSkin {
     ColumnLayout {
         id: mainLayout
 
-        anchors.fill: parent
-        anchors.margins: 5
+        // Keep natural vertical spacing when the host allocates extra height.
+        // The host still controls its own size, including manual resizing.
+        anchors { left: parent.left; right: parent.right; top: parent.top; margins: root.blockMargin }
         spacing: 0
 
         Item {
-            implicitHeight: datePicker.implicitHeight
+            visible: root.dateVisibility !== 2 || root.showUptime
+            implicitHeight: Math.max(datePicker.visible ? datePicker.implicitHeight : 0, uptimePicker.visible ? uptimePicker.implicitHeight : 0)
             implicitWidth: datePicker.implicitWidth
 
             Layout.fillWidth: true
@@ -46,11 +48,13 @@ BaseSkin {
 
             DatePicker {
                 id: datePicker
+                visible: root.dateVisibility !== 2
 
                 anchors { left: parent.left; leftMargin: 10 }
             }
 
             UptimePicker {
+                id: uptimePicker
                 anchors { top: parent.top; right: parent.right }
                 visible: root.showUptime
                 uptime: root.uptime
@@ -64,15 +68,17 @@ BaseSkin {
             rowSpacing: 0
 
             Layout.fillWidth: true
-            Layout.topMargin: 5
+            Layout.topMargin: root.blockMargin
 
             DistroBlock {
                 engine: root.engine
+            blockSpacing: root.blockSpacing
 
                 Layout.rowSpan: 3
             }
 
             TimePicker {
+                visible: root.timeVisibility !== 2
                 Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: -5
                 Layout.leftMargin: 10
@@ -84,6 +90,7 @@ BaseSkin {
             }
 
             Rectangle {
+                visible: root.timeVisibility !== 2
                 color: "white"
 
                 Layout.leftMargin: 2
@@ -96,9 +103,9 @@ BaseSkin {
             ColumnLayout {
                 spacing: 0
 
-                Layout.leftMargin: 5
-                Layout.rightMargin: 5
-                Layout.topMargin: 5
+                Layout.leftMargin: root.blockMargin
+                Layout.rightMargin: root.blockMargin
+                Layout.topMargin: root.blockMargin
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
@@ -144,21 +151,26 @@ BaseSkin {
             Layout.minimumHeight: 3
             Layout.maximumHeight: 3
             Layout.preferredHeight: 3
-            Layout.topMargin: 5
+            Layout.topMargin: root.blockMargin
         }
 
-        CpuWidget {
+        CpuColumns {
             model: root.cpuModel
+            requestedColumns: root.cpuColumns
+            showCpuFrequency: root.showCpuFrequency
             coloredCpuLoad: root.coloredCpuLoad
             flatCpuLoad: root.flatCpuLoad
             indicatorHeight: root.indicatorHeight
             direction: root.direction
 
-            Layout.leftMargin: 5
-            Layout.topMargin: 5
+            Layout.leftMargin: root.blockMargin
+            Layout.topMargin: root.blockMargin
+            Layout.maximumWidth: root.cpuColumns === 0 ? Math.max(100, availableScreenWidth * 0.8) : Infinity
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignTop
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
+            Layout.maximumHeight: implicitHeight
             Layout.preferredWidth: implicitWidth
             Layout.preferredHeight: implicitHeight
         }
@@ -170,7 +182,7 @@ BaseSkin {
             Layout.minimumHeight: 3
             Layout.maximumHeight: 3
             Layout.preferredHeight: 3
-            Layout.topMargin: 5
+            Layout.topMargin: root.blockMargin
         }
 
         MemArea {
@@ -180,7 +192,7 @@ BaseSkin {
 
             Layout.topMargin: 2
             Layout.leftMargin: 10
-            Layout.rightMargin: 5
+            Layout.rightMargin: root.blockMargin
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
@@ -196,7 +208,7 @@ BaseSkin {
             Layout.minimumHeight: 3
             Layout.maximumHeight: 3
             Layout.preferredHeight: 3
-            Layout.topMargin: 5
+            Layout.topMargin: root.blockMargin
         }
 
         MemArea {
@@ -208,7 +220,7 @@ BaseSkin {
 
             Layout.topMargin: 2
             Layout.leftMargin: 10
-            Layout.rightMargin: 5
+            Layout.rightMargin: root.blockMargin
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight
@@ -224,8 +236,8 @@ BaseSkin {
             Layout.minimumHeight: 3
             Layout.maximumHeight: 3
             Layout.preferredHeight: 3
-            Layout.topMargin: 5
-            Layout.rightMargin: 5
+            Layout.topMargin: root.blockMargin
+            Layout.rightMargin: root.blockMargin
         }
 
         NetArea {
@@ -241,7 +253,7 @@ BaseSkin {
 
             Layout.topMargin: 2
             Layout.leftMargin: 10
-            Layout.rightMargin: 5
+            Layout.rightMargin: root.blockMargin
             Layout.fillWidth: true
             Layout.minimumWidth: implicitWidth
             Layout.minimumHeight: implicitHeight

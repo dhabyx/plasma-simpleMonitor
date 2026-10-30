@@ -1,0 +1,584 @@
+# plasma-simpleMonitor language translation file.
+# Copyright (C) 2013-2016 Dhaby Xiloj, Konstantin Shtepa
+# This file is distributed under the same license as the plasma-simpleMonitor package.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-29 15:53-0600\n"
+"PO-Revision-Date: 2017-04-06 14:59+0200\n"
+"Last-Translator: Barcza Károly <kbarcza@blackpanther.hu>\n"
+"Language-Team: \n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../plasmoid/contents/config/config.qml:25
+msgid "Content"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:30
+msgid "Appearance"
+msgstr ""
+
+#: ../plasmoid/contents/config/config.qml:35
+msgid "Sensors"
+msgstr ""
+
+#: ../plasmoid/contents/ui/SystemData.qml:222
+msgid "GPU:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/SystemData.qml:222
+#: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
+#, fuzzy
+msgid "GPU %1:"
+msgstr "CPU %1:"
+
+#: ../plasmoid/contents/ui/SystemData.qml:295
+#, fuzzy
+msgid "CPU avg:"
+msgstr "CPU %1:"
+
+#: ../plasmoid/contents/ui/SystemData.qml:302
+#, fuzzy
+msgid "CPU max:"
+msgstr "CPU %1:"
+
+#: ../plasmoid/contents/ui/components/CpuCoreDelegate.qml:19
+#: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:62
+#: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:64
+msgid "CPU %1:"
+msgstr "CPU %1:"
+
+#: ../plasmoid/contents/ui/components/CpuCoreDelegate.qml:92
+#: ../plasmoid/contents/ui/skins/MinimalisticSkin.qml:105
+msgid "Frequency unavailable"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:27
+msgid "Show:"
+msgstr "Megjelenítés:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:27
+msgid "Distribution logo"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:28
+#, fuzzy
+msgid "GPU temperature"
+msgstr "CPU magas hőmérséklet:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:29
+msgid "Swap"
+msgstr "Lapózóterület (swap)"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:30
+msgid "Uptime"
+msgstr "Aktivitási idő"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:31
+msgid "Network"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:32
+msgid "CPU frequency"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:34
+msgid "Date:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:35
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:41
+msgid "According to presentation"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:35
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:41
+#, fuzzy
+msgid "Show"
+msgstr "Megjelenítés:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:35
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:41
+msgid "Hide"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:40
+#, fuzzy
+msgid "Time:"
+msgstr "Ébren:"
+
+#: ../plasmoid/contents/ui/config/ConfigGeneral.qml:47
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:64
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:149
+msgid "Restore page defaults"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:32
+msgid "Temperature units:"
+msgstr "Hőmérséklet mértékegységek:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:33
+msgid "Celsius °C"
+msgstr "Celsius-fok (°C)"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:33
+msgid "Fahrenheit °F"
+msgstr "Fahrenheit-fok (°F)"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:38
+#, fuzzy
+msgid "CPU temperature:"
+msgstr "CPU magas hőmérséklet:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:39
+msgid "Per core"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:39
+msgid "Average"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:39
+msgid "Maximum"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:43
+msgid "CPU High Temperature:"
+msgstr "CPU magas hőmérséklet:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:44
+msgid "CPU Critical Temperature:"
+msgstr "CPU kritikus hőmérséklet:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:46
+msgid "Update interval:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:50
+msgctxt "Abbreviation for seconds"
+msgid "s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:54
+msgid "Network speed unit:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:56
+msgid "Bytes per second"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:56
+msgid "Bits per second"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:60
+msgid "Network:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:60
+msgid "Ping"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:61
+msgid "Host to ping:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:58
+msgid "Presentation:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:59
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:111
+msgid "Default"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:59
+msgid "Column"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:59
+msgid "Minimalistic"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:64
+#, fuzzy
+msgid "Preview:"
+msgstr "előnézet:"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:84
+msgid "Layout:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:85
+msgid "Compact"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:90
+#, fuzzy
+msgid "CPU columns:"
+msgstr "CPU %1:"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:92
+msgid "Automatic"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:98
+msgid "Minimalistic shows a CPU summary instead of per-core columns."
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:103
+msgid "Background color:"
+msgstr "Háttérszín:"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:104
+msgid "Standard"
+msgstr "Alap"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:104
+msgid "Crystal"
+msgstr "Kristály"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:104
+msgid "Translucent"
+msgstr "Áttetsző"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:109
+msgid "Logo:"
+msgstr "Embléma:"
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:111
+msgid "Tux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:111
+msgid "Slackware"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:111
+msgid "Ubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:111
+msgid "Kubuntu"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:112
+msgid "OpenSUSE"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:112
+msgid "Manjaro"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:112
+msgid "Arch"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:112
+msgid "Fedora"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:112
+msgid "Debian"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Linux Mint"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "EndeavourOS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Pop!_OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Zorin OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "elementary OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "NixOS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Gentoo"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Alpine"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Void"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Rocky"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "AlmaLinux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Red Hat"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "CentOS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Kali"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "blackPanther OS"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "KDE neon"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:113
+msgid "Custom"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:119
+msgid "Choose a custom logo"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:120
+msgid "Images (*.svg *.png)"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:127
+msgid "Custom logo:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:130
+msgid "Choose image…"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:144
+msgid "CPU load indicator style:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:144
+msgid "Colored"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:145
+msgid "Flat"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/ConfigSkins.qml:146
+msgid "CPU load indicator height:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:89
+msgid "Example Linux"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:95
+msgid "Mon 12 May"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:97
+#, fuzzy
+msgid "Uptime: 2 h"
+msgstr "Ébren:"
+
+#: ../plasmoid/contents/ui/config/Preview.qml:108
+msgid "CPU: 42%"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:108
+#, fuzzy
+msgid "CPU temperature: 54 °C"
+msgstr "CPU magas hőmérséklet:"
+
+#: ../plasmoid/contents/ui/config/Preview.qml:109
+msgid "Average frequency: 3.20 GHz"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:110
+msgid "GPU: 48 °C"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:111
+msgid "Memory: 8 / 16 GiB"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:112
+msgid "Swap: 1 / 4 GiB"
+msgstr ""
+
+#: ../plasmoid/contents/ui/config/Preview.qml:113
+msgid "Network: ↓ 2.4 MB/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/main.qml:50
+msgid "Lock image scaling"
+msgstr "Képméretezés zárása"
+
+#: ../plasmoid/contents/ui/main.qml:50
+msgid "Unlock image scaling"
+msgstr "Képméretezés feloldása"
+
+#: ../plasmoid/contents/ui/monitorWidgets/AverageCPU.qml:52
+msgid "CPU:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/AverageCPU.qml:57
+#, javascript-format
+msgid "%1%"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:47
+msgid "Mem:"
+msgstr "Mem:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:52
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:69
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:80
+msgid "%1 GiB"
+msgstr "%1 GiB"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:63
+msgid "Used:"
+msgstr "Használt:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/MemArea.qml:74
+msgid "Free:"
+msgstr "Szabad: "
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:46
+#, fuzzy
+msgid "%1 Gbit/s"
+msgstr "%1 GiB"
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:47
+msgid "%1 Mbit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:48
+msgid "%1 kbit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:49
+msgid "%1 bit/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:51
+#, fuzzy
+msgid "%1 GiB/s"
+msgstr "%1 GiB"
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:52
+msgid "%1 MiB/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:53
+msgid "%1 KiB/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:54
+msgid "%1 B/s"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:71
+msgid "Net:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:76
+msgid "offline"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:84
+msgid "Ping:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:90
+msgid "no reply"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:90
+msgid "%1 ms"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:99
+msgid "Down:"
+msgstr ""
+
+#: ../plasmoid/contents/ui/monitorWidgets/NetArea.qml:111
+#, fuzzy
+msgid "Up:"
+msgstr "Ébren:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
+msgid "Uptime:"
+msgstr "Ébren:"
+
+#: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:43
+msgid "%1d %2:%3"
+msgstr "%1 nap %2.%3"
+
+#: ../plasmoid/contents/ui/skins/ColumnSkin.qml:214
+#: ../plasmoid/contents/ui/skins/DefaultSkin.qml:214
+#: ../plasmoid/contents/ui/skins/MinimalisticSkin.qml:149
+msgid "Swap:"
+msgstr "Lapozófájl:"
+
+#: ../plasmoid/contents/ui/skins/MinimalisticSkin.qml:98
+msgid "Average frequency: %1"
+msgstr ""
+
+#~ msgid "General"
+#~ msgstr "Általános"
+
+#~ msgid "Skins"
+#~ msgstr "Felületek"
+
+#, fuzzy
+#~ msgid "Temperature settings:"
+#~ msgstr "Hőmérséklet beállítások:"
+
+#, fuzzy
+#~ msgid ""
+#~ "You can use the <b>sensors</b> command to find the appropriate values for "
+#~ "this section."
+#~ msgstr ""
+#~ "<i>(A megfelelő értékek elhelyzéséhez használni tudod a <strong>sensors</"
+#~ "strong> parancsot is ebben a szekcióban)</i>"
+
+#, fuzzy
+#~ msgid "Style settings:"
+#~ msgstr "Hőmérséklet beállítások:"
+
+#, fuzzy
+#~ msgid "Performance settings:"
+#~ msgstr "Hőmérséklet beállítások:"
+
+#~ msgid "Skin:"
+#~ msgstr "Megjelenés:"
+
+#~ msgid "Parts settings:"
+#~ msgstr "Összetevő beállítások:"
+
+#~ msgid "Core %1:"
+#~ msgstr "Mag %1:"

@@ -19,6 +19,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 
 import "../monitorWidgets"
 import "../components"
@@ -32,15 +33,25 @@ BaseSkin {
     RowLayout {
         id: mainLayout
 
-        anchors.fill: parent
-        anchors.margins: 5
+        // Keep natural vertical spacing when the host allocates extra height.
+        // The host still controls its own size, including manual resizing.
+        anchors { left: parent.left; right: parent.right; top: parent.top; margins: root.blockMargin }
         spacing: 0
 
         DistroBlock {
             engine: root.engine
+            blockSpacing: root.blockSpacing
 
-            Layout.topMargin: 5
+            Layout.topMargin: root.blockMargin
 
+            DatePicker {
+                visible: root.dateVisibility === 1
+                Layout.alignment: Qt.AlignCenter
+            }
+            TimePicker {
+                visible: root.timeVisibility === 1
+                Layout.alignment: Qt.AlignCenter
+            }
             UptimePicker {
                 visible: root.showUptime
                 uptime: root.uptime
@@ -60,7 +71,7 @@ BaseSkin {
             Layout.maximumWidth: 3
             Layout.preferredWidth: 3
             Layout.fillHeight: true
-            Layout.topMargin: 5
+            Layout.topMargin: root.blockMargin
         }
 
         ColumnLayout {
@@ -75,12 +86,25 @@ BaseSkin {
 
                 Layout.topMargin: 2
                 Layout.leftMargin: 10
-                Layout.rightMargin: 5
+                Layout.rightMargin: root.blockMargin
                 Layout.fillWidth: true
                 Layout.minimumWidth: implicitWidth
                 Layout.minimumHeight: implicitHeight
                 Layout.preferredWidth: implicitWidth
                 Layout.maximumHeight: implicitHeight
+            }
+
+            Text {
+                visible: root.showCpuFrequency
+                text: i18n("Average frequency: %1", root.engine.hasAvgFrequency ? (root.engine.avgFrequencyHz / 1e9).toFixed(2) + " GHz" : "—")
+                color: "white"
+                font.pointSize: 9
+                Layout.leftMargin: 10
+                Layout.fillWidth: true
+                elide: Text.ElideRight
+                QQC2.ToolTip.visible: averageFrequencyHover.containsMouse && !root.engine.hasAvgFrequency
+                QQC2.ToolTip.text: i18n("Frequency unavailable")
+                MouseArea { id: averageFrequencyHover; anchors.fill: parent; hoverEnabled: true; acceptedButtons: Qt.NoButton }
             }
 
             Rectangle {
@@ -90,8 +114,8 @@ BaseSkin {
                 Layout.minimumHeight: 3
                 Layout.maximumHeight: 3
                 Layout.preferredHeight: 3
-                Layout.topMargin: 5
-                Layout.rightMargin: 5
+                Layout.topMargin: root.blockMargin
+                Layout.rightMargin: root.blockMargin
             }
 
             MemArea {
@@ -101,7 +125,7 @@ BaseSkin {
 
                 Layout.topMargin: 2
                 Layout.leftMargin: 10
-                Layout.rightMargin: 5
+                Layout.rightMargin: root.blockMargin
                 Layout.fillWidth: true
                 Layout.minimumWidth: implicitWidth
                 Layout.minimumHeight: implicitHeight
@@ -117,8 +141,8 @@ BaseSkin {
                 Layout.minimumHeight: 3
                 Layout.maximumHeight: 3
                 Layout.preferredHeight: 3
-                Layout.topMargin: 5
-                Layout.rightMargin: 5
+                Layout.topMargin: root.blockMargin
+                Layout.rightMargin: root.blockMargin
             }
 
             MemArea {
@@ -130,7 +154,7 @@ BaseSkin {
 
                 Layout.topMargin: 2
                 Layout.leftMargin: 10
-                Layout.rightMargin: 5
+                Layout.rightMargin: root.blockMargin
                 Layout.fillWidth: true
                 Layout.minimumWidth: implicitWidth
                 Layout.minimumHeight: implicitHeight
@@ -146,8 +170,8 @@ BaseSkin {
                 Layout.minimumHeight: 3
                 Layout.maximumHeight: 3
                 Layout.preferredHeight: 3
-                Layout.topMargin: 5
-                Layout.rightMargin: 5
+                Layout.topMargin: root.blockMargin
+                Layout.rightMargin: root.blockMargin
             }
 
             NetArea {
@@ -163,7 +187,7 @@ BaseSkin {
 
                 Layout.topMargin: 2
                 Layout.leftMargin: 10
-                Layout.rightMargin: 5
+                Layout.rightMargin: root.blockMargin
                 Layout.fillWidth: true
                 Layout.minimumWidth: implicitWidth
                 Layout.minimumHeight: implicitHeight

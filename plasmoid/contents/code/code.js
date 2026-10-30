@@ -22,7 +22,7 @@
 // Order matters: the logo selector in the configuration uses index + 1.
 var logos = ["tux", "slackware", "ubuntu", "kubuntu", "opensuse", "manjaro", "arch", "fedora", "debian",
             "linuxmint", "endeavouros", "pop", "zorin", "elementary", "nixos", "gentoo",
-            "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali"]
+            "alpine", "void", "rocky", "almalinux", "rhel", "centos", "kali", "blackpanther", "neon"]
 
 // Names (as found in the OS name, pretty name or LOGO icon of the system)
 // mapped to the bundled logos. Derivatives without their own logo use the
@@ -31,7 +31,7 @@ var aliases = {
     "arch": "arch", "archlinux": "arch", "cachyos": "arch", "garuda": "arch",
     "arcolinux": "arch", "artix": "arch", "endeavouros": "endeavouros",
     "manjaro": "manjaro", "debian": "debian", "ubuntu": "ubuntu",
-    "kubuntu": "kubuntu", "neon": "kubuntu", "fedora": "fedora",
+    "kubuntu": "kubuntu", "neon": "neon", "blackpanther": "blackpanther", "fedora": "fedora",
     "opensuse": "opensuse", "suse": "opensuse", "sles": "opensuse",
     "slackware": "slackware", "linuxmint": "linuxmint", "mint": "linuxmint",
     "pop": "pop", "zorin": "zorin", "elementary": "elementary",
@@ -97,20 +97,6 @@ function num(value, fallback) {
     return (value === undefined || value === null || isNaN(n)) ? fallback : n
 }
 
-/**
- * Shell command used to find the number of physical CPU cores (the sensors
- * only know about logical CPUs).
- */
-var cpuCoresCommand = "grep -m1 'cpu cores' /proc/cpuinfo"
-
-/**
- * Parses the "cpu cores" line of /proc/cpuinfo. Returns 0 when unknown.
- */
-function parseCpuCores(text) {
-    var match = /cpu cores\s*:\s*(\d+)/.exec(String(text))
-    return match ? parseInt(match[1]) : 0
-}
-
 // Route lookup for a public address: gives the interface and the local IP of
 // the connection in use, without sending any packet.
 var netRouteCommand = "ip -o route get 1.1.1.1"
@@ -147,4 +133,67 @@ function parsePing(text) {
 
 function toFahrenheit(celsius) {
     return celsius * 9 / 5 + 32
+}
+
+/** Convert a finite positive frequency from the sensor's declared unit to Hz.
+ * unitValues are KSysGuard's Hz, kHz, MHz, GHz, THz and PHz enums in order.
+ * Return null for unavailable data or an unknown unit.
+ */
+function frequencyHz(value, unit, unitValues) {
+    if (typeof value !== "number" || !isFinite(value) || value <= 0)
+        return null
+    var index = unitValues.indexOf(unit)
+    if (index < 0 || index >= 6)
+        return null
+    var hz = value * Math.pow(1000, index)
+    return isFinite(hz) ? hz : null
+}
+
+// Parse os-release as data, never as shell code. Only the quoting and escapes
+// defined for os-release are interpreted; substitutions remain literal.
+function parseOsRelease(text) {
+    var values = {};
+    String(text || "").split(/\r?\n/).forEach(function(line) {
+        var match = line.match(/^\s*([A-Z][A-Z0-9_]*)=(.*)\s*$/);
+        if (!match) return;
+        var value = match[2].trim();
+        if (value.charAt(0) === '"') {
+            if (value.length < 2 || value.charAt(value.length - 1) !== '"') return;
+            value = value.slice(1, -1).replace(/\\([\\"$`])/g, '$1');
+        } else if (value.charAt(0) === "'") {
+            if (value.length < 2 || value.charAt(value.length - 1) !== "'") return;
+            value = value.slice(1, -1);
+        } else if (/\s/.test(value)) {
+            return;
+        }
+        values[match[1]] = value;
+    });
+    var versionLabel = values.VERSION || "";
+    var parentheses = versionLabel.match(/\(([^()]*)\)\s*$/);
+    var officialCodename = values.UBUNTU_CODENAME || values.VERSION_CODENAME || "";
+    var label = parentheses ? parentheses[1].trim() : "";
+    var firstWord = label.split(/\s+/)[0];
+    var codename = officialCodename;
+    if (officialCodename && label &&
+        (label.toLowerCase() === officialCodename.toLowerCase() ||
+         firstWord.toLowerCase() === officialCodename.toLowerCase()))
+        codename = label;
+    return {
+        name: values.NAME || "",
+        version: values.VERSION_ID || "",
+        codename: codename
+    };
+}
+
+function cpuSensorIds(paths, kind) {
+    if (kind !== "usage" && kind !== "temperature" && kind !== "frequency") return [];
+    var pattern = new RegExp("^cpu/cpu([0-9]+)/" + kind + "$");
+    var seen = {}, result = [];
+    for (var i = 0; i < paths.length; ++i) {
+        var m = pattern.exec(String(paths[i]));
+        if (!m) continue;
+        var id = Number(m[1]);
+        if (!seen[id]) { seen[id] = true; result.push(id); }
+    }
+    return result.sort(function(a,b) { return a-b; });
 }

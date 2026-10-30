@@ -78,3 +78,6 @@ build
 *.exe
 *.plasmoid
 .idea/
+
+# Release assets
+/dist/
