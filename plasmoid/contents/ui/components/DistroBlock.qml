@@ -30,6 +30,8 @@ ColumnLayout {
 
     // The SystemData object.
     property QtObject engine
+    property int blockSpacing: engine.compactLayout === true ? 2 : 4
+    spacing: blockSpacing
 
     Layout.fillWidth: true
     Layout.fillHeight: true
@@ -40,6 +42,7 @@ ColumnLayout {
 
     LogoImage {
         id: distroLogo
+        visible: root.engine.showLogo !== false
 
         // Fit landscape logos into a 160x100 area without enlarging the skin.
         // Square logos remain 100x100; preserve aspect ratio for all shapes.
@@ -65,13 +68,21 @@ ColumnLayout {
     }
 
     OsInfoItem {
+        compactLayout: root.engine.compactLayout === true
+        autoFitIssue: root.engine.autoFitIssue || ""
         distroName: root.engine.distroName
         distroVersion: root.engine.distroVersion
+        distroCodename: root.engine.distroCodename || ""
+        showDistroName: root.engine.showDistroName !== false
+        showDistroVersion: root.engine.showDistroVersion !== false
+        showDistroCodename: root.engine.showDistroCodename !== false
+        distroLayout: root.engine.distroLayout || 0
         kernelName: root.engine.kernelName
         kernelVersion: root.engine.kernelVersion
 
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
         Layout.topMargin: 2
+        Layout.fillWidth: true
         Layout.minimumHeight: implicitHeight
         Layout.maximumHeight: implicitHeight
         Layout.minimumWidth: implicitWidth

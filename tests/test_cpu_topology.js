@@ -1,0 +1,20 @@
+const assert = require('assert');
+const fs = require('fs');
+const vm = require('vm');
+const path = require('path');
+const code = fs.readFileSync(path.join(__dirname, '../plasmoid/contents/code/code.js'), 'utf8').replace('.pragma library', '');
+const c = vm.createContext({}); vm.runInContext(code, c);
+const parse = input => JSON.stringify(c.parseCpuTopology(input));
+const proc = ids => ids.map(i => `processor : ${i}\n`).join('\n');
+let siblings=''; for(let i=0;i<12;i++) siblings += `${i}=${i%6},${i%6+6}\n`;
+assert.strictEqual(parse(proc([...Array(12).keys()])+'\n--SIBLINGS--\n'+siblings), '[0,1,2,3,4,5]');
+assert.strictEqual(parse(proc([12,8,9,6,10])+'\n--SIBLINGS--\n8=8-9\n9=8-9\n6=4,6\n10=10,12\n12=10,12\n'), '[6,8,10]');
+// Interleaved siblings across two packages, with offline IDs absent from proc.
+assert.strictEqual(parse(proc([0,1,2,3,4,5,6,7])+'\n--SIBLINGS--\n0=0-1\n1=0-1\n2=2-3\n3=2-3\n4=4-5\n5=4-5\n6=6-7\n7=6-7\n'), '[0,2,4,6]');
+assert.strictEqual(parse(proc([5,2])), '[2,5]');
+assert.strictEqual(parse(proc([5,2])+'\n--SIBLINGS--\n2=invalid\n'), '[2,5]');
+assert.strictEqual(parse(proc([0,2])+'\n--SIBLINGS--\n0=0-1\n2=0-1\n'), '[0,2]');
+const twoSockets = 'processor: 0\nphysical id: 0\ncore id: 0\n\nprocessor: 4\nphysical id: 1\ncore id: 0\n\nprocessor: 8\nphysical id: 0\ncore id: 0\n\nprocessor: 12\nphysical id: 1\ncore id: 0\n';
+assert.strictEqual(parse(twoSockets+'\n--SIBLINGS--\n0=0,8\n8=0,8\n4=4,12\n12=4,12\n'), '[0,4]');
+assert.strictEqual(parse(''), '[]');
+console.log('Physical CPU topology parsing passed');

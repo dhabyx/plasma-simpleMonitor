@@ -3,6 +3,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Development preview (`develop`) - 2026-10-30
+
+### Added
+- Content, Appearance and Sensors preferences with a synthetic live preview.
+- Optional CPU frequency, compact spacing, CPU columns and content visibility.
+- Independent distribution name, version and codename, on one or several lines.
+- Local custom SVG/PNG logos, KDE neon and blackPanther artwork, and Hungarian translations.
+- Opt-in content auto-fit with guarded window and desktop-grid adapters.
+- Regression tests for topology, frequency, layouts, configuration and sizing.
+
+### Changed
+- Translation catalogs are generated from PO sources during the CMake build.
+- Bundled SVGs are rendered at adequate resolution and landscape logos retain their proportions.
+- CPU temperatures follow online sibling topology; missing readings are excluded from averages.
+- Layouts keep natural spacing when their host retains additional height.
+- Installation, removal, contributor credits and artwork sources are documented.
+
+### Preview limitations
+- Desktop auto-fit depends on private Plasma 6.6 interfaces and was validated in an isolated grid.
+- Some artwork provenance/usage questions and translations remain pending; see LOGO-SOURCES.md.
+
 ## [0.7.0] - Unreleased
     ### Changed
     - Ported to Plasma 6 / Qt 6 (PlasmoidItem, metadata.json, kpackagetool6).

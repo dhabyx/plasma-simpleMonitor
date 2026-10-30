@@ -148,3 +148,91 @@ function parsePing(text) {
 function toFahrenheit(celsius) {
     return celsius * 9 / 5 + 32
 }
+
+/** Convert a finite positive frequency from the sensor's declared unit to Hz.
+ * unitValues are KSysGuard's Hz, kHz, MHz, GHz, THz and PHz enums in order.
+ * Return null for unavailable data or an unknown unit.
+ */
+function frequencyHz(value, unit, unitValues) {
+    if (typeof value !== "number" || !isFinite(value) || value <= 0)
+        return null
+    var index = unitValues.indexOf(unit)
+    if (index < 0 || index >= 6)
+        return null
+    var hz = value * Math.pow(1000, index)
+    return isFinite(hz) ? hz : null
+}
+
+// KSystemStats names sensors using online /proc/cpuinfo processor IDs. The
+// kernel's sibling masks identify threads belonging to the same physical core.
+// Missing sibling information keeps a processor separate, never guessed.
+var cpuTopologyCommand = "cat /proc/cpuinfo; printf '\n--SIBLINGS--\n'; for d in /sys/devices/system/cpu/cpu[0-9]*; do [ -r \"$d/topology/thread_siblings_list\" ] || continue; printf '%s=' \"${d##*/cpu}\"; cat \"$d/topology/thread_siblings_list\"; done"
+function parseCpuTopology(text) {
+    var parts = String(text || "").split(/\n--SIBLINGS--\n/)
+    var siblings = {}
+    var lines = (parts[1] || "").split("\n")
+    for (var i = 0; i < lines.length; ++i) {
+        var pair = /^(\d+)=([0-9,-]+)$/.exec(lines[i].trim())
+        if (pair) siblings[pair[1]] = pair[2]
+    }
+    var processors = [], match
+    var pattern = /^processor\s*:\s*(\d+)\s*$/gm
+    while ((match = pattern.exec(parts[0])) !== null) processors.push(Number(match[1]))
+    processors.sort(function(a, b) { return a - b })
+    function includesId(mask, id) {
+        var ranges = mask.split(","), found = false
+        for (var r = 0; r < ranges.length; ++r) {
+            var bounds = /^(\d+)(?:-(\d+))?$/.exec(ranges[r])
+            if (!bounds) return false
+            var first = Number(bounds[1]), last = bounds[2] === undefined ? first : Number(bounds[2])
+            if (last < first) return false
+            if (id >= first && id <= last) found = true
+        }
+        return found
+    }
+    var seen = {}, ids = []
+    for (var j = 0; j < processors.length; ++j) {
+        var id = processors[j]
+        var key = siblings[id] && includesId(siblings[id], id) ? "siblings:" + siblings[id] : "cpu:" + id
+        if (seen[key]) continue
+        seen[key] = true
+        ids.push(id)
+    }
+    return ids
+}
+
+// Parse os-release as data, never as shell code. Only the quoting and escapes
+// defined for os-release are interpreted; substitutions remain literal.
+function parseOsRelease(text) {
+    var values = {};
+    String(text || "").split(/\r?\n/).forEach(function(line) {
+        var match = line.match(/^\s*([A-Z][A-Z0-9_]*)=(.*)\s*$/);
+        if (!match) return;
+        var value = match[2].trim();
+        if (value.charAt(0) === '"') {
+            if (value.length < 2 || value.charAt(value.length - 1) !== '"') return;
+            value = value.slice(1, -1).replace(/\\([\\"$`])/g, '$1');
+        } else if (value.charAt(0) === "'") {
+            if (value.length < 2 || value.charAt(value.length - 1) !== "'") return;
+            value = value.slice(1, -1);
+        } else if (/\s/.test(value)) {
+            return;
+        }
+        values[match[1]] = value;
+    });
+    var versionLabel = values.VERSION || "";
+    var parentheses = versionLabel.match(/\(([^()]*)\)\s*$/);
+    var officialCodename = values.UBUNTU_CODENAME || values.VERSION_CODENAME || "";
+    var label = parentheses ? parentheses[1].trim() : "";
+    var firstWord = label.split(/\s+/)[0];
+    var codename = officialCodename;
+    if (officialCodename && label &&
+        (label.toLowerCase() === officialCodename.toLowerCase() ||
+         firstWord.toLowerCase() === officialCodename.toLowerCase()))
+        codename = label;
+    return {
+        name: values.NAME || "",
+        version: values.VERSION_ID || "",
+        codename: codename
+    };
+}

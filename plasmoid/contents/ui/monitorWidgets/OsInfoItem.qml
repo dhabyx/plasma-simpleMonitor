@@ -19,18 +19,35 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 
 
 Item {
     id: root
+    property bool compactLayout: false
+    property string autoFitIssue: ""
     property string distroName: ""
     property string distroVersion: ""
+    property string distroCodename: ""
+    property bool showDistroName: true
+    property bool showDistroVersion: true
+    property bool showDistroCodename: true
+    property int distroLayout: 0
+
+    readonly property string distroText: {
+        const fields = []
+        if (showDistroName && distroName.trim()) fields.push(distroName.trim())
+        if (showDistroVersion && distroVersion.trim()) fields.push(distroVersion.trim())
+        if (showDistroCodename && distroCodename.trim()) fields.push(distroCodename.trim())
+        return fields.join(distroLayout === 1 ? "\n" : " ")
+    }
 
     property string kernelName: ""
     property string kernelVersion: ""
 
-    implicitWidth: infoColumn.implicitWidth
-    implicitHeight: infoColumn.implicitHeight
+    // Keep long distribution names from widening the entire skin.
+    implicitWidth: 180
+    implicitHeight: infoColumn.implicitHeight + (compactLayout ? 8 : 16)
 
     FontLoader {
         id: mondaRegular
@@ -40,33 +57,53 @@ Item {
     ColumnLayout {
         id: infoColumn
 
-        spacing: 1
+        spacing: root.compactLayout ? 2 : 4
         anchors.fill: parent
+        anchors.leftMargin: root.compactLayout ? 8 : 12
+        anchors.rightMargin: root.compactLayout ? 8 : 12
+        anchors.topMargin: root.compactLayout ? 4 : 8
+        anchors.bottomMargin: root.compactLayout ? 4 : 8
 
         Text {
             id: distroInfo
-            text: (distroVersion.indexOf(',') >= 0) ?
-                      distroName + " "
-                      + distroVersion.substring(0,distroVersion.indexOf(','))
-                      + '\n'
-                      + distroVersion.substring(distroVersion.indexOf(',')+2, distroVersion.length)
-                    : distroName + " " + distroVersion
+            text: root.distroText
+            visible: text.length > 0
             color: "white"
 
-            lineHeight: 0.6
+            lineHeight: 1.1
+            Layout.fillWidth: true
+            wrapMode: Text.WordWrap
             Layout.alignment: Qt.AlignHCenter
             horizontalAlignment: Text.AlignHCenter
             font { family: mondaRegular.name; pointSize: 9 }
         }
         
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 2
         Text {
             id: kernelInfo
             text: kernelName + " " + kernelVersion
+            Layout.fillWidth: true
+            elide: Text.ElideRight
+            fontSizeMode: Text.HorizontalFit
+            minimumPointSize: 8
             color: "white"
             Layout.alignment: Qt.AlignHCenter
-//            lineHeight: 0.6
             horizontalAlignment: Text.AlignHCenter
             font { family: mondaRegular.name; pointSize: 9 }
+        }
+        Text {
+            visible: root.autoFitIssue !== ""
+            text: "⚠"
+            color: "#ffc766"
+            font.pixelSize: 14
+            QQC2.ToolTip.visible: warningHover.hovered
+            QQC2.ToolTip.text: !visible ? "" : root.autoFitIssue === "no-space"
+                ? i18n("Not enough space to fit. Free space or disable automatic fitting.")
+                : i18n("Automatic fitting is unavailable in this host; you can resize manually.")
+            HoverHandler { id: warningHover }
+        }
         }
     }
 }

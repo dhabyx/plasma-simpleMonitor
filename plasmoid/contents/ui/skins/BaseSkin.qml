@@ -25,6 +25,15 @@ Item {
 
     property QtObject engine
 
+    readonly property bool showLogo: engine.showLogo
+    readonly property bool showCpuFrequency: engine.showCpuFrequency
+    readonly property bool compactLayout: engine.compactLayout
+    readonly property int dateVisibility: engine.dateVisibility
+    readonly property int timeVisibility: engine.timeVisibility
+    readonly property int cpuColumns: engine.cpuColumns
+    readonly property int blockMargin: compactLayout ? 3 : 5
+    readonly property int blockSpacing: compactLayout ? 2 : 4
+
     readonly property int bgColor:           engine.bgColor
     readonly property int logo:              engine.logo
     readonly property bool showGpuTemp:      engine.showGpuTemp

@@ -49,6 +49,7 @@ ListView {
 
         required property int index
         required property real val
+        required property bool hasValue
         required property string dataUnits
         required property string coreLabelStr
 
@@ -68,8 +69,8 @@ ListView {
         Text {
             id: unitLabel
             anchors.right: parent.right
-            text: coreTempList.tempUnit === 0 ? Math.floor(coreListTemp.val) + coreListTemp.dataUnits
-                                               : Math.floor(coreListTemp.val * 9 / 5 + 32) + "°F"
+            text: !coreListTemp.hasValue ? "—" : (coreTempList.tempUnit === 0 ? Math.floor(coreListTemp.val) + coreListTemp.dataUnits
+                                               : Math.floor(coreListTemp.val * 9 / 5 + 32) + "°F")
             font.bold: true
             font.pointSize: 10
             color: "white"
@@ -82,7 +83,7 @@ ListView {
             anchors.topMargin: 1
             anchors.left: parent.left
             height: 11
-            width: Math.max(0, Math.min(parent.width, Math.floor(coreListTemp.val / coreTempList.criticalTemp * parent.width)))
+            width: Math.max(0, Math.min(parent.width, Math.floor((coreListTemp.hasValue ? coreListTemp.val : 0) / coreTempList.criticalTemp * parent.width)))
             color: "transparent"
             clip: true
 

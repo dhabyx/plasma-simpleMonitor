@@ -71,6 +71,32 @@
             <default>1.0</default>
         </entry>
 
+        <!-- New options retain the previous presentation by default. -->
+        <entry name="showLogo" type="Bool"><label>Show logo</label><default>true</default></entry>
+        <entry name="showDistroName" type="Bool"><label>Show distribution name</label><default>true</default></entry>
+        <entry name="showDistroVersion" type="Bool"><label>Show distribution version</label><default>true</default></entry>
+        <entry name="showDistroCodename" type="Bool"><label>Show distribution codename</label><default>true</default></entry>
+        <entry name="distroLayout" type="Enum">
+            <label>Distribution information layout</label>
+            <choices><choice name="OneLine"/><choice name="SeparateLines"/></choices><default>0</default>
+        </entry>
+        <entry name="showCpuFrequency" type="Bool"><label>Show CPU frequency</label><default>false</default></entry>
+        <entry name="autoFitContent" type="Bool"><label>Fit size to content</label><default>false</default></entry>
+        <entry name="compactLayout" type="Bool"><label>Compact layout</label><default>false</default></entry>
+        <entry name="dateVisibility" type="Enum">
+            <label>Date visibility</label>
+            <choices><choice name="AccordingToSkin"/><choice name="Show"/><choice name="Hide"/></choices>
+            <default>0</default>
+        </entry>
+        <entry name="timeVisibility" type="Enum">
+            <label>Time visibility</label>
+            <choices><choice name="AccordingToSkin"/><choice name="Show"/><choice name="Hide"/></choices>
+            <default>0</default>
+        </entry>
+        <entry name="cpuColumns" type="Int">
+            <label>CPU columns (0 for automatic)</label><min>0</min><max>8</max><default>1</default>
+        </entry>
+
         <!-- Displays Section -->
         <entry name="showGpuTemp" type="Bool">
             <label>Show GPU Temperature</label>
