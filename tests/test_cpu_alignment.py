@@ -22,7 +22,7 @@ property int direction:Qt.LeftToRight
 property int blockMargin:5
 property alias cpuModel: cpus
 ListModel { id:cpus }
-Component.onCompleted: { for(var i=0;i<12;i++)cpus.append({val:20,frequencyHz:3000000000,hasFrequency:true}) }
+Component.onCompleted: { for(var i=0;i<12;i++)cpus.append({cpuId:i,val:20,frequencyHz:3000000000,hasFrequency:true}) }
 GridLayout { anchors.fill:parent; columns:2
 Item { Layout.rowSpan:7; Layout.minimumHeight:700; Layout.minimumWidth:200 }
 %s

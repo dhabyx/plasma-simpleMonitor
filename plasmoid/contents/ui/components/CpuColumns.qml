@@ -55,6 +55,7 @@ Item {
                 delegate: CpuCoreDelegate {
                     required property int index
                     objectName: "cpu_" + index
+                    required property int cpuId
                     required property real val
                     required property real frequencyHz
                     required property bool hasFrequency
@@ -62,7 +63,7 @@ Item {
                     y: CpuLayout.rowFor(index, root.rows) * root.rowHeight
                     width: parent.width / root.columns
                     height: root.rowHeight
-                    cpuIndex: index
+                    cpuIndex: cpuId
                     loadValue: val
                     frequencyValue: frequencyHz
                     frequencyAvailable: hasFrequency

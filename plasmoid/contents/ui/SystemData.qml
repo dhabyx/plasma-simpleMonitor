@@ -42,6 +42,7 @@ QtObject {
     readonly property bool showDistroVersion: Plasmoid.configuration.showDistroVersion
     readonly property bool showDistroCodename: Plasmoid.configuration.showDistroCodename
     readonly property int distroLayout: Plasmoid.configuration.distroLayout
+    readonly property bool groupCpuTemperatures: Plasmoid.configuration.groupCpuTemperatures
     readonly property bool showLogo:         Plasmoid.configuration.showLogo
     readonly property bool showCpuFrequency: Plasmoid.configuration.showCpuFrequency
     readonly property bool compactLayout:    Plasmoid.configuration.compactLayout
@@ -124,12 +125,19 @@ QtObject {
     property int tempGeneration: 0
     property var tempSensorModels: []
 
-    readonly property int cpuCount: Math.max(0, Math.round(coreCountSensor.value || 0))
-    // One representative online logical CPU per known physical core.
-    readonly property var tempCpuIds: cpuInfo.cpuIds
+    property int cpuGeneration: 0
+    property int freqGeneration: 0
+    property int _validLoadCount: 0
+    property var cpuSensorModels: []
+    property var freqSensorModels: []
+    readonly property var usageCpuIds: cpuDiscovery.usageIds
+    readonly property var tempCpuIds: cpuGrouping.enabled ? cpuGrouping.representativeIds : cpuDiscovery.temperatureIds
+    readonly property string cpuGroupingIssue: cpuGrouping.enabled && ["stale", "incomplete", "error"].indexOf(cpuGrouping.state) >= 0 ? cpuGrouping.state : ""
+    readonly property int cpuCount: usageCpuIds.length
     readonly property int tempCount: tempCpuIds.length
+    onUsageCpuIdsChanged: rebuildCpuModel()
     onTempCpuIdsChanged: rebuildCoreTempModel()
-    onCpuCountChanged: cpuInfo.refresh()
+    onShowCpuFrequencyChanged: rebuildFrequencySensors()
 
     // Highest GPU index probed (gpu/gpu0 ... gpu/gpuN). ksystemstats numbers
     // the GPUs after their DRM card, so the indices can have gaps.
@@ -144,45 +152,58 @@ QtObject {
             model.append(template)
     }
 
-    function setCpuLoad(index, value) {
-        if (index < 0 || index >= cpuCount) return
-        ensureRows(cpuModel, index + 1, { val: 0, frequencyHz: 0, hasFrequency: false })
-        _loadSum += value - cpuModel.get(index).val
-        cpuModel.setProperty(index, "val", value)
-        avgLoad = _loadSum / cpuModel.count
-    }
-
-    // Frequency values are stored in Hz regardless of the sensor's unit.
-    function setCpuFrequency(index, hz) {
-        if (index < 0 || index >= cpuCount)
-            return
-        ensureRows(cpuModel, index + 1, { val: 0, frequencyHz: 0, hasFrequency: false })
-        var row = cpuModel.get(index)
-        if (row.hasFrequency) {
-            _frequencySum -= row.frequencyHz
-            _frequencyCount--
+    function rebuildCpuModel() {
+        cpuGeneration++
+        cpuSensorModels = []
+        cpuModel.clear()
+        _loadSum = 0; _validLoadCount = 0; avgLoad = 0
+        _frequencySum = 0; _frequencyCount = 0; avgFrequencyHz = 0
+        const sensors = []
+        for (let i = 0; i < usageCpuIds.length; ++i) {
+            const id = usageCpuIds[i]
+            cpuModel.append({cpuId:id, val:0, hasLoad:false, frequencyHz:0, hasFrequency:false})
+            sensors.push({cpuId:id, generation:cpuGeneration})
         }
-        var valid = showCpuFrequency && isNumber(hz) && hz > 0
+        cpuSensorModels = sensors
+        rebuildFrequencySensors()
+    }
+    function validCpuRow(index, cpuId, generation) {
+        return generation === cpuGeneration && index >= 0 && index < cpuModel.count && cpuModel.get(index).cpuId === cpuId
+    }
+    function setCpuLoad(index, value, cpuId, generation) {
+        if (!validCpuRow(index, cpuId, generation)) return
+        const row = cpuModel.get(index)
+        if (row.hasLoad) { _loadSum -= row.val; _validLoadCount-- }
+        const valid = isNumber(value) && value >= 0
+        cpuModel.setProperty(index, "val", valid ? value : 0)
+        cpuModel.setProperty(index, "hasLoad", valid)
+        if (valid) { _loadSum += value; _validLoadCount++ }
+        avgLoad = _validLoadCount ? _loadSum / _validLoadCount : 0
+    }
+    function setCpuFrequency(index, hz, cpuId, generation, sensorGeneration) {
+        if (sensorGeneration !== freqGeneration || !validCpuRow(index, cpuId, generation)) return
+        const row = cpuModel.get(index)
+        if (row.hasFrequency) { _frequencySum -= row.frequencyHz; _frequencyCount-- }
+        const valid = showCpuFrequency && isNumber(hz) && hz > 0
         cpuModel.setProperty(index, "frequencyHz", valid ? hz : 0)
         cpuModel.setProperty(index, "hasFrequency", valid)
-        if (valid) {
-            _frequencySum += hz
-            _frequencyCount++
-        }
-        avgFrequencyHz = _frequencyCount > 0 ? _frequencySum / _frequencyCount : 0
+        if (valid) { _frequencySum += hz; _frequencyCount++ }
+        avgFrequencyHz = _frequencyCount ? _frequencySum / _frequencyCount : 0
     }
-
-    function clearCpuFrequencies() {
-        for (var i = 0; i < cpuModel.count; ++i) {
+    function rebuildFrequencySensors() {
+        freqGeneration++
+        freqSensorModels = []
+        _frequencySum = 0; _frequencyCount = 0; avgFrequencyHz = 0
+        const sensors = []
+        for (let i = 0; i < cpuModel.count; ++i) {
+            const id = cpuModel.get(i).cpuId
             cpuModel.setProperty(i, "frequencyHz", 0)
             cpuModel.setProperty(i, "hasFrequency", false)
+            if (showCpuFrequency && cpuDiscovery.frequencyIds.indexOf(id) >= 0)
+                sensors.push({row:i, cpuId:id, generation:cpuGeneration, freqGeneration:freqGeneration})
         }
-        _frequencySum = 0
-        _frequencyCount = 0
-        avgFrequencyHz = 0
+        freqSensorModels = sensors
     }
-
-    onShowCpuFrequencyChanged: if (!showCpuFrequency) clearCpuFrequencies()
 
     function rebuildCoreTempModel() {
         // Invalidate callbacks before destroying old delegates, including when
@@ -265,9 +286,17 @@ QtObject {
         return typeof value === "number" && isFinite(value)
     }
 
-    property CpuInfo cpuInfo: CpuInfo {
-        id: cpuInfo
-        enabled: root.cpuTempMode === 0
+    property CpuGrouping cpuGrouping: CpuGrouping {
+        id: cpuGrouping
+        enabled: root.groupCpuTemperatures && root.cpuTempMode === 0
+        discoveryReady: cpuDiscovery.ready
+        usageIds: cpuDiscovery.usageIds
+        temperatureIds: cpuDiscovery.temperatureIds
+    }
+
+    property CpuSensorDiscovery cpuDiscovery: CpuSensorDiscovery {
+        id: cpuDiscovery
+        onFrequencyIdsChanged: root.rebuildFrequencySensors()
     }
 
     property NetInfo netInfo: NetInfo {
@@ -277,41 +306,39 @@ QtObject {
         pingHost: root.pingHost
     }
 
-    property Sensors.Sensor coreCountSensor: Sensors.Sensor {
-        sensorId: "cpu/all/coreCount"
-    }
-
-    // CPU load, one sensor per logical CPU.
+    // CPU usage and frequency sensor IDs are discovered rather than guessed.
     property Instantiator cpuLoadSensors: Instantiator {
-        model: root.cpuCount
+        model: root.cpuSensorModels
         delegate: Sensors.Sensor {
             required property int index
-            sensorId: "cpu/cpu" + index + "/usage"
+            required property var modelData
+            sensorId: "cpu/cpu" + modelData.cpuId + "/usage"
             updateRateLimit: root.intervalMs
-            onValueChanged: if (root.isNumber(value)) root.setCpuLoad(index, value)
+            function syncLoad() { root.setCpuLoad(index, status === Sensors.Sensor.Ready ? value : null, modelData.cpuId, modelData.generation) }
+            onValueChanged: syncLoad()
+            onStatusChanged: syncLoad()
+            Component.onDestruction: root.setCpuLoad(index, null, modelData.cpuId, modelData.generation)
         }
     }
-
     // No frequency Sensor objects or subscriptions exist while disabled.
     property Instantiator cpuFrequencySensors: Instantiator {
-        model: root.showCpuFrequency ? root.cpuCount : 0
+        model: root.freqSensorModels
         delegate: Sensors.Sensor {
-            id: frequencySensor
-            required property int index
-            sensorId: "cpu/cpu" + index + "/frequency"
+            required property var modelData
+            sensorId: "cpu/cpu" + modelData.cpuId + "/frequency"
             updateRateLimit: root.intervalMs
             function syncFrequency() {
-                var hz = status === Sensors.Sensor.Ready
+                const hz = status === Sensors.Sensor.Ready
                     ? Code.frequencyHz(value, unit, [Formatter.Units.UnitHertz,
                         Formatter.Units.UnitKiloHertz, Formatter.Units.UnitMegaHertz,
                         Formatter.Units.UnitGigaHertz, Formatter.Units.UnitTeraHertz,
                         Formatter.Units.UnitPetaHertz]) : null
-                root.setCpuFrequency(index, hz)
+                root.setCpuFrequency(modelData.row, hz, modelData.cpuId, modelData.generation, modelData.freqGeneration)
             }
             onValueChanged: syncFrequency()
             onStatusChanged: syncFrequency()
             onMetaDataChanged: syncFrequency()
-            Component.onDestruction: root.setCpuFrequency(index, null)
+            Component.onDestruction: root.setCpuFrequency(modelData.row, null, modelData.cpuId, modelData.generation, modelData.freqGeneration)
         }
     }
 

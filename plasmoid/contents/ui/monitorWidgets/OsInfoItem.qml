@@ -26,6 +26,7 @@ Item {
     id: root
     property bool compactLayout: false
     property string autoFitIssue: ""
+    property string cpuGroupingIssue: ""
     property string distroName: ""
     property string distroVersion: ""
     property string distroCodename: ""
@@ -92,6 +93,19 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             horizontalAlignment: Text.AlignHCenter
             font { family: mondaRegular.name; pointSize: 9 }
+        }
+        Text {
+            visible: root.cpuGroupingIssue !== ""
+            text: "⚠"
+            color: "#ffc766"
+            font.pixelSize: 14
+            QQC2.ToolTip.visible: cpuGroupHover.hovered
+            QQC2.ToolTip.text: !visible ? "" : root.cpuGroupingIssue === "stale"
+                ? i18n("CPU list changed. Using logical CPUs; use Refresh CPU grouping in the widget menu.")
+                : root.cpuGroupingIssue === "incomplete"
+                    ? i18n("CPU topology is incomplete. Unknown CPUs remain separate.")
+                    : i18n("CPU grouping is unavailable. Using logical CPUs; retry from the widget menu.")
+            HoverHandler { id: cpuGroupHover }
         }
         Text {
             visible: root.autoFitIssue !== ""

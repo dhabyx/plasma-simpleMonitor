@@ -70,6 +70,7 @@ ColumnLayout {
     OsInfoItem {
         compactLayout: root.engine.compactLayout === true
         autoFitIssue: root.engine.autoFitIssue || ""
+        cpuGroupingIssue: root.engine.cpuGroupingIssue || ""
         distroName: root.engine.distroName
         distroVersion: root.engine.distroVersion
         distroCodename: root.engine.distroCodename || ""

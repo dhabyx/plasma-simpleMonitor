@@ -32,7 +32,7 @@ Rectangle {
     readonly property real maxHeight: list.maximumHeight
     readonly property real listHeight: list.height
     ListModel { id: cpus }
-    function fill() { cpus.clear(); for (var i=0;i<countWanted;++i) cpus.append({val:i%%100, frequencyHz:2400000000, hasFrequency:i%%2===0}) }
+    function fill() { cpus.clear(); for (var i=0;i<countWanted;++i) cpus.append({cpuId:i*2, val:i%%100, frequencyHz:2400000000, hasFrequency:i%%2===0}) }
     onCountWantedChanged: fill()
     Component.onCompleted: fill()
     Components.CpuColumns {
@@ -74,6 +74,7 @@ Rectangle {
                     delegates={int(o.objectName()[4:]):o for o in items if o.objectName().startswith('cpu_')}
                     self.assertEqual(set(delegates),set(range(count)))
                     for index,obj in delegates.items():
+                        self.assertEqual(obj.property('cpuIndex'), index * 2)
                         self.assertAlmostEqual(obj.property('y'), (index % rows)*obj.property('height'), delta=.01)
                         self.assertAlmostEqual(obj.property('x'), (index // rows)*obj.property('width'), delta=.01)
                     self.assertLessEqual(self.root.property('listHeight'),self.root.property('maxHeight'))

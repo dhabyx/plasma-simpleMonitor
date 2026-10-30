@@ -149,6 +149,10 @@
             </choices>
             <default>0</default>
         </entry>
+        <entry name="groupCpuTemperatures" type="Bool">
+            <label>Group logical CPUs by physical core</label>
+            <default>false</default>
+        </entry>
         <entry name="cpuHighTemp" type="Int">
             <label>CPU High Temperature</label>
             <default>60</default>

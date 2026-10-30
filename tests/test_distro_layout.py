@@ -13,7 +13,7 @@ class DistroLayout(unittest.TestCase):
  def setUpClass(cls):
   cls.app = QGuiApplication.instance() or QGuiApplication([])
   cls.tmp = tempfile.TemporaryDirectory()
-  src=(ROOT/'plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml').read_text().replace('../../fonts/Monda/Monda-Regular.ttf', (ROOT/'plasmoid/contents/fonts/Monda/Monda-Regular.ttf').as_uri()).replace('id: distroInfo', 'id: distroInfo\n            objectName: "distro"').replace('id: kernelInfo', 'id: kernelInfo\n            objectName: "kernel"').replace('text: "⚠"', 'objectName: "warning"\n            text: "⚠"')
+  src=(ROOT/'plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml').read_text().replace('../../fonts/Monda/Monda-Regular.ttf', (ROOT/'plasmoid/contents/fonts/Monda/Monda-Regular.ttf').as_uri()).replace('id: distroInfo', 'id: distroInfo\n            objectName: "distro"').replace('id: kernelInfo', 'id: kernelInfo\n            objectName: "kernel"').replace('visible: root.autoFitIssue !== ""', 'objectName: "warning"\n            visible: root.autoFitIssue !== ""')
   (pathlib.Path(cls.tmp.name)/'OsInfoItem.qml').write_text(src)
   (pathlib.Path(cls.tmp.name)/'main.qml').write_text(QML.replace('@PATH@',cls.tmp.name))
   cls.view=QQuickView(); cls.view.rootContext().setContextProperty('i18n', cls.view.engine().evaluate('(function(s) { return s; })')); cls.view.setSource(QUrl.fromLocalFile(cls.tmp.name+'/main.qml')); cls.view.show(); cls.app.processEvents()

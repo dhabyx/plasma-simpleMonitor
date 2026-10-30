@@ -97,20 +97,6 @@ function num(value, fallback) {
     return (value === undefined || value === null || isNaN(n)) ? fallback : n
 }
 
-/**
- * Shell command used to find the number of physical CPU cores (the sensors
- * only know about logical CPUs).
- */
-var cpuCoresCommand = "grep -m1 'cpu cores' /proc/cpuinfo"
-
-/**
- * Parses the "cpu cores" line of /proc/cpuinfo. Returns 0 when unknown.
- */
-function parseCpuCores(text) {
-    var match = /cpu cores\s*:\s*(\d+)/.exec(String(text))
-    return match ? parseInt(match[1]) : 0
-}
-
 // Route lookup for a public address: gives the interface and the local IP of
 // the connection in use, without sending any packet.
 var netRouteCommand = "ip -o route get 1.1.1.1"
@@ -163,44 +149,6 @@ function frequencyHz(value, unit, unitValues) {
     return isFinite(hz) ? hz : null
 }
 
-// KSystemStats names sensors using online /proc/cpuinfo processor IDs. The
-// kernel's sibling masks identify threads belonging to the same physical core.
-// Missing sibling information keeps a processor separate, never guessed.
-var cpuTopologyCommand = "cat /proc/cpuinfo; printf '\n--SIBLINGS--\n'; for d in /sys/devices/system/cpu/cpu[0-9]*; do [ -r \"$d/topology/thread_siblings_list\" ] || continue; printf '%s=' \"${d##*/cpu}\"; cat \"$d/topology/thread_siblings_list\"; done"
-function parseCpuTopology(text) {
-    var parts = String(text || "").split(/\n--SIBLINGS--\n/)
-    var siblings = {}
-    var lines = (parts[1] || "").split("\n")
-    for (var i = 0; i < lines.length; ++i) {
-        var pair = /^(\d+)=([0-9,-]+)$/.exec(lines[i].trim())
-        if (pair) siblings[pair[1]] = pair[2]
-    }
-    var processors = [], match
-    var pattern = /^processor\s*:\s*(\d+)\s*$/gm
-    while ((match = pattern.exec(parts[0])) !== null) processors.push(Number(match[1]))
-    processors.sort(function(a, b) { return a - b })
-    function includesId(mask, id) {
-        var ranges = mask.split(","), found = false
-        for (var r = 0; r < ranges.length; ++r) {
-            var bounds = /^(\d+)(?:-(\d+))?$/.exec(ranges[r])
-            if (!bounds) return false
-            var first = Number(bounds[1]), last = bounds[2] === undefined ? first : Number(bounds[2])
-            if (last < first) return false
-            if (id >= first && id <= last) found = true
-        }
-        return found
-    }
-    var seen = {}, ids = []
-    for (var j = 0; j < processors.length; ++j) {
-        var id = processors[j]
-        var key = siblings[id] && includesId(siblings[id], id) ? "siblings:" + siblings[id] : "cpu:" + id
-        if (seen[key]) continue
-        seen[key] = true
-        ids.push(id)
-    }
-    return ids
-}
-
 // Parse os-release as data, never as shell code. Only the quoting and escapes
 // defined for os-release are interpreted; substitutions remain literal.
 function parseOsRelease(text) {
@@ -235,4 +183,17 @@ function parseOsRelease(text) {
         version: values.VERSION_ID || "",
         codename: codename
     };
+}
+
+function cpuSensorIds(paths, kind) {
+    if (kind !== "usage" && kind !== "temperature" && kind !== "frequency") return [];
+    var pattern = new RegExp("^cpu/cpu([0-9]+)/" + kind + "$");
+    var seen = {}, result = [];
+    for (var i = 0; i < paths.length; ++i) {
+        var m = pattern.exec(String(paths[i]));
+        if (!m) continue;
+        var id = Number(m[1]);
+        if (!seen[id]) { seen[id] = true; result.push(id); }
+    }
+    return result.sort(function(a,b) { return a-b; });
 }

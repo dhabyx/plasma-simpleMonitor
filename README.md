@@ -23,6 +23,7 @@ Dependencies
 
 - Plasma 6 (Plasma Shell) and Qt 6.
 - `kstatsviewer` / KSysGuard sensors (`ksystemstats`, shipped with Plasma).
+- KDE KItemModels QML module for discovering the available sensor IDs.
 
 Plasma 5 is no longer supported by this branch.
 
@@ -96,13 +97,17 @@ case. Missing fields are omitted. /etc/os-release is read once, falling back to
 /usr/lib/os-release if unavailable; its contents are parsed as data without
 evaluating shell expressions.
 
-Per-core temperatures wait for CPU topology: the widget chooses one online
-logical processor per kernel sibling group and uses its KSystemStats sensor.
-Unknown or missing readings appear as a dash and do not contribute to the
-average. If sibling information is unavailable, logical processors are kept
-separate rather than guessed to be siblings. Some systems (including some AMD
-hardware) expose a shared package temperature for multiple cores; separate
-rows cannot guarantee independent physical sensors on those systems.
+Per-logical-CPU temperatures use the processors and sensors reported by
+KSystemStats. A processor can appear without an available temperature reading;
+missing readings appear as a dash. Some logical CPUs may share a temperature
+sensor, so separate rows do not necessarily represent independent physical
+cores. Average and maximum modes use KSystemStats' aggregate sensors.
+Optional physical-core grouping is disabled by default and applies only to the
+per-logical-CPU temperature mode. When enabled, the widget reads local CPU
+topology once and groups reported logical CPUs by sibling relationship; if
+CPU topology changes, use “Refresh CPU grouping” in the widget context menu.
+Grouping does not create independent temperature readings where hardware or
+KSystemStats provides a shared sensor.
 
 Before replacing or removing a user-installed widget, save its package and
 configuration. For example, choose a backup directory and copy the installed
@@ -178,7 +183,7 @@ For example:
 
 ```sh
 node tests/test_os_release.js
-node tests/test_cpu_topology.js
+python3 tests/test_cpu_temperature_settings.py
 python3 tests/test_settings_schema.py
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software python3 tests/test_natural_geometry.py
 python3 tests/test_window_autofit_runtime.py

@@ -84,7 +84,7 @@ Rectangle {
         property var coreTempModel: cores
         property var gpuTempModel: gpus
     }
-    function setCount(n) { cpus.clear(); for (var i=0;i<n;i++) cpus.append({val:i % 100, frequencyHz:2400000000+i*1000000, hasFrequency:i % 2 === 0}) }
+    function setCount(n) { cpus.clear(); for (var i=0;i<n;i++) cpus.append({cpuId:i,val:i % 100, frequencyHz:2400000000+i*1000000, hasFrequency:i % 2 === 0}) }
     function setGpu(enabled) { gpus.clear(); if (enabled) gpus.append({val:55, gpuIndex:0, gpuLabelStr:"GPU:", dataUnits:"°C"}) }
     function setTemps(n) { cores.clear(); for (var i=0;i<n;i++) cores.append({val:48,hasValue:true,coreLabelStr:"CPU "+i+":",dataUnits:"°C"}) }
     function reload() { loader.setSource(["@PLASMOID@/contents/ui/skins/DefaultSkin.qml","@PLASMOID@/contents/ui/skins/ColumnSkin.qml","@PLASMOID@/contents/ui/skins/MinimalisticSkin.qml"][skin], {engine: data}) }

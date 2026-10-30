@@ -52,6 +52,12 @@ PlasmoidItem {
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
+            text: i18n("Refresh CPU grouping")
+            icon.name: "view-refresh"
+            enabled: sys.groupCpuTemperatures && sys.cpuTempMode === 0
+            onTriggered: sys.cpuGrouping.refresh()
+        },
+        PlasmaCore.Action {
             text: i18n("Retry fitting size to content")
             icon.name: "view-refresh"
             enabled: Plasmoid.configuration.autoFitContent

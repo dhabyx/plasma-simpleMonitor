@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-30 00:50-0600\n"
+"POT-Creation-Date: 2026-10-30 01:44-0600\n"
 "PO-Revision-Date: 2020-04-05 13:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,26 +30,26 @@ msgstr "Apariencia"
 msgid "Sensors"
 msgstr "Sensores"
 
-#: ../plasmoid/contents/ui/SystemData.qml:200
+#: ../plasmoid/contents/ui/SystemData.qml:221
 #: ../plasmoid/contents/ui/components/CpuCoreDelegate.qml:19
 #: ../plasmoid/contents/ui/monitorWidgets/CoreTempList.qml:63
 #: ../plasmoid/contents/ui/monitorWidgets/CpuWidget.qml:64
 msgid "CPU %1:"
 msgstr "CPU %1:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:206
+#: ../plasmoid/contents/ui/SystemData.qml:227
 msgid "CPU avg:"
 msgstr "CPU media:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:206
+#: ../plasmoid/contents/ui/SystemData.qml:227
 msgid "CPU max:"
 msgstr "CPU máxima:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:261
+#: ../plasmoid/contents/ui/SystemData.qml:282
 msgid "GPU:"
 msgstr "GPU:"
 
-#: ../plasmoid/contents/ui/SystemData.qml:261
+#: ../plasmoid/contents/ui/SystemData.qml:282
 #: ../plasmoid/contents/ui/monitorWidgets/GpuTempList.qml:65
 msgid "GPU %1:"
 msgstr "GPU %1:"
@@ -139,77 +139,98 @@ msgid "Time:"
 msgstr "Hora:"
 
 #: ../plasmoid/contents/ui/config/ConfigGeneral.qml:66
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:64
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:84
 #: ../plasmoid/contents/ui/config/ConfigSkins.qml:175
 msgid "Restore page defaults"
 msgstr "Restablecer valores de esta página"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:32
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:34
 msgid "Temperature units:"
 msgstr "Unidades de temperatura:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:33
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:35
 msgid "Celsius °C"
 msgstr "Celsius °C"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:33
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:35
 msgid "Fahrenheit °F"
 msgstr "Fahrenheit °F"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:38
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:40
 msgid "CPU temperature:"
 msgstr "Temperatura de CPU:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:39
-msgid "Per core"
-msgstr "Por núcleo"
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:41
+msgid "Per logical CPU"
+msgstr "Por procesador lógico"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:39
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:41
 msgid "Average"
 msgstr "Media"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:39
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:41
 msgid "Maximum"
 msgstr "Máxima"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:43
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:48
+msgid "CPU grouping:"
+msgstr "Agrupación de CPU:"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:49
+msgid "Group logical CPUs by physical core"
+msgstr "Agrupar procesadores lógicos por núcleo físico"
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:53
+msgid ""
+"When CPUs change, use Refresh CPU grouping from the widget menu. Topology is "
+"read once."
+msgstr ""
+"Cuando cambien los procesadores, usa Actualizar agrupación de CPU en el menú "
+"del widget. La topología se lee una vez."
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:59
+msgid "Some logical CPUs may share a temperature sensor."
+msgstr ""
+"Algunos procesadores lógicos pueden compartir un sensor de temperatura."
+
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:63
 msgid "CPU High Temperature:"
 msgstr "Temperatura alta de CPU:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:44
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:64
 msgid "CPU Critical Temperature:"
 msgstr "Temperatura crítica de la CPU:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:46
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:66
 msgid "Update interval:"
 msgstr "Intervalo de actualización:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:50
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:70
 msgctxt "Abbreviation for seconds"
 msgid "s"
 msgstr "s"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:54
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:74
 msgid "Network speed unit:"
 msgstr "Unidad de velocidad de red:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:56
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:76
 msgid "Bytes per second"
 msgstr "Bytes por segundo"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:56
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:76
 msgid "Bits per second"
 msgstr "Bits por segundo"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:60
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:80
 msgid "Network:"
 msgstr "Red:"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:60
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:80
 msgid "Ping"
 msgstr "Ping"
 
-#: ../plasmoid/contents/ui/config/ConfigMisc.qml:61
+#: ../plasmoid/contents/ui/config/ConfigMisc.qml:81
 msgid "Host to ping:"
 msgstr "Servidor para ping:"
 
@@ -471,14 +492,18 @@ msgid "Network: ↓ 2.4 MB/s"
 msgstr "Red: ↓ 2,4 MB/s"
 
 #: ../plasmoid/contents/ui/main.qml:55
+msgid "Refresh CPU grouping"
+msgstr "Actualizar agrupación de CPU"
+
+#: ../plasmoid/contents/ui/main.qml:61
 msgid "Retry fitting size to content"
 msgstr "Reintentar ajustar tamaño al contenido"
 
-#: ../plasmoid/contents/ui/main.qml:61
+#: ../plasmoid/contents/ui/main.qml:67
 msgid "Lock image scaling"
 msgstr "Bloqueo de escala de imagen"
 
-#: ../plasmoid/contents/ui/main.qml:61
+#: ../plasmoid/contents/ui/main.qml:67
 msgid "Unlock image scaling"
 msgstr "Desbloquear escala de imagen"
 
@@ -569,13 +594,34 @@ msgstr "Descarga:"
 msgid "Up:"
 msgstr "Subida:"
 
-#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:103
+#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:104
+msgid ""
+"CPU list changed. Using logical CPUs; use Refresh CPU grouping in the widget "
+"menu."
+msgstr ""
+"La lista de CPU cambió. Se muestran procesadores lógicos; usa Actualizar "
+"agrupación de CPU en el menú del widget."
+
+#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:106
+msgid "CPU topology is incomplete. Unknown CPUs remain separate."
+msgstr "La topología de CPU está incompleta. Los procesadores desconocidos permanecen separados."
+
+#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:107
+msgid ""
+"CPU grouping is unavailable. Using logical CPUs; retry from the widget menu."
+msgstr ""
+"La agrupación de CPU no está disponible. Se muestran procesadores lógicos; "
+"reinténtalo desde el menú del widget."
+
+#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:117
 msgid "Not enough space to fit. Free space or disable automatic fitting."
 msgstr "No hay espacio para ajustar. Libera espacio o desactiva el autoajuste."
 
-#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:104
+#: ../plasmoid/contents/ui/monitorWidgets/OsInfoItem.qml:118
 msgid "Automatic fitting is unavailable in this host; you can resize manually."
-msgstr "El autoajuste no está disponible en este anfitrión; puedes cambiar el tamaño manualmente."
+msgstr ""
+"El autoajuste no está disponible en este anfitrión; puedes cambiar el tamaño "
+"manualmente."
 
 #: ../plasmoid/contents/ui/monitorWidgets/UptimePicker.qml:37
 msgid "Uptime:"
@@ -594,6 +640,9 @@ msgstr "Swap:"
 #: ../plasmoid/contents/ui/skins/MinimalisticSkin.qml:99
 msgid "Average frequency: %1"
 msgstr "Frecuencia media: %1"
+
+#~ msgid "Per core"
+#~ msgstr "Por núcleo"
 
 #, fuzzy
 #~ msgid "Temperature settings:"
