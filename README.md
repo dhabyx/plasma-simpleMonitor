@@ -3,12 +3,10 @@ Simple Monitor for Plasma
 
 A simple monitor for plasma, completely written in QML and Javascript.
 
-Development preview (`develop`)
--------------------------------
+Version 0.7.0
+-------------
 
-This branch contains the locally reviewed Plasma 6 development preview. It is
-not a tagged stable release. `master` remains the separate release baseline.
-The preview includes optional content, compact layouts, CPU columns and
+This release supports Plasma 6 and Qt 6. It includes optional content, compact layouts, CPU columns and
 frequency, configurable distribution fields, custom logos, and opt-in sizing.
 Community credits are recorded in [AUTHORS.md](AUTHORS.md); artwork provenance
 and outstanding source/usage questions are recorded in [LOGO-SOURCES.md](LOGO-SOURCES.md).
@@ -44,7 +42,7 @@ Installation
 If you need localisation (i18n/l10n) support, please use `cmake` to install this widget to your system-wide directory. You also would need root permission.
 
 ````Shell
-git clone --branch develop https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
+git clone --branch master https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
 cd plasma-simpleMonitor
 cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 cmake --build build
@@ -59,7 +57,7 @@ CMake generates translations from PO files in the build directory. See
 This way may be more convenient, but localisation support is not possible. This widget will be installed into your home directory.
 
 ````Shell
-git clone --branch develop https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
+git clone --branch master https://github.com/dhabyx/plasma-simpleMonitor.git plasma-simpleMonitor
 cd plasma-simpleMonitor
 ./install.sh        # or: kpackagetool6 -t Plasma/Applet -i ./plasmoid
 ````
@@ -136,12 +134,22 @@ package path after removal rather than assuming one command removes both.
 Packaging
 =========
 
-Simple way for make plasmoid package:
+Build the release assets with Python 3 and GNU gettext (`msgfmt`):
 
-````Shell
-cd plasma-simpleMonitor/plasmoid
-zip -r plasma-simpleMonitor.plasmoid contents metadata.json
-````
+```sh
+python3 scripts/build-release.py
+```
+
+`dist/` contains the installable `.plasmoid` (including eight compiled translation
+catalogs, logos and fonts), a separate translation archive and `SHA256SUMS`.
+Install the `.plasmoid` from Plasma's widget dialog or with
+`kpackagetool6 -t Plasma/Applet -i plasma-simpleMonitor-v0.7.0.plasmoid`
+(use `-u` to upgrade). Source archives are provided by GitHub on the release page;
+CMake installation remains available from those sources.
+
+Tags matching `v*` run `.github/workflows/release.yml`, which checks the tag
+against `metadata.json`, builds the assets and publishes a GitHub release using
+`RELEASE-NOTES.md`. The workflow can also be retried manually for an existing tag.
 
 Distribution logos
 ==================

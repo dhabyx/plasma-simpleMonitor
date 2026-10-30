@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## Development preview (`develop`) - 2026-10-30
+## [0.7.0] - 2026-10-30
 
 ### Added
 - Content, Appearance and Sensors preferences with a synthetic live preview.
@@ -16,19 +16,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 - Translation catalogs are generated from PO sources during the CMake build.
 - Bundled SVGs are rendered at adequate resolution and landscape logos retain their proportions.
-- CPU temperatures follow online sibling topology; missing readings are excluded from averages.
+- CPU IDs and available sensors are discovered from KDE; missing readings are excluded from averages.
+- Physical-core temperature grouping is optional and caches one initial cpuinfo read.
 - Layouts keep natural spacing when their host retains additional height.
 - Installation, removal, contributor credits and artwork sources are documented.
 
-### Preview limitations
+### Known limitations
 - Desktop auto-fit depends on private Plasma 6.6 interfaces and was validated in an isolated grid.
 - Some artwork provenance/usage questions and translations remain pending; see LOGO-SOURCES.md.
 
-## [0.7.0] - Unreleased
+### Plasma 6 migration
     ### Changed
     - Ported to Plasma 6 / Qt 6 (PlasmoidItem, metadata.json, kpackagetool6).
     - System data now comes from KSysGuard sensors (org.kde.ksysguard.sensors).
-    - Distribution and kernel are read from the os/* sensors; only the number of physical CPU cores still needs a shell call, and only in per-core temperature mode.
+    - CPU readings come from KDE sensors. Optional physical-core temperature grouping reads /proc/cpuinfo once per widget instance; distribution fields use os-release and KDE.
     - Configuration pages rewritten with Kirigami and Qt Quick Controls 2.
     - Memory "Used/Free" now follows the KSysGuard definition (free = available).
     - Translations moved to <lang>/LC_MESSAGES and regenerated.
